@@ -1,0 +1,25 @@
+$borderColor: #dee5e7;
+$bgColor: #fff;
+$headingBorderColor: #edf1f2;
+$headingBgColor: #f6f8f8;
+$headingFontColor: #333;
+
+.box {
+  border-radius: 2px;
+  background: $bgColor;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  border: 1px solid $borderColor;
+
+  .heading {
+    background: $headingBgColor;
+    color: $headingFontColor;
+    border-radius: 2px 2px 0 0;
+    padding: 10px 15px;
+    border-bottom: 1px solid $headingBorderColor;
+  }
+
+  .body {
+    padding: 15px;
+  }
+}

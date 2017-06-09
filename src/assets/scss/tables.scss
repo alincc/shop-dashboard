@@ -1,0 +1,41 @@
+.table {
+  width: 100%;
+  background: #fff;
+  margin: 1em 0;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: .28571429rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  font-size: 0.8em;
+
+  thead {
+    tr {
+      &:first-child {
+        th:first-child {
+          border-radius: .28571429rem 0 0 0;
+        }
+      }
+
+      th {
+        text-transform: uppercase;
+        background: #f9fafb;
+        font-weight: 700;
+        border-bottom: 1px solid rgba(34,36,38,.1);
+        padding: 1em 1em;
+      }
+    }
+  }
+
+  td {
+    padding: 1em 1em;
+    vertical-align: top;
+
+    img {
+      max-width: 80%;
+      padding: 5px;
+      border: #eee 1px solid;
+    }
+  }
+
+}

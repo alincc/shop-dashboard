@@ -1,0 +1,64 @@
+$errorColor: #9f3a38;
+@mixin input {
+  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
+  padding: .6em 1em;
+  background: #fff;
+  border: 1px solid rgba(34,36,38,.15);
+  color: rgba(0,0,0,.87);
+  line-height: 1.6em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form {
+  .field {
+    margin: 15px 0;
+
+    label {
+      display: block;
+      margin: 5px 0;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      @include input;
+    }
+
+    &.error {
+      color: $errorColor;
+
+      input {
+        color: $errorColor;
+        border-color: #e0b4b4;
+        background: #fff6f6;
+      }
+    }
+  }
+
+  .errors {
+    font-size: 0.7em;
+    margin-top: 10px;
+  }
+}
+
+.input {
+  @include input;
+}
+
+*::-webkit-input-placeholder {
+  color: #bbb;
+}
+*:-moz-placeholder {
+  /* FF 4-18 */
+  color: #bbb;
+}
+*::-moz-placeholder {
+  /* FF 19+ */
+  color: #bbb;
+}
+*:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #bbb;
+}

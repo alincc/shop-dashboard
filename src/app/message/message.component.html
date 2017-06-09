@@ -1,0 +1,8 @@
+<div class="message" [ngClass]="data.type" *ngIf="data">
+  <div *ngIf="data.title">
+    <h3 class="data.title">{{ data.title }}</h3>
+    <p>{{ data.message }}</p>
+  </div>
+
+  <div *ngIf="!data.title">{{ data.message }}</div>
+</div>

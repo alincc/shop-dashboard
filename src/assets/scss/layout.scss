@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,700');
+
+@import 'box.scss';
+@import 'tables.scss';
+@import 'forms.scss';
+@import 'buttons.scss';
+@import 'messages.scss';
+@import 'variables.scss';
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: $bgColor;
+  color: $baseFontColor;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
+  font-size: 1em;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.42857143;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  color: $baseLinkColor;
+  text-decoration: none;
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.text-muted {
+  color: #5c798f;
+}
+
+.text-xs {
+  font-size: 0.8em;
+}
+
+.main {
+  padding: 20px;
+}

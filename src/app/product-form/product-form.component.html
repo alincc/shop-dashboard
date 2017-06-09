@@ -1,0 +1,19 @@
+<div>
+
+  <div *ngIf="!product" class="message negative">
+    No product found
+  </div>
+
+  <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()" *ngIf="product" novalidate>
+
+    <div class="field" [ngClass]="{'error': formErrors.name}">
+      <label for="name">Name</label>
+      <input formControlName="name" placeholder="Name">
+
+      <div *ngIf="formErrors.name" class="errors">{{ formErrors.name }}</div>
+    </div>
+
+    <button type="submit" class="button" [disabled]="!form.valid">Save</button>
+  </form>
+
+</div>
