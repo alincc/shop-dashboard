@@ -14,6 +14,12 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductFormComponent } from './product-form/product-form.component';
 import { MessageComponent } from './message/message.component';
 
+import {
+  ProductService,
+  CategoryService,
+} from './services';
+import { ProductAddComponent } from './product-add/product-add.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +30,8 @@ import { MessageComponent } from './message/message.component';
     ProductListContainerComponent,
     ProductDetailComponent,
     ProductFormComponent,
-    MessageComponent
+    MessageComponent,
+    ProductAddComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,10 @@ import { MessageComponent } from './message/message.component';
     AppRoutingModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    ProductService,
+    CategoryService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

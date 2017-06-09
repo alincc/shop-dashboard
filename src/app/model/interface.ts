@@ -165,7 +165,7 @@ class Order implements IOrder {
 }
 
 class Product {
-  _id: String;
+  _id: string;
   category?: Category;
   category_id?: String;
   name: String;

@@ -1,14 +1,20 @@
+<app-message *ngIf="errorMsg" [data]="errorMsg"></app-message>
+
 <div class="product-list-container main">
 
   <div class="box">
 
     <div class="heading">
+      <div class="pull-right">
+        <a routerLink="/product/create"><i class="fa fa-file-o" aria-hidden="true"></i></a>
+      </div>
+
       Products
     </div>
 
     <div class="body">
 
-      <table class="table">
+      <table class="table" *ngIf="products">
         <thead>
           <tr>
             <th>ID</th>
@@ -23,18 +29,23 @@
         </thead>
 
         <tbody>
-          <tr>
+          <tr *ngFor="let product of products">
             <td>ID</td>
             <td>Image</td>
-            <td>Name</td>
+            <td>{{ product.name }}</td>
             <td>Category</td>
-            <td>Price</td>
+            <td>{{ product.price }}</td>
             <td>Quantity</td>
             <td>Status</td>
             <td>
-              <a [routerLink]="['/product', 2]">
+              <a [routerLink]="['/product', product._id]">
                 <i class="fa fa-edit"></i>
               </a>
+
+              <a (click)="removeProduct(product)">
+                <i class="fa fa-remove"></i>
+              </a>
+              
             </td>
           </tr>
         </tbody>

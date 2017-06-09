@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../model/interface';
-import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, Params }   from '@angular/router';
 
-import { FAKE_PRODUCT1 } from '../../testing/mocks';
+import { Product, ErrorResponse, Message } from '../model/interface';
+import { ProductService } from '../services';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,15 +13,32 @@ import { FAKE_PRODUCT1 } from '../../testing/mocks';
 export class ProductDetailComponent implements OnInit {
 
   product: Product;
+  private errorMsg: Message;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+  ) { }
 
   ngOnInit() {
-    this.getProduct();
+    this.route.params
+      .switchMap((params: Params) => this.productService.getProduct(params['id']))
+      .subscribe(
+        product => this.product = product,
+        err => this.handleError(err),
+      );
   }
 
-  getProduct(): void {
-    this.product = FAKE_PRODUCT1;
+  onSubmit(data) {
+    this.productService.updateProduct(this.product._id, data)
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err),
+      )
+  }
+
+  handleError(error: ErrorResponse) {
+    this.errorMsg = new Message('negative', error.message, 'Ooops..');
   }
 
 }

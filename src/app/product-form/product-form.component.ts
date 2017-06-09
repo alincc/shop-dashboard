@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { Product } from '../model/interface';
 
@@ -9,6 +9,7 @@ import { Product } from '../model/interface';
 })
 export class ProductFormComponent implements OnInit {
   @Input() product: Product;
+  @Output() submitEmitter: EventEmitter<any> = new EventEmitter();
 
   form: FormGroup;
 
@@ -29,6 +30,16 @@ export class ProductFormComponent implements OnInit {
   }
 
   buildForm(): void {
+    if (!this.product) {
+      this.product = {
+        _id: '',
+        name: '',
+        description: '',
+        image: '',
+        price: 0,
+      };
+    }
+
     this.form = this.fb.group({
       name: [this.product.name, Validators.required]
     });
@@ -40,7 +51,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('form submitted', this.form.value);
+    this.submitEmitter.emit(this.form.value);
   }
 
   onValueChanged(data?: any) {
