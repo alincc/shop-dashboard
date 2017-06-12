@@ -6,14 +6,101 @@
 
   <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()" *ngIf="product" novalidate>
 
-    <div class="field" [ngClass]="{'error': formErrors.name}">
-      <label for="name">Name</label>
-      <input formControlName="name" placeholder="Name">
+    <div class="box-tabbed">
 
-      <div *ngIf="formErrors.name" class="errors">{{ formErrors.name }}</div>
+      <div class="tabs">
+
+        <span class="tab" [ngClass]="{'active': activeTab == 'basic'}" (click)="setTab('basic')">Basic</span>
+
+        <span class="tab" [ngClass]="{'active': activeTab == 'category'}" (click)="setTab('category')">Category</span>
+
+        <span class="tab" [ngClass]="{'active': activeTab == 'quantities'}" (click)="setTab('quantities')">Quantities</span>
+
+        <span class="tab" [ngClass]="{'active': activeTab == 'pricing'}" (click)="setTab('pricing')">Pricing</span>
+
+        <span class="tab" [ngClass]="{'active': activeTab == 'image'}" (click)="setTab('image')">Images</span>
+
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane" *ngIf="activeTab == 'basic'">
+
+          <div class="field" [ngClass]="{'error': formErrors.name}">
+            <label for="name">Name</label>
+            <input formControlName="name" placeholder="Name">
+
+            <div *ngIf="formErrors.name" class="errors">{{ formErrors.name }}</div>
+          </div>
+
+          <div class="field" [ngClass]="{'error': formErrors.description}">
+            <label for="description">Description</label>
+            <input formControlName="description" placeholder="Description">
+
+            <div *ngIf="formErrors.description" class="errors">{{ formErrors.description }}</div>
+          </div>
+
+          <div class="field">
+            <label for="active">Active</label>
+            <span class="text-muted text-xs">Do you want the product to be available in the store?</span>
+
+            <input type="checkbox" formControlName="active">
+          </div>
+
+        </div>
+
+        <div class="tab-pane" *ngIf="activeTab == 'category'">
+          Category
+
+          <div class="field" [ngClass]="{'error': formErrors.category}">
+            <label for="category">Category</label>
+
+            <select [compareWith]="selectComparator" formControlName="category">
+              <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+            </select>
+
+            <div *ngIf="formErrors.category" class="errors">{{ formErrors.category }}</div>
+          </div>
+        </div>
+
+        <div class="tab-pane" *ngIf="activeTab == 'pricing'">
+          <div class="field" [ngClass]="{'error': formErrors.price}">
+            <label for="price">Price</label>
+            <input formControlName="price" placeholder="Price">
+
+            <div *ngIf="formErrors.price" class="errors">{{ formErrors.price }}</div>
+          </div>
+        </div>
+
+        <div class="tab-pane" *ngIf="activeTab == 'quantities'">
+          Quantities
+
+          <div class="field" [ngClass]="{'error': formErrors.quantity}">
+            <label for="quantity">Quantity</label>
+            <input formControlName="quantity" placeholder="Quantity">
+
+            <div *ngIf="formErrors.quantity" class="errors">{{ formErrors.quantity }}</div>
+          </div>
+        </div>
+
+        <div class="tab-pane" *ngIf="activeTab == 'image'">
+          Images
+
+          <div class="field" [ngClass]="{'error': formErrors.image}">
+            <label for="image">Image</label>
+            <input formControlName="image" placeholder="Image">
+
+            <div *ngIf="formErrors.image" class="errors">{{ formErrors.image }}</div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
     <button type="submit" class="button" [disabled]="!form.valid">Save</button>
+
   </form>
+
+
 
 </div>

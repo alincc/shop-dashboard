@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
-import { Product } from '../model/interface';
+import { CategoryService } from '../services';
+import { Product, Category } from '../model/interface';
 
 @Component({
   selector: 'app-product-form',
@@ -11,22 +12,62 @@ export class ProductFormComponent implements OnInit {
   @Input() product: Product;
   @Output() submitEmitter: EventEmitter<any> = new EventEmitter();
 
+  categories: Category[];
+
+  selectedCategory: Category;
+
+  activeTab: string = 'basic';
+
   form: FormGroup;
 
   formErrors = {
     name: '',
+    price: '',
+    quantity: '',
+    description: '',
+    category: '',
+    image: '',
   };
 
   validationMessages = {
     'name': {
       'required':      'Name is required.',
     },
+    'price': {
+      'required':      'Price is required',
+    },
+    'quantity': {
+      'required':      'Quantity is required',
+    },
+    'description': {
+      'required':      'Description is required',
+    },
+    'image': {
+      'required':      'Image is required',
+    },
+    'category': {
+      'required':      'Category is required',
+    },
   };
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private categoryService: CategoryService,
+  ) { }
 
   ngOnInit() {
-    this.buildForm();
+    this.categoryService.getCategories()
+      .subscribe(
+        categories => this.categories = categories,
+        err => console.log(err),
+      );
+      this.buildForm();
+  }
+
+  selectComparator(item: any, other: any) {
+    if (!other) return null;
+
+    return item._id == other._id;
   }
 
   buildForm(): void {
@@ -34,14 +75,23 @@ export class ProductFormComponent implements OnInit {
       this.product = {
         _id: '',
         name: '',
+        category: null,
         description: '',
         image: '',
+        quantity: 0,
         price: 0,
+        active: true,
       };
     }
 
     this.form = this.fb.group({
-      name: [this.product.name, Validators.required]
+      name: [this.product.name, Validators.required],
+      price: [this.product.price, Validators.required],
+      quantity: [this.product.quantity, Validators.required],
+      description: [this.product.description, Validators.required],
+      image: [this.product.image, Validators.required],
+      category: [this.product.category, Validators.required],
+      active: [this.product.active, Validators.required],
     });
 
     this.form.valueChanges
@@ -70,6 +120,10 @@ export class ProductFormComponent implements OnInit {
         }
       }
     }
+  }
+
+  setTab(tab: string) {
+    this.activeTab = tab;
   }
 
 }

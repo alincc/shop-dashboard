@@ -46,6 +46,7 @@ export const FAKE_PRODUCT1: Product = {
   description: "Description 1",
   image: "Image 1",
   price: 100,
+  active: true,
 };
 
 export const FAKE_PRODUCT2: Product = {
@@ -54,18 +55,13 @@ export const FAKE_PRODUCT2: Product = {
   description: "Description 2",
   image: "Image 2",
   price: 100,
+  active: true,
 };
 
 export const FAKE_PRODUCTS: Product[] = [FAKE_PRODUCT1, FAKE_PRODUCT2];
 
 export const PRODUCT_NOT_IN_CART: OrderLine = {
-  product: {
-    _id: "999",
-    name: "Product 999",
-    description: "Description 999",
-    image: "Image 999",
-    price: 999,
-  },
+  product: FAKE_PRODUCT1,
   quantity: 0
 };
 export const MOCK_ITEMS: OrderLine[] = [{ product: FAKE_PRODUCT1, quantity: 1 }, { product: FAKE_PRODUCT2, quantity: 2 }];

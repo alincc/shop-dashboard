@@ -5,6 +5,8 @@
 @import 'forms.scss';
 @import 'buttons.scss';
 @import 'messages.scss';
+@import 'panels.scss';
+@import 'tabs.scss';
 @import 'variables.scss';
 
 html {
@@ -43,6 +45,43 @@ a {
 
 .text-xs {
   font-size: 0.8em;
+}
+
+.text-thin {
+  font-weight: 300;
+}
+
+.text-info {
+  color: #23b7e5;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.bg-primary {
+  color: #f4f3f9;
+  background: #7266ba;
+
+  .text-muted {
+    color: #d6d3e6 !important;
+  }
+}
+
+.bg-info {
+  background: #23b7e5;
+
+  .text-muted {
+    color: #b0e1f1 !important;
+  }
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 .main {

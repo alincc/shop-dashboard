@@ -17,8 +17,10 @@ import { MessageComponent } from './message/message.component';
 import {
   ProductService,
   CategoryService,
+  OrderService,
 } from './services';
 import { ProductAddComponent } from './product-add/product-add.component';
+import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { ProductAddComponent } from './product-add/product-add.component';
     ProductDetailComponent,
     ProductFormComponent,
     MessageComponent,
-    ProductAddComponent
+    ProductAddComponent,
+    LatestOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { ProductAddComponent } from './product-add/product-add.component';
   providers: [
     ProductService,
     CategoryService,
+    OrderService,
   ],
   bootstrap: [AppComponent]
 })

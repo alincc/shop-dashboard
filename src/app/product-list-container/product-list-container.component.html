@@ -31,21 +31,21 @@
         <tbody>
           <tr *ngFor="let product of products">
             <td>ID</td>
-            <td>Image</td>
+            <td class="image-column"><img [src]="product.image" alt="Image" /></td>
             <td>{{ product.name }}</td>
-            <td>Category</td>
+            <td>{{ product.category?.name || "No category" }}</td>
             <td>{{ product.price }}</td>
-            <td>Quantity</td>
-            <td>Status</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.active ? "Active" : "Disabled" }}</td>
             <td>
               <a [routerLink]="['/product', product._id]">
                 <i class="fa fa-edit"></i>
               </a>
 
-              <a (click)="removeProduct(product)">
+              <a (click)="removeProduct(product)" class="cursor">
                 <i class="fa fa-remove"></i>
               </a>
-              
+
             </td>
           </tr>
         </tbody>

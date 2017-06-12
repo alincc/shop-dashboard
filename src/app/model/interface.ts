@@ -171,7 +171,9 @@ class Product {
   name: String;
   description: String;
   image: String;
+  quantity?: number;
   price: number;
+  active: boolean;
 }
 
 class Shipping {
