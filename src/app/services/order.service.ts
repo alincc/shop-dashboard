@@ -17,6 +17,12 @@ export class OrderService {
                     .catch(this.handleError);
   }
 
+  get(id: string): Observable<Order> {
+    return this.http.get(`${this.url}/${id}`)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
     return Observable.throw(error.json() || 'Server error');
   }
