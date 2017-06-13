@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../services';
-import { Category } from '../model/interface';
+import { Observable } from 'rxjs/Observable';
+
+import { CategoryService, ConfirmationService, ToastService } from '../services';
+import { Category, ResolveEmit } from '../model/interface';
 
 @Component({
   selector: 'app-category-list-container',
@@ -12,7 +14,11 @@ export class CategoryListContainerComponent implements OnInit {
   categories: Category[];
   isFinished: boolean = false;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(
+    private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,
+    private toastService: ToastService,
+  ) { }
 
   ngOnInit() {
     this.loadCategories();
@@ -28,12 +34,19 @@ export class CategoryListContainerComponent implements OnInit {
   }
 
   removeCategory(category: Category): void {
-    this.categoryService.removeCategory(category._id)
+    this.confirmationService
+      .create('Are you sure?', 'Do you really want to delete this item?')
+      .switchMap((ans: ResolveEmit) => ans.resolved ? this.categoryService.removeCategory(category._id) : Observable.of(null))
       .subscribe(
-        res => this.categories = this.categories.filter(c => c._id !== category._id),
+        res => {
+          if (res) {
+            this.categories = this.categories.filter(c => c._id !== category._id);
+            this.toastService.success('Removed!', 'The category was removed from the catalog');
+          }
+        },
         err => console.log(err),
         () => this.isFinished = true,
-      )
+      );
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services';
+import { ProductService, ToastService } from '../services';
 
 @Component({
   selector: 'app-product-add',
@@ -8,7 +8,10 @@ import { ProductService } from '../services';
 })
 export class ProductAddComponent implements OnInit {
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private toastService: ToastService,
+  ) { }
 
   ngOnInit() {
   }
@@ -16,7 +19,7 @@ export class ProductAddComponent implements OnInit {
   onSubmit(data) {
     this.productService.createProduct(data)
       .subscribe(
-        res => console.log(res),
+        res => this.toastService.success('Product created!', 'The product was created successfully'),
         err => console.log(err),
       );
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 
 import { Customer, ErrorResponse, Message, ShippingStatus } from '../model/interface';
-import { CustomerService } from '../services';
+import { CustomerService, ToastService } from '../services';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -20,6 +20,7 @@ export class CustomerDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private customerService: CustomerService,
+    private toastService: ToastService,
   ) { }
 
   ngOnInit() {
@@ -36,6 +37,7 @@ export class CustomerDetailComponent implements OnInit {
       .subscribe(
         res => this.customer = new Customer(res.data),
         err => console.log(err),
+        () => this.toastService.success('Saved!', 'The customer information was updated'),
       );
   }
 
@@ -44,6 +46,7 @@ export class CustomerDetailComponent implements OnInit {
       .subscribe(
         res => this.customer = new Customer(res.data),
         err => console.log(err),
+        () => this.toastService.success('Note saved!', 'The customer note was saved'),
       );
   }
 

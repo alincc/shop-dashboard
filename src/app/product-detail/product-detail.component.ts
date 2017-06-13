@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
+import { Location } from '@angular/common';
 
-import { Product, ErrorResponse, Message } from '../model/interface';
-import { ProductService } from '../services';
+import { Product, ErrorResponse, Message, ResolveEmit } from '../model/interface';
+import { ProductService, ToastService, ConfirmationService } from '../services';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -18,6 +19,9 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private confirmationService: ConfirmationService,
+    private toastService: ToastService,
+    private location: Location,
   ) { }
 
   ngOnInit() {
@@ -32,17 +36,24 @@ export class ProductDetailComponent implements OnInit {
   onSubmit(data) {
     this.productService.updateProduct(this.product._id, data)
       .subscribe(
-        res => console.log(res),
+        res => this.toastService.success('Product saved!', 'The product was updated successfully'),
         err => console.log(err),
       )
   }
 
   onRemove() {
     if (!this.product._id) return false;
-    
-    this.productService.removeProduct(this.product._id)
+
+    this.confirmationService
+      .create('Are you sure?', 'Do you really want to delete this item?')
+      .switchMap((ans: ResolveEmit) => ans.resolved ? this.productService.removeProduct(this.product._id) : Observable.of(null))
       .subscribe(
-        res => console.log('Product removed, should redirect user', res),
+        res => {
+          if (res) {
+            this.toastService.success('Product removed!', 'The product was removed from the catalog');
+            this.location.back();
+          }
+        },
         err => console.log(err),
       );
   }

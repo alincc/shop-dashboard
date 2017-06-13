@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 
 import { Category, ErrorResponse, Message } from '../model/interface';
-import { CategoryService } from '../services';
+import { CategoryService, ToastService } from '../services';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -19,6 +19,7 @@ export class CategoryDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
+    private toastService: ToastService,
   ) { }
 
   ngOnInit() {
@@ -36,12 +37,15 @@ export class CategoryDetailComponent implements OnInit {
 
   onSubmit(data) {
     this.isFinished = false;
-    
+
     this.categoryService.update(this.category._id, data)
       .subscribe(
         res => this.category = new Category(res.data),
         err => console.log(err),
-        () => this.isFinished = true,
+        () => {
+          this.isFinished = true;
+          this.toastService.success('Saved!', 'The category was updated');
+        },
       );
   }
 

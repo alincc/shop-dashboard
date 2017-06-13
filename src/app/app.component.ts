@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+
+  public notificationOptions = {
+      position: ["bottom", "right"],
+      timeOut: 5000,
+      lastOnBottom: true,
+      maxStack: 3,
+      preventDuplicates: true,
+      animate: 'fromRight',
+  }
 }

@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +22,8 @@ import {
   CategoryService,
   OrderService,
   CustomerService,
+  ToastService,
+  ConfirmationService,
 } from './services';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
@@ -55,12 +60,17 @@ import { CategoryFormComponent } from './category-form/category-form.component';
     HttpModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SimpleNotificationsModule.forRoot(),
+    JasperoConfirmationsModule,
   ],
   providers: [
     ProductService,
     CategoryService,
     OrderService,
     CustomerService,
+    ToastService,
+    ConfirmationService,
   ],
   bootstrap: [AppComponent]
 })

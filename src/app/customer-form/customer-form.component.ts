@@ -61,6 +61,7 @@ export class CustomerFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitEmitter.emit(this.form.value);
+    this.editing = false;
   }
 
   toggleEdit() {

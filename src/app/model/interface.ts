@@ -57,6 +57,13 @@ interface SuccessResponse {
   data: any;
 }
 
+export interface ResolveEmit {
+    // Returns this if modal resolved with yes or no
+    resolved?: boolean;
+    // If the modal was closed in some other way this is removed
+    closedWithOutResolving?: string;
+}
+
 class ContactMessage {
   constructor(public name: String, public email: String, public message: String) { }
 }
