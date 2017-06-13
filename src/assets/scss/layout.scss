@@ -5,6 +5,8 @@
 @import 'forms.scss';
 @import 'buttons.scss';
 @import 'messages.scss';
+@import 'colors.scss';
+@import 'text.scss';
 @import 'panels.scss';
 @import 'tabs.scss';
 @import 'margins.scss';
@@ -38,30 +40,6 @@ a {
 .no-padding {
   padding-left: 0;
   padding-right: 0;
-}
-
-.text-muted {
-  color: #5c798f;
-}
-
-.text-xs {
-  font-size: 0.8em;
-}
-
-.text-thin {
-  font-weight: 300;
-}
-
-.text-info {
-  color: #23b7e5;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-white {
-  color: #fff;
 }
 
 .bg-primary {

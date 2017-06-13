@@ -1,0 +1,50 @@
+<app-title-pane heading="Categories" subtitle="Manage categories">
+  <div options>
+    <a class="btn btn-sm btn-info btn-addon" routerLink="/category/create">
+      <i class="fa fa-plus"></i>
+      Create new
+    </a>
+  </div>
+</app-title-pane>
+
+<div class="category-list-container main">
+
+  <div class="box">
+
+    <div class="heading">Categories</div>
+
+    <div class="body">
+
+      <table class="table" *ngIf="categories">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Active</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let category of categories">
+            <td>{{ category.name }}</td>
+            <td>[_description]</td>
+            <td>[_active]</td>
+            <td>
+              <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/category', category._id]">
+                <i class="fa fa-edit"></i>
+              </a>
+
+              <a (click)="removeCategory(category)" class="btn btn-sm btn-icon btn-danger">
+                <i class="fa fa-remove"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

@@ -8,10 +8,25 @@ interface User {
   ip: String;
 }
 
-interface Category {
-  _id: String;
-  name: String;
-  image: String;
+interface ICategory {
+  _id: string;
+  name: string;
+  image: string;
+  products: Product[],
+}
+
+class Category implements ICategory {
+  _id: string;
+  name: string;
+  image: string;
+  products: Product[];
+
+  constructor(category: ICategory) {
+    this._id = category._id;
+    this.name = category.name;
+    this.image = category.image;
+    this.products = category.products;
+  }
 }
 
 interface CartProduct {

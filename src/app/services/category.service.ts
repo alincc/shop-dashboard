@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Category } from '../model/interface';
@@ -20,6 +20,21 @@ export class CategoryService {
     return this.http.get(this.url + '/' + id)
                     .map(res => res.json())
                     .catch(this.handleError);
+  }
+
+  removeCategory(id: string) {
+    return this.http.delete(`${this.url}/${id}`)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  update(id: string, category: Category): Observable<any> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.url + '/' + id, JSON.stringify(category), options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {

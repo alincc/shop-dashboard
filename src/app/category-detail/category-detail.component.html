@@ -1,0 +1,9 @@
+<app-title-pane heading="View category" subtitle="Manage categories"></app-title-pane>
+
+<div class="category-detail main">
+
+  <div class="message info" *ngIf="!category">Category not found</div>
+
+  <app-category-form *ngIf="category" [category]="category" (submitEmitter)="onSubmit($event)"></app-category-form>
+
+</div>

@@ -1,0 +1,31 @@
+@import "colors.scss";
+
+.text-muted {
+  color: #5c798f;
+}
+
+.text-xs {
+  font-size: 0.8em;
+}
+
+.text-thin {
+  font-weight: 300;
+}
+
+.text-info {
+  color: #23b7e5;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-success { color: $colorSuccess; }
+.text-danger { color: $colorDanger; }
+.text-warning { color: $colorWarning; }
+.text-primary { color: $colorPrimary; }
+.text-info { color: $colorInfo; }

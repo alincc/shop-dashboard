@@ -1,0 +1,53 @@
+<div class="category-form">
+
+  <div class="panel bordered-title" *ngIf="category">
+    <div class="options">
+      <i class="fa fa-edit cursor" (click)="toggleEdit()" *ngIf="!editing"></i>
+      <i class="fa fa-arrow-circle-o-left cursor" (click)="toggleEdit()" *ngIf="editing"></i>
+    </div>
+
+    <h4 class="text-thin">{{ category.name }}</h4>
+
+    <div class="content">
+
+      <table *ngIf="!editing">
+        <tr>
+          <td>Name</td>
+          <td>{{ category.name }}</td>
+        </tr>
+        <tr>
+          <td>Products</td>
+          <td>{{ category.products.length }}</td>
+        </tr>
+      </table>
+
+      <form *ngIf="editing" [formGroup]="form" class="form" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="field" [ngClass]="{'error': formErrors.name}">
+          <label for="name">Name</label>
+          <input formControlName="name" placeholder="Name">
+
+          <div *ngIf="formErrors.name" class="errors">{{ formErrors.name }}</div>
+        </div>
+
+        <div class="field" [ngClass]="{'error': formErrors.image}">
+          <label for="image">Image</label>
+          <input formControlName="image" placeholder="Image">
+
+          <div *ngIf="formErrors.image" class="errors">{{ formErrors.image }}</div>
+        </div>
+
+        <button class="btn btn-sm btn-info btn-addon" type="submit" [disabled]="!form.valid">
+          <i class="fa fa-check" *ngIf="form.valid"></i>
+          <i class="fa fa-ban" *ngIf="!form.valid"></i>
+          Save
+        </button>
+
+        <button type="button" class="btn btn-sm btn-default" (click)="toggleEdit()">Cancel</button>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

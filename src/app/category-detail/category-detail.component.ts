@@ -1,0 +1,48 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params }   from '@angular/router';
+
+import { Category, ErrorResponse, Message } from '../model/interface';
+import { CategoryService } from '../services';
+import { Observable } from 'rxjs/Observable';
+
+@Component({
+  selector: 'app-category-detail',
+  templateUrl: './category-detail.component.html',
+  styleUrls: ['./category-detail.component.scss']
+})
+export class CategoryDetailComponent implements OnInit {
+
+  category: Category;
+  private errorMsg: Message;
+  isFinished: boolean = false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private categoryService: CategoryService,
+  ) { }
+
+  ngOnInit() {
+    this.route.params
+      .switchMap((params: Params) => this.categoryService.getCategory(params['id']))
+      .subscribe(
+        category => this.category = new Category(category),
+        err => this.handleError(err),
+      );
+  }
+
+  handleError(error: ErrorResponse) {
+    this.errorMsg = new Message('negative', error.message, 'Ooops..');
+  }
+
+  onSubmit(data) {
+    this.isFinished = false;
+    
+    this.categoryService.update(this.category._id, data)
+      .subscribe(
+        res => this.category = new Category(res.data),
+        err => console.log(err),
+        () => this.isFinished = true,
+      );
+  }
+
+}

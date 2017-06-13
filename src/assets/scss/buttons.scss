@@ -1,3 +1,5 @@
+@import "colors.scss";
+
 .button {
   border-radius: 0;
   background: #0ab3a3;
@@ -81,86 +83,82 @@
   }
 
   &.btn-info {
-    color: #fff !important;
-    background-color: #23b7e5;
-    border-color: #23b7e5;
+    color: $colorInfoText !important;
+    background-color: $colorInfo;
+    border-color: $colorInfo;
 
     &:hover {
-      background-color: #19a9d5;
-      border-color: #189ec8;
+      background-color: $colorInfoHover;
+      border-color: $colorInfoDarker;
     }
 
     &.disabled, &[disabled] {
-      background-color: #23b7e5 !important;
-      border-color: #23b7e5 !important;
+      background-color: $colorInfo !important;
+      border-color: $colorInfo !important;
     }
   }
 
   &.btn-primary {
-    color: #fff !important;
-    background-color: #7266ba;
-    border-color: #7266ba;
+    color: $colorPrimaryText !important;
+    background-color: $colorPrimary;
+    border-color: $colorPrimary;
 
     &:hover {
-      color: #fff !important;
-      background-color: #6254b2;
-      border-color: #5a4daa;
+      background-color: $colorPrimaryHover;
+      border-color: $colorPrimaryDarker;
     }
 
     &.disabled, &[disabled] {
-      background-color: #7266ba;
-      border-color: #7266ba;
+      background-color: $colorPrimary;
+      border-color: $colorPrimary;
     }
   }
 
   &.btn-success {
-    color: #fff !important;
-    background-color: #27c24c;
-    border-color: #27c24c;
+    color: $colorSuccessText !important;
+    background-color: $colorSuccess;
+    border-color: $colorSuccess;
 
     &:hover {
-      color: #fff !important;
-      background-color: #23ad44;
-      border-color: #20a03f;
+      background-color: $colorSuccessHover;
+      border-color: $colorSuccessDarker;
     }
 
     &.disabled, &[disabled] {
-      background-color: #27c24c;
-      border-color: #27c24c;
+      background-color: $colorSuccess;
+      border-color: $colorSuccess;
     }
   }
 
   &.btn-warning {
-    color: #fff !important;
-    background-color: #fad733;
-    border-color: #fad733;
+    color: $colorWarningText !important;
+    background-color: $colorWarning;
+    border-color: $colorWarning;
 
     &:hover {
-      color: #fff !important;
-      background-color: #f9d21a;
-      border-color: #f9cf0b;
+      background-color: $colorWarningHover;
+      border-color: $colorWarningDarker;
     }
 
     &.disabled, &[disabled] {
-      background-color: #fad733;
-      border-color: #fad733;
+      background-color: $colorWarning;
+      border-color: $colorWarning;
     }
   }
 
   &.btn-danger {
-    color: #fff !important;
-    background-color: #f05050;
-    border-color: #f05050;
+    color: $colorDangerText !important;
+    background-color: $colorDanger;
+    border-color: $colorDanger;
 
     &:hover {
-      color: #fff !important;
-      background-color: #ee3939;
-      border-color: #ed2a2a;
+      background-color: $colorDangerHover;
+      border-color: $colorDangerDarker;
     }
 
     &.disabled, &[disabled] {
-      background-color: #f05050;
-      border-color: #f05050;
+      background-color: $colorDanger;
+      border-color: $colorDanger;
     }
   }
 

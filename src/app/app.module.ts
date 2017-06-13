@@ -25,6 +25,9 @@ import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
 import { CustomerListContainerComponent } from './customer-list-container/customer-list-container.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
+import { CategoryListContainerComponent } from './category-list-container/category-list-container.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
     LatestOrdersComponent,
     CustomerListContainerComponent,
     CustomerDetailComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    CategoryListContainerComponent,
+    CategoryDetailComponent,
+    CategoryFormComponent
   ],
   imports: [
     BrowserModule,

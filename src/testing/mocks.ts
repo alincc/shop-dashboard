@@ -30,12 +30,14 @@ export const FAKE_CATEGORY1: Category = {
   _id: "1",
   name: "Category 1",
   image: "Image 1",
+  products: [],
 };
 
 export const FAKE_CATEGORY2: Category = {
   _id: "2",
   name: "Category 2",
   image: "Image 2",
+  products: [],
 };
 
 export const FAKE_CATEGORIES: Category[] = [FAKE_CATEGORY1, FAKE_CATEGORY2];
