@@ -1,6 +1,11 @@
 <div class="title-pane">
+  <div class="pull-right options">
+    <ng-content select="[options]"></ng-content>
+  </div>
 
-  <h1>Dashboard</h1>
-  <span class="text-muted">Welcome to your dashboard</span>
+  <div class="title" [ngClass]="{'no-subtitle': !subtitle}">
+    <h1>{{ heading }}</h1>
+    <span class="text-muted" *ngIf="subtitle">{{ subtitle }}</span>
+  </div>
 
 </div>

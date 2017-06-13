@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-title-pane',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./title-pane.component.scss']
 })
 export class TitlePaneComponent implements OnInit {
+  @Input() heading: string;
+  @Input() subtitle: string;
 
   constructor() { }
 
