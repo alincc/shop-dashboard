@@ -1,0 +1,65 @@
+<div class="customer-form">
+
+  <div class="panel bordered-title" *ngIf="customer">
+
+    <div class="options">
+      <i class="fa fa-edit cursor" (click)="toggleEdit()" *ngIf="!editing"></i>
+      <i class="fa fa-arrow-circle-o-left cursor" (click)="toggleEdit()" *ngIf="editing"></i>
+    </div>
+
+    <h4 class="text-thin">
+      {{ customer.getFullname() }}
+    </h4>
+
+    <div class="content">
+
+      <table *ngIf="!editing">
+        <tr>
+          <td>Firstname</td>
+          <td>{{ customer.firstname }}</td>
+        </tr>
+        <tr>
+          <td>Lastname</td>
+          <td>{{ customer.lastname }}</td>
+        </tr>
+        <tr>
+          <td>Customer Since</td>
+          <td>[_customer_since]</td>
+        </tr>
+        <tr>
+          <td>Last Visit</td>
+          <td>[_lastvisit]</td>
+        </tr>
+        <tr>
+          <td>Country</td>
+          <td>{{ customer.country }}</td>
+        </tr>
+        <tr>
+          <td>Status</td>
+          <td>{{ customer.getStatus() }}</td>
+        </tr>
+      </table>
+
+      <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()" *ngIf="editing" novalidate>
+
+        <div class="field" [ngClass]="{'error': formErrors.firstname}">
+          <label for="firstname">Firstname</label>
+          <input formControlName="firstname" placeholder="Firstname">
+
+          <div *ngIf="formErrors.firstname" class="errors">{{ formErrors.firstname }}</div>
+        </div>
+
+        <button class="btn btn-sm btn-info btn-addon" type="submit" [disabled]="!form.valid">
+          <i class="fa fa-check" *ngIf="form.valid"></i>
+          <i class="fa fa-ban" *ngIf="!form.valid"></i>
+          Save
+        </button>
+
+        <button type="button" class="btn btn-sm btn-default" (click)="toggleEdit()">Cancel</button>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

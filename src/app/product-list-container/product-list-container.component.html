@@ -38,11 +38,12 @@
             <td>{{ product.quantity }}</td>
             <td>{{ product.active ? "Active" : "Disabled" }}</td>
             <td>
-              <a [routerLink]="['/product', product._id]">
+  
+              <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/product', product._id]">
                 <i class="fa fa-edit"></i>
               </a>
 
-              <a (click)="removeProduct(product)" class="cursor">
+              <a (click)="removeProduct(product)" class="btn btn-sm btn-icon btn-danger">
                 <i class="fa fa-remove"></i>
               </a>
 

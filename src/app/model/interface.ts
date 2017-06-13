@@ -67,6 +67,8 @@ class ICustomer {
   lastname: String;
   firstname: String;
   orders: Order[];
+  active?: boolean;
+  note?: string;
 }
 class Customer implements ICustomer {
   _id?: string;
@@ -79,6 +81,8 @@ class Customer implements ICustomer {
   lastname: String;
   firstname: String;
   orders: Order[];
+  active?: boolean;
+  note?: string;
 
   constructor(customer: ICustomer) {
     this._id = customer._id;
@@ -91,6 +95,8 @@ class Customer implements ICustomer {
     this.lastname = customer.lastname;
     this.firstname = customer.firstname;
     this.orders = customer.orders;
+    this.active = customer.active ? customer.active : true;
+    this.note = customer.note;
   }
 
   public differs(other: Customer): boolean {
@@ -107,6 +113,14 @@ class Customer implements ICustomer {
     }
 
     return false;
+  }
+
+  public getFullname(): string {
+    return `${this.firstname} ${this.lastname}`;
+  }
+
+  public getStatus(): string {
+    return this.active ? 'Enabled' : 'Disabled';
   }
 }
 

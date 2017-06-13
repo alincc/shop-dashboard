@@ -1,4 +1,4 @@
-<div>
+<div class="product-form">
 
   <div *ngIf="!product" class="message negative">
     No product found
@@ -6,7 +6,7 @@
 
   <form [formGroup]="form" class="form" (ngSubmit)="onSubmit()" *ngIf="product" novalidate>
 
-    <div class="box-tabbed">
+    <div class="box-tabbed m-b">
 
       <div class="tabs">
 
@@ -97,7 +97,15 @@
 
     </div>
 
-    <button type="submit" class="button" [disabled]="!form.valid">Save</button>
+    <button class="btn btn-sm btn-info btn-addon" type="submit" [disabled]="!form.valid">
+      <i class="fa fa-check"></i>
+      Save
+    </button>
+
+    <button class="btn btn-sm btn-danger btn-addon" type="button" *ngIf="product._id" (click)="onRemove()">
+      <i class="fa fa-trash-o"></i>
+      Remove
+    </button>
 
   </form>
 

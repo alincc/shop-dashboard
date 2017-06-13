@@ -1,5 +1,7 @@
 <div class="product-detail main">
-  Product info
-
-  <app-product-form [product]="product" *ngIf="product" (submitEmitter)="onSubmit($event)"></app-product-form>
+  <app-product-form [product]="product"
+    *ngIf="product"
+    (removeEmitter)="onRemove($event)"
+    (submitEmitter)="onSubmit($event)">
+  </app-product-form>
 </div>

@@ -11,6 +11,7 @@ import { Product, Category } from '../model/interface';
 export class ProductFormComponent implements OnInit {
   @Input() product: Product;
   @Output() submitEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() removeEmitter: EventEmitter<any> = new EventEmitter();
 
   categories: Category[];
 
@@ -61,7 +62,7 @@ export class ProductFormComponent implements OnInit {
         categories => this.categories = categories,
         err => console.log(err),
       );
-      this.buildForm();
+    this.buildForm();
   }
 
   selectComparator(item: any, other: any) {
@@ -102,6 +103,10 @@ export class ProductFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitEmitter.emit(this.form.value);
+  }
+
+  onRemove(): void {
+    this.removeEmitter.emit();
   }
 
   onValueChanged(data?: any) {

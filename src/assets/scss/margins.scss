@@ -1,0 +1,65 @@
+$mTiny: 5px;
+$mSmall: 10px;
+$mDefault: 15px;
+$mLarge: 30px;
+$mHuge: 40px;
+
+.m-b-xs { margin-bottom: $mTiny; }
+.m-b-sm { margin-bottom: $mSmall; }
+.m-b { margin-bottom: $mDefault; }
+.m-b-lg { margin-bottom: $mLarge; }
+.m-b-xl { margin-bottom: $mHuge; }
+
+.m-t-xs { margin-top: $mTiny; }
+.m-t-sm { margin-top: $mSmall; }
+.m-t { margin-top: $mDefault; }
+.m-t-lg { margin-top: $mLarge; }
+.m-t-xl { margin-top: $mHuge; }
+
+.m-l-xs { margin-left: $mTiny; }
+.m-l-sm { margin-left: $mSmall; }
+.m-l { margin-left: $mDefault; }
+.m-l-lg { margin-left: $mLarge; }
+.m-l-xl { margin-left: $mHuge; }
+
+.m-r-xs { margin-right: $mTiny; }
+.m-r-sm { margin-right: $mSmall; }
+.m-r { margin-right: $mDefault; }
+.m-r-lg { margin-right: $mLarge; }
+.m-r-xl { margin-right: $mHuge; }
+
+.m-xs { margin: $mTiny; }
+.m-sm { margin: $mSmall; }
+.m { margin: $mDefault; }
+.m-lg { margin: $mLarge; }
+.m-xl { margin: $mHuge; }
+
+.padder-v {
+  padding-top: $mDefault;
+  padding-bottom: $mDefault;
+}
+
+.padder-xs {
+  padding-top: $mTiny;
+  padding-bottom: $mTiny;
+}
+
+.padder-sm {
+  padding-top: $mSmall;
+  padding-bottom: $mSmall;
+}
+
+.padder {
+  padding-top: $mDefault;
+  padding-bottom: $mDefault;
+}
+
+.padder-lg {
+  padding-top: $mLarge;
+  padding-bottom: $mLarge;
+}
+
+.padder-xl {
+  padding-top: $mHuge;
+  padding-bottom: $mHuge;
+}

@@ -37,6 +37,16 @@ export class ProductDetailComponent implements OnInit {
       )
   }
 
+  onRemove() {
+    if (!this.product._id) return false;
+    
+    this.productService.removeProduct(this.product._id)
+      .subscribe(
+        res => console.log('Product removed, should redirect user', res),
+        err => console.log(err),
+      );
+  }
+
   handleError(error: ErrorResponse) {
     this.errorMsg = new Message('negative', error.message, 'Ooops..');
   }

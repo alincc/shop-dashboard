@@ -18,9 +18,13 @@ import {
   ProductService,
   CategoryService,
   OrderService,
+  CustomerService,
 } from './services';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
+import { CustomerListContainerComponent } from './customer-list-container/customer-list-container.component';
+import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { CustomerFormComponent } from './customer-form/customer-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
     ProductFormComponent,
     MessageComponent,
     ProductAddComponent,
-    LatestOrdersComponent
+    LatestOrdersComponent,
+    CustomerListContainerComponent,
+    CustomerDetailComponent,
+    CustomerFormComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +54,7 @@ import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
     ProductService,
     CategoryService,
     OrderService,
+    CustomerService,
   ],
   bootstrap: [AppComponent]
 })
