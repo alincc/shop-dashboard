@@ -34,6 +34,7 @@ import { CategoryListContainerComponent } from './category-list-container/catego
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { OrderListContainerComponent } from './order-list-container/order-list-container.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { OrderListContainerComponent } from './order-list-container/order-list-c
     CategoryListContainerComponent,
     CategoryDetailComponent,
     CategoryFormComponent,
-    OrderListContainerComponent
+    OrderListContainerComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

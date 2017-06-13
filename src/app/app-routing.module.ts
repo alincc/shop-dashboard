@@ -8,6 +8,8 @@ import { CustomerListContainerComponent } from './customer-list-container/custom
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { CategoryListContainerComponent } from './category-list-container/category-list-container.component';
+import { OrderListContainerComponent } from './order-list-container/order-list-container.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +20,8 @@ export const routes: Routes = [
   { path: 'product/:id', component: ProductDetailComponent },
   { path: 'categories', component: CategoryListContainerComponent },
   { path: 'category/:id', component: CategoryDetailComponent },
+  { path: 'orders', component: OrderListContainerComponent },
+  { path: 'order/:id', component: OrderDetailComponent },
 ];
 
 @NgModule({
