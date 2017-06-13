@@ -33,6 +33,7 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { CategoryListContainerComponent } from './category-list-container/category-list-container.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import { OrderListContainerComponent } from './order-list-container/order-list-container.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CategoryFormComponent } from './category-form/category-form.component';
     CustomerFormComponent,
     CategoryListContainerComponent,
     CategoryDetailComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    OrderListContainerComponent
   ],
   imports: [
     BrowserModule,
