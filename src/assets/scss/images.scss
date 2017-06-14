@@ -1,0 +1,38 @@
+.thumb-xxs {
+  width: 30px;
+}
+
+.thumb-xs {
+  width: 34px;
+}
+
+.thumb-sm {
+  width: 40px;
+}
+
+.thumb {
+  width: 50px;
+}
+
+.thumb-md {
+  width: 64px;
+}
+
+.thumb-lg {
+  width: 96px;
+}
+
+.thumb-xl {
+  width: 128px;
+}
+
+.thumb-xss, .thumb-xs, .thumb-sm, .thumb,
+.thumb-md, .thumb.lg, .thumb-xl {
+  display: inline-block;
+
+  img {
+    height: auto;
+    max-width: 100% !important;
+    vertical-align: middle;
+  }
+}

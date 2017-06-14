@@ -1,3 +1,41 @@
-<p>
-  order-list-container works!
-</p>
+<app-title-pane heading="Orders" subtitle="Manage orders"></app-title-pane>
+
+<div class="order-list-container main">
+
+  <div class="box">
+
+    <div class="heading">Orders</div>
+
+    <div class="body">
+
+      <table class="table" *ngIf="orders">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order._id}}</td>
+            <td>{{ order.total | currency:'USD':true }}</td>
+            <td>{{ order.getShippingStatus() }}</td>
+            <td>{{ order.createdAt | date:'short' }}</td>
+            <td>
+              <a [routerLink]="['/order', order._id]">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+</div>

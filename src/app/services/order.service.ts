@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { Order } from '../model/interface';
@@ -20,6 +20,15 @@ export class OrderService {
   get(id: string): Observable<Order> {
     return this.http.get(`${this.url}/${id}`)
       .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  update(id: string, order: Order): Observable<any> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.url + '/' + id, JSON.stringify(order), options)
+      .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 

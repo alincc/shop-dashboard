@@ -1,0 +1,5 @@
+<select [(ngModel)]="selectedShippingOption" [compareWith]="selectComparator">
+  <option *ngFor="let option of options" [ngValue]="option">{{ option }}</option>
+</select>
+
+<button class="btn btn-sm btn-info" (click)="onSave()">Update status</button>

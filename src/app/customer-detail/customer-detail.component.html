@@ -26,17 +26,7 @@
 
             <div class="message info">This note will not be displayed to the customer</div>
 
-            <form (ngSubmit)="onSubmitNote()" class="form">
-              <div class="field">
-                <textarea [(ngModel)]="customer.note" name="note"></textarea>
-              </div>
-
-              <button class="btn btn-sm btn-info btn-addon" type="submit">
-                <i class="fa fa-check"></i>
-                Save
-              </button>
-
-            </form>
+            <app-customer-note-form [customer]="customer" (noteEmitter)="onSubmitNote($event)"></app-customer-note-form>
 
           </div>
 

@@ -41,7 +41,7 @@ export class CustomerDetailComponent implements OnInit {
       );
   }
 
-  onSubmitNote() {
+  onSubmitNote(note: string) {
     this.customerService.update(this.customer._id, this.customer)
       .subscribe(
         res => this.customer = new Customer(res.data),

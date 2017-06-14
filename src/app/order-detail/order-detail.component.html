@@ -1,3 +1,131 @@
-<p>
-  order-detail works!
-</p>
+<app-title-pane heading="View order" subtitle="Manage orders"></app-title-pane>
+
+<div class="order-detail main">
+
+  <div class="message info" *ngIf="!order">Order not found</div>
+
+  <div *ngIf="order">
+
+    <div class="row">
+
+      <div class="col-md-6 col-xs-12">
+
+        <div class="panel bordered-title">
+
+          <h4 class="text-thin">
+            Details
+          </h4>
+
+          <div class="content">
+
+            <div class="box">
+              <div class="content">
+
+                <app-order-update-status [order]="order" (updateEmitter)="onUpdateStatus($event)"></app-order-update-status>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+
+        <div class="panel bordered-title">
+
+          <h4 class="text-thin">
+            Customer
+          </h4>
+
+          <div class="content">
+
+            <div class="row">
+
+              <div class="col-md-5 col-xs-12">
+                Customer name: {{ order.customer.getFullname() }}
+                Customer created: {{ order.customer.createdAt || '' }}
+                Customer number of orders : {{ order.customer.orders.length }}
+              </div>
+
+              <div class="col-md-7 col-xs-12">
+                Link: <a [routerLink]="['/customer', order.customer._id]">view profile</a> <br><br>
+
+                <div class="message info">This note will not be displayed to the customer</div>
+
+                <app-customer-note-form [customer]="order.customer" (noteEmitter)="onSubmitNote($event)"></app-customer-note-form>
+              </div>
+
+              <div class="col-md-12 col-xs-12">
+                <h3>Shipping Address</h3>
+
+                <!-- Create ShippingAddress class and store it in the order aside from just customer information -->
+                [_todo]
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-xs-12">
+
+        <div class="panel bordered-title">
+
+          <h4 class="text-thin">
+            Products
+          </h4>
+
+          <div class="content">
+
+            <table class="table">
+
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Product</th>
+                  <th>Unit Price</th>
+                  <th>Quantity</th>
+                  <th>Available quantity</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <tr *ngFor="let item of order.items">
+                  <td>
+                    <a class="thumb-md" [routerLink]="['/product', item.product._id]">
+                      <img [src]="item.product.image" alt="Image" />
+                    </a>
+                  </td>
+                  <td>{{ item.product.name }}</td>
+                  <td>{{ item.product.price }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>[_available_quantity]</td>
+                  <td>[_total]</td>
+                  <td>[_edit_button]</td>
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>

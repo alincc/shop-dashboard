@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit()" class="form" *ngIf="customer">
+  <div class="field">
+    <textarea [(ngModel)]="customer.note" name="note"></textarea>
+  </div>
+
+  <button class="btn btn-sm btn-info btn-addon" type="submit">
+    <i class="fa fa-check"></i>
+    Save
+  </button>
+
+</form>

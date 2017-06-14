@@ -159,7 +159,7 @@ export enum ShippingStatus {
 }
 
 interface IOrder {
-  _id: String;
+  _id: string;
   updatedAt: String;
   createdAt: String;
   total: number;
@@ -171,7 +171,7 @@ interface IOrder {
 }
 
 class Order implements IOrder {
-  _id: String;
+  _id: string;
   updatedAt: String;
   createdAt: String;
   total: number;
@@ -186,9 +186,9 @@ class Order implements IOrder {
     this.updatedAt = order.updatedAt;
     this.createdAt = order.createdAt;
     this.total = order.total;
-    this.status = order.status ? order.status : null;
+    this.status = order.status;
     this.items = order.items ? order.items : [];
-    this.customer = order.customer ? order.customer : null;
+    this.customer = order.customer ? new Customer(order.customer) : null;
     this.shipping = order.shipping ? order.shipping : null;
     this.payment = order.payment ? order.payment : null;
   }
@@ -197,6 +197,10 @@ class Order implements IOrder {
     return this.items.reduce((sum, item) => {
       return sum + (item.product.price * item.quantity);
     }, 0);
+  }
+
+  public getShippingStatus(): string {
+    return ShippingStatus[this.status];
   }
 }
 
