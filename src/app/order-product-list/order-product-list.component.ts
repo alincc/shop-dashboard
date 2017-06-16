@@ -22,4 +22,16 @@ export class OrderProductListComponent implements OnInit {
     this.updateEmitter.emit(this.items);
   }
 
+  priceDiffers(line: OrderLine): boolean {
+    return line.price !== line.product.price;
+  }
+
+  priceIncreased(line: OrderLine): boolean {
+    return line.price > line.product.price
+  }
+
+  priceDecreased(line: OrderLine): boolean {
+    return line.price < line.product.price
+  }
+
 }

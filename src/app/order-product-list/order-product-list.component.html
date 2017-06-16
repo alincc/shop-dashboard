@@ -21,7 +21,7 @@
         </a>
       </td>
       <td>{{ item.product.name }}</td>
-      <td>
+      <td [ngClass]="{'text-danger': priceDecreased(item), 'text-success': priceIncreased(item), 'text-bold': priceDiffers(item)}">
         <input type="text" [(ngModel)]="item.price" *ngIf="toggle[i]">
         <span *ngIf="!toggle[i]">{{ item.price | currency:'USD':true }}</span>
       </td>
