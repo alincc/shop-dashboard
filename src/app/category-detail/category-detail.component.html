@@ -2,7 +2,7 @@
 
 <div class="category-detail main">
 
-  <div class="message info" *ngIf="!category">Category not found</div>
+  <app-message [data]="errorMsg"></app-message>
 
   <app-category-form *ngIf="category" [category]="category" (submitEmitter)="onSubmit($event)"></app-category-form>
 

@@ -1,0 +1,91 @@
+<div *ngIf="shippingAddress" class="shipping-address">
+
+  <div *ngIf="!editing" class="padder-v">
+    <button class="btn btn-sm btn-info pull-right" (click)="editing = !editing">Edit</button>
+
+    {{ shippingAddress.getFullname() }} <br>
+    {{ shippingAddress.address }} <br>
+    {{ shippingAddress.postnumber }} {{ shippingAddress.city }} <br>
+    {{ shippingAddress.country }} <br><br>
+
+    <i class="fa fa-envelope-o m-r-xs"></i> {{ shippingAddress.email }} <br>
+    <i class="fa fa-phone m-r-xs"></i> {{ shippingAddress.phone }} <br>
+  </div>
+
+  <div *ngIf="editing">
+    <div class="form">
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+
+          <div class="field">
+            <label for="firstname">Firstname</label>
+            <input type="text" [(ngModel)]="shippingAddress.firstname" placeholder="Firstname" id="firstname">
+          </div>
+
+        </div>
+        <div class="col-md-6 col-xs-12">
+
+          <div class="field">
+            <label for="lastname">Lastname</label>
+            <input type="text" [(ngModel)]="shippingAddress.lastname" placeholder="Lastname" id="lastname">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="address">Address</label>
+        <input type="text" [(ngModel)]="shippingAddress.address" placeholder="Address" id="address">
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+
+          <div class="field">
+            <label for="postnumber">Postnumber</label>
+            <input type="text" [(ngModel)]="shippingAddress.postnumber" placeholder="Postnumber" id="postnumber">
+          </div>
+
+        </div>
+        <div class="col-md-6 col-xs-12">
+
+          <div class="field">
+            <label for="city">City</label>
+            <input type="text" [(ngModel)]="shippingAddress.city" placeholder="City" id="city">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="country">Country</label>
+        <input type="text" [(ngModel)]="shippingAddress.country" placeholder="Country" id="country">
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="text" [(ngModel)]="shippingAddress.phone" placeholder="Phone" id="phone">
+          </div>
+
+        </div>
+        <div class="col-md-6 col-xs-12">
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="text" [(ngModel)]="shippingAddress.email" placeholder="Email" id="email">
+          </div>
+
+        </div>
+      </div>
+
+      <button class="btn btn-sm btn-info" (click)="onSave()">Save</button>
+      <button class="btn btn-sm btn-default" (click)="editing = !editing">Cancel</button>
+
+    </div>
+  </div>
+
+</div>

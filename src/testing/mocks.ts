@@ -8,6 +8,7 @@ import {
   ShippingStatus,
   Category,
   Payment,
+  ShippingLine,
 } from '../app/model/interface';
 
 export const FAKE_PAYMENT1: Payment = {
@@ -62,11 +63,25 @@ export const FAKE_PRODUCT2: Product = {
 
 export const FAKE_PRODUCTS: Product[] = [FAKE_PRODUCT1, FAKE_PRODUCT2];
 
-export const PRODUCT_NOT_IN_CART: OrderLine = {
+export const PRODUCT_NOT_IN_CART: OrderLine = new OrderLine({
   product: FAKE_PRODUCT1,
-  quantity: 0
-};
-export const MOCK_ITEMS: OrderLine[] = [{ product: FAKE_PRODUCT1, quantity: 1 }, { product: FAKE_PRODUCT2, quantity: 2 }];
+  quantity: 0,
+  price: FAKE_PRODUCT1.price,
+});
+
+const FAKE_ORDERLINE1 = new OrderLine({
+  product: FAKE_PRODUCT1,
+  quantity: 1,
+  price: FAKE_PRODUCT1.price,
+});
+
+const FAKE_ORDERLINE2 = new OrderLine({
+  product: FAKE_PRODUCT2,
+  quantity: 1,
+  price: FAKE_PRODUCT2.price,
+});
+
+export const MOCK_ITEMS: OrderLine[] = [FAKE_ORDERLINE1, FAKE_ORDERLINE2];
 
 export const MOCK_CUSTOMER1: Customer = new Customer({
   _id: "1",
@@ -110,6 +125,8 @@ export const MOCK_SHIPPING1: Shipping = {
   description: "description",
   price: 100,
 }
+export const FAKE_SHIPPING_LINE1 = new ShippingLine(MOCK_SHIPPING1, "111", 1, 1);
+
 
 export const MOCK_ORDER1 = new Order({
     _id: "100",
@@ -117,10 +134,11 @@ export const MOCK_ORDER1 = new Order({
     createdAt: "0000",
     total: 100,
     status: ShippingStatus.Pending,
+    statusLog: [],
     items: MOCK_ITEMS,
     customer: MOCK_CUSTOMER1,
-    shipping: MOCK_SHIPPING1
+    // shipping: MOCK_SHIPPING1
+    shipping: FAKE_SHIPPING_LINE1,
 });
-
 
 export const MOCK_SHIPPINGS: Shipping[] = [MOCK_SHIPPING1];

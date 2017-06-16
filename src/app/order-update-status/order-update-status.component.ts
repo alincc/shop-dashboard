@@ -8,8 +8,8 @@ import { Order, ShippingStatus } from '../model/interface';
 })
 export class OrderUpdateStatusComponent implements OnInit {
   @Input() order: Order;
-  @Output() updateEmitter: EventEmitter<string> = new EventEmitter();
-  selectedShippingOption: any = 'Pending';
+  @Output() updateEmitter: EventEmitter<any> = new EventEmitter();
+  selectedShippingOption: any = '0';
 
   shippingStatus : string[] = Object.keys(ShippingStatus);
   options: any;
@@ -18,15 +18,15 @@ export class OrderUpdateStatusComponent implements OnInit {
 
   ngOnInit() {
     this.options = this.shippingStatus.slice(this.shippingStatus.length / 2);
-    this.selectedShippingOption = ShippingStatus[this.order.status];
+    this.selectedShippingOption = this.order.status.toString();
   }
 
   onSave() {
-    this.updateEmitter.emit(ShippingStatus[this.selectedShippingOption]);
+    this.updateEmitter.emit({ status: this.selectedShippingOption });
   }
 
-  selectComparator(item: string, other: string) {
-    return item == other;
+  getOptions() {
+    return this.options.map(item => ({ value: ShippingStatus[item].toString(), label: item }));
   }
 
 }

@@ -1,0 +1,35 @@
+<table class="table" *ngIf="shipping">
+  <thead>
+    <tr>
+      <th>Carrier</th>
+      <th>Weight</th>
+      <th>Shipping Cost</th>
+      <th>Tracking number</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>{{ shipping.value.name }}</td>
+      <td>{{ shipping.weight }}</td>
+      <td>{{ shipping.price | currency:'USD':true }}</td>
+      <td>
+        <input type="text" *ngIf="editing" [(ngModel)]="shipping.trackingNumber">
+
+        <span *ngIf="!editing">{{ shipping.trackingNumber }}</span>
+      </td>
+      <td>
+        <div *ngIf="!editing">
+          <button type="button" class="btn btn-info btn-xs" (click)="editing = !editing">Edit Tracking Number</button>
+        </div>
+
+        <div *ngIf="editing">
+          <button type="button" class="btn btn-info btn-xs" (click)="onSave()">Save</button>
+          <button type="button" class="btn btn-default btn-xs" (click)="onCancelEdit()">Cancel</button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+
+</table>

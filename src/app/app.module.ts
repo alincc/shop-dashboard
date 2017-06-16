@@ -37,6 +37,10 @@ import { OrderListContainerComponent } from './order-list-container/order-list-c
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { CustomerNoteFormComponent } from './customer-note-form/customer-note-form.component';
 import { OrderUpdateStatusComponent } from './order-update-status/order-update-status.component';
+import { ShippingInfoComponent } from './shipping-info/shipping-info.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+import { SelectComponent } from './select/select.component';
+import { OrderProductListComponent } from './order-product-list/order-product-list.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { OrderUpdateStatusComponent } from './order-update-status/order-update-s
     OrderListContainerComponent,
     OrderDetailComponent,
     CustomerNoteFormComponent,
-    OrderUpdateStatusComponent
+    OrderUpdateStatusComponent,
+    ShippingInfoComponent,
+    ShippingAddressComponent,
+    SelectComponent,
+    OrderProductListComponent
   ],
   imports: [
     BrowserModule,

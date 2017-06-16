@@ -16,7 +16,8 @@
 
     h1, h2, h3, h4, h5 {
       border-bottom: 1px solid #dee5e7;
-      padding: 15px;
+      line-height: 3;
+      padding: 0 15px;
     }
 
     .content {
@@ -25,9 +26,9 @@
   }
 
   .options {
-    line-height: 1.1;
+    line-height: 3;
     float: right;
     display: block;
-    padding: 15px;
+    padding: 0 15px;
   }
 }

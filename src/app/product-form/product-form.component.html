@@ -54,9 +54,13 @@
           <div class="field" [ngClass]="{'error': formErrors.category}">
             <label for="category">Category</label>
 
-            <select [compareWith]="selectComparator" formControlName="category">
-              <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
-            </select>
+            <app-select
+              [options]="categoryOptions()"
+              formControlName="category"
+              label="Select a category"
+              *ngIf="categories"
+            >
+            </app-select>
 
             <div *ngIf="formErrors.category" class="errors">{{ formErrors.category }}</div>
           </div>

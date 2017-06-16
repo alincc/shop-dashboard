@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params }   from '@angular/router';
 
-import { Order, ErrorResponse, Message, Customer, ShippingStatus } from '../model/interface';
+import { Order, OrderLine, ErrorResponse, Message, Customer, ShippingStatus, ShippingLine, ShippingAddress } from '../model/interface';
 import { OrderService, CustomerService, ToastService } from '../services';
 import { Observable } from 'rxjs/Observable';
 
@@ -24,15 +24,10 @@ export class OrderDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.route.params
       .switchMap((params: Params) => this.orderService.get(params['id']))
       .subscribe(
-        order => {
-          this.order = new Order(order);
-
-          console.log("Order: ", this.order);
-        },
+        order => this.order = new Order(order),
         err => this.handleError(err),
       );
   }
@@ -46,14 +41,24 @@ export class OrderDetailComponent implements OnInit {
       );
   }
 
-  onUpdateStatus(status: string) {
-    this.order.status = +status;
+  onUpdateProducts(items: OrderLine[]) {
+    this.onUpdate({ items: items });
+  }
 
-    this.orderService.update(this.order._id, this.order)
+  onUpdateStatus(status: any) {
+    this.onUpdate(status)
+  }
+
+  onUpdateAddress(address: ShippingAddress) {
+    this.onUpdate({ shippingAddress: address });
+  }
+
+  onUpdate(body: any) {
+    this.orderService.update(this.order._id, body)
       .subscribe(
         res => this.order = new Order(res.data),
         err => console.log(err),
-        () => this.toastService.success('Updated!', 'The order status was updated'),
+        () => this.toastService.success('Updated!', 'The order was updated'),
       );
   }
 

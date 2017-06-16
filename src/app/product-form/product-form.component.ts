@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { CategoryService } from '../services';
-import { Product, Category } from '../model/interface';
+import { Product, Category, IOption } from '../model/interface';
 
 @Component({
   selector: 'app-product-form',
@@ -14,8 +14,6 @@ export class ProductFormComponent implements OnInit {
   @Output() removeEmitter: EventEmitter<any> = new EventEmitter();
 
   categories: Category[];
-
-  selectedCategory: Category;
 
   activeTab: string = 'basic';
 
@@ -65,10 +63,8 @@ export class ProductFormComponent implements OnInit {
     this.buildForm();
   }
 
-  selectComparator(item: any, other: any) {
-    if (!other) return null;
-
-    return item._id == other._id;
+  categoryOptions(): IOption[] {
+    return this.categories.map(category => ({ label: category.name, value: category }));
   }
 
   buildForm(): void {

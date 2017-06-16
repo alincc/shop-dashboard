@@ -1,3 +1,9 @@
+export interface IOption {
+  value: any;
+  label: string;
+  disabled?: boolean;
+}
+
 interface User {
   _id: String,
   admin: boolean;
@@ -146,9 +152,26 @@ class Customer implements ICustomer {
   }
 }
 
-interface OrderLine {
+class IOrderLine {
   product: Product;
   quantity: number;
+  price: number;
+}
+
+class OrderLine implements IOrderLine {
+  product: Product;
+  quantity: number;
+  price: number;
+
+  constructor(orderLine: IOrderLine) {
+    this.product = orderLine.product;
+    this.quantity = orderLine.quantity;
+    this.price = orderLine.price;
+  }
+
+  public getTotalPrice(): number {
+    return this.price * this.quantity;
+  }
 }
 
 export enum ShippingStatus {
@@ -158,15 +181,86 @@ export enum ShippingStatus {
   Completed = 4,
 }
 
+interface IShippingStatusEntry {
+  _id: string;
+  createdAt: string;
+  status: number;
+}
+
+class ShippingStatusEntry {
+  _id: string;
+  createdAt: string;
+  status: number;
+
+  constructor(shippingStatusEntry: IShippingStatusEntry) {
+    this._id = shippingStatusEntry._id;
+    this.createdAt = shippingStatusEntry.createdAt;
+    this.status = shippingStatusEntry.status;
+  }
+
+  public getShippingStatus(): string {
+    return ShippingStatus[this.status];
+  }
+}
+
+export class ShippingLine {
+  constructor(
+    public value: Shipping,
+    public trackingNumber: string,
+    public price: number,
+    public weight: number,
+  ) { }
+}
+
+export class IShippingAddress {
+  email: string;
+  phone: string;
+  firstname: string;
+  lastname: string;
+  postnumber: string;
+  address: string;
+  country: string;
+  city: string;
+}
+
+export class ShippingAddress {
+  email: string;
+  phone: string;
+  firstname: string;
+  lastname: string;
+  postnumber: string;
+  address: string;
+  country: string;
+  city: string;
+
+  constructor(shippingAddress: IShippingAddress) {
+    this.email = shippingAddress.email;
+    this.phone = shippingAddress.phone;
+    this.firstname = shippingAddress.firstname;
+    this.lastname = shippingAddress.lastname;
+    this.postnumber = shippingAddress.postnumber;
+    this.address = shippingAddress.address;
+    this.country = shippingAddress.country;
+    this.city = shippingAddress.city;
+  }
+
+  public getFullname(): string {
+    return `${this.firstname} ${this.lastname}`;
+  }
+}
+
 interface IOrder {
   _id: string;
   updatedAt: String;
   createdAt: String;
   total: number;
   status?: ShippingStatus;
+  statusLog: ShippingStatusEntry[];
   items: OrderLine[];
   customer?: Customer; // TODO: should not be optional
-  shipping?: Shipping;
+  // shipping?: Shipping;
+  shipping?: ShippingLine;
+  shippingAddress?: ShippingAddress;
   payment?: Payment;
 }
 
@@ -176,9 +270,11 @@ class Order implements IOrder {
   createdAt: String;
   total: number;
   status?: ShippingStatus;
+  statusLog: ShippingStatusEntry[];
   items: OrderLine[];
   customer?: Customer; // TODO: should not be optional
-  shipping?: Shipping;
+  shipping?: ShippingLine;
+  shippingAddress?: ShippingAddress;
   payment?: Payment;
 
   constructor(order: IOrder) {
@@ -187,10 +283,12 @@ class Order implements IOrder {
     this.createdAt = order.createdAt;
     this.total = order.total;
     this.status = order.status;
-    this.items = order.items ? order.items : [];
+    this.statusLog = order.statusLog.map(item => new ShippingStatusEntry(item));
+    this.items = order.items ? order.items.map(item => new OrderLine(item)) : [];
     this.customer = order.customer ? new Customer(order.customer) : null;
     this.shipping = order.shipping ? order.shipping : null;
     this.payment = order.payment ? order.payment : null;
+    this.shippingAddress = order.shippingAddress ? new ShippingAddress(order.shippingAddress) : null;
   }
 
   public calculateSubTotal(): number {

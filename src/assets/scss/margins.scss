@@ -40,26 +40,26 @@ $mHuge: 40px;
 }
 
 .padder-xs {
-  padding-top: $mTiny;
-  padding-bottom: $mTiny;
+  padding-left: $mTiny;
+  padding-right: $mTiny;
 }
 
 .padder-sm {
-  padding-top: $mSmall;
-  padding-bottom: $mSmall;
+  padding-left: $mSmall;
+  padding-right: $mSmall;
 }
 
 .padder {
-  padding-top: $mDefault;
-  padding-bottom: $mDefault;
+  padding-left: $mDefault;
+  padding-right: $mDefault;
 }
 
 .padder-lg {
-  padding-top: $mLarge;
-  padding-bottom: $mLarge;
+  padding-left: $mLarge;
+  padding-right: $mLarge;
 }
 
 .padder-xl {
-  padding-top: $mHuge;
-  padding-bottom: $mHuge;
+  padding-left: $mHuge;
+  padding-right: $mHuge;
 }

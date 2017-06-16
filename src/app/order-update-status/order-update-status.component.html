@@ -1,5 +1,23 @@
-<select [(ngModel)]="selectedShippingOption" [compareWith]="selectComparator">
-  <option *ngFor="let option of options" [ngValue]="option">{{ option }}</option>
-</select>
+<div class="padder-v">
 
-<button class="btn btn-sm btn-info" (click)="onSave()">Update status</button>
+  <div class="row">
+
+    <div class="col-md-9 col-xs-12">
+
+      <app-select
+        [options]="getOptions()"
+        [(ngModel)]="selectedShippingOption"
+        label="Select a status">
+      </app-select>
+
+    </div>
+
+    <div class="col-md-3 col-xs-12">
+
+      <button class="btn btn-info pull-right" (click)="onSave()">Update status</button>
+
+    </div>
+
+  </div>
+
+</div>
