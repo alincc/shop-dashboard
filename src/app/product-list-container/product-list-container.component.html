@@ -32,7 +32,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: currentPage }">
             <td>ID</td>
             <td class="image-column"><img [src]="product.image" alt="Image" /></td>
             <td>{{ product.name }}</td>
@@ -54,6 +54,8 @@
           </tr>
         </tbody>
       </table>
+
+      <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>
 
     </div>
 

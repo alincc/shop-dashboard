@@ -26,7 +26,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let category of categories">
+          <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: currentPage }">
             <td>{{ category.name }}</td>
             <td>[_description]</td>
             <td>[_active]</td>
@@ -42,6 +42,8 @@
           </tr>
         </tbody>
       </table>
+
+      <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>
 
     </div>
 

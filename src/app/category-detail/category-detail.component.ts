@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 export class CategoryDetailComponent implements OnInit {
 
   category: Category;
-  private errorMsg: Message;
+  errorMsg: Message;
   isFinished: boolean = false;
 
   constructor(

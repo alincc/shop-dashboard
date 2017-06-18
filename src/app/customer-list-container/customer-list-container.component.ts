@@ -8,7 +8,7 @@ import { Customer } from '../model/interface';
   styleUrls: ['./customer-list-container.component.scss']
 })
 export class CustomerListContainerComponent implements OnInit {
-
+  currentPage: number = 1;
   customers: Customer[];
   isFinished: boolean = false;
 

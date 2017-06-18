@@ -10,7 +10,7 @@ import { ProductService, ToastService, ConfirmationService } from '../services';
   styleUrls: ['./product-list-container.component.scss']
 })
 export class ProductListContainerComponent implements OnInit {
-
+  currentPage: number = 1;
   products: Product[];
   isFinished: boolean = false;
   errorMsg: Message;

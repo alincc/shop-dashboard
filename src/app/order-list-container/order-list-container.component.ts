@@ -8,7 +8,7 @@ import { Order } from '../model/interface';
   styleUrls: ['./order-list-container.component.scss']
 })
 export class OrderListContainerComponent implements OnInit {
-
+  currentPage: number = 1;
   orders: Order[];
   isFinished: boolean = false;
 

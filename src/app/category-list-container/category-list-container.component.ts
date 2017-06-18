@@ -10,7 +10,7 @@ import { Category, ResolveEmit } from '../model/interface';
   styleUrls: ['./category-list-container.component.scss']
 })
 export class CategoryListContainerComponent implements OnInit {
-
+  currentPage: number = 1;
   categories: Category[];
   isFinished: boolean = false;
 

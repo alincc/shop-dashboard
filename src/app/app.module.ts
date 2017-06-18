@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,6 +17,8 @@ import { ProductListContainerComponent } from './product-list-container/product-
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { MessageComponent } from './message/message.component';
+
+import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
 
 import {
   ProductService,
@@ -68,7 +71,9 @@ import { OrderProductListComponent } from './order-product-list/order-product-li
     ShippingInfoComponent,
     ShippingAddressComponent,
     SelectComponent,
-    OrderProductListComponent
+    OrderProductListComponent,
+    RouterLinkStubDirective,
+    RouterOutletStubComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +84,7 @@ import { OrderProductListComponent } from './order-product-list/order-product-li
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     JasperoConfirmationsModule,
+    NgxPaginationModule,
   ],
   providers: [
     ProductService,
