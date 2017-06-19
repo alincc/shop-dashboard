@@ -38,8 +38,10 @@
               <input type="checkbox" (change)="onSelect(category)" />
             </td>
             <td>{{ category.name }}</td>
-            <td>[_description]</td>
-            <td>[_active]</td>
+            <td>{{ category.description }}</td>
+            <td>
+              <i class="fa" [ngClass]="{'fa-check text-success': category.active, 'fa-times text-danger': !category.active }"></i>
+            </td>
             <td>
               <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/category', category._id]">
                 <i class="fa fa-edit"></i>

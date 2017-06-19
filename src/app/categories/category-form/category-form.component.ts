@@ -18,6 +18,7 @@ export class CategoryFormComponent implements OnInit {
   formErrors = {
     name: '',
     image: '',
+    description: '',
   };
 
   validationMessages = {
@@ -26,6 +27,12 @@ export class CategoryFormComponent implements OnInit {
     },
     'image': {
       'required':      'Image is required.',
+    },
+    'description': {
+      'required':      'Description is required.',
+    },
+    'active': {
+      'required':      'Active is required.',
     },
   };
 
@@ -46,12 +53,16 @@ export class CategoryFormComponent implements OnInit {
         name: '',
         image: '',
         products: [],
+        description: '',
+        active: true,
       };
     }
 
     this.form = this.fb.group({
       name: [this.category.name, Validators.required],
       image: this.category.image,
+      description: this.category.description,
+      active: this.category.active,
     });
 
     this.form.valueChanges

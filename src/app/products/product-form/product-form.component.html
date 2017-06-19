@@ -41,9 +41,9 @@
 
           <div class="field">
             <label for="active">Active</label>
-            <span class="text-muted text-xs">Do you want the product to be available in the store?</span>
 
             <input type="checkbox" formControlName="active">
+            <span class="text-muted text-xs">Do you want the product to be available in the store?</span>
           </div>
 
         </div>
@@ -72,6 +72,13 @@
             <input formControlName="price" placeholder="Price">
 
             <div *ngIf="formErrors.price" class="errors">{{ formErrors.price }}</div>
+          </div>
+
+          <div class="field">
+            <label for="onSale">On Sale</label>
+
+            <input formControlName="onSale" type="checkbox">
+            <span class="text-muted text-xs">Do you want the product to be labeled as "On Sale"?</span>
           </div>
         </div>
 

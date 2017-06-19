@@ -10,16 +10,34 @@
 
     <div class="content">
 
-      <table *ngIf="!editing">
-        <tr>
-          <td>Name</td>
-          <td>{{ category.name }}</td>
-        </tr>
-        <tr>
-          <td>Products</td>
-          <td>{{ category.products.length }}</td>
-        </tr>
-      </table>
+      <div class="form-horizontal" *ngIf="!editing">
+
+        <div class="row">
+
+          <div class="col-xs-3 col-md-3">
+            <div class="control-label">Name</div>
+          </div>
+
+          <div class="col-xs-9 col-md-9">{{ category.name }}</div>
+
+          <div class="col-xs-3 col-md-3">
+            <div class="control-label">Products</div>
+          </div>
+
+          <div class="col-xs-9 col-md-9">{{ category.products.length }}</div>
+
+          <div class="col-xs-3 col-md-3">
+            <div class="control-label">Description</div>
+          </div>
+
+          <div class="col-xs-9 col-md-9">
+            <em *ngIf="!category.description">No description</em>
+            {{ category.description }}
+          </div>
+
+        </div>
+
+      </div>
 
       <form *ngIf="editing" [formGroup]="form" class="form" (ngSubmit)="onSubmit()" novalidate>
 
@@ -35,6 +53,20 @@
           <input formControlName="image" placeholder="Image">
 
           <div *ngIf="formErrors.image" class="errors">{{ formErrors.image }}</div>
+        </div>
+
+        <div class="field" [ngClass]="{'error': formErrors.description}">
+          <label for="description">Description</label>
+          <input formControlName="description" placeholder="Description">
+
+          <div *ngIf="formErrors.description" class="errors">{{ formErrors.description }}</div>
+        </div>
+
+        <div class="field" [ngClass]="{'error': formErrors.active}">
+          <label for="active">Active</label>
+          <input formControlName="active" type="checkbox">
+
+          <div *ngIf="formErrors.active" class="errors">{{ formErrors.active }}</div>
         </div>
 
         <button class="btn btn-sm btn-info btn-addon" type="submit" [disabled]="!form.valid">

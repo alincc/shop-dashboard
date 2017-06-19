@@ -50,7 +50,7 @@
               <td>{{ customer.country }}</td>
               <td>{{ customer.orders.length }}</td>
               <td>{{ customer.getStatus() }}</td>
-              <td>[customer since]</td>
+              <td>{{ customer.createdAt | date:'short' }}</td>
               <td>[last visit]</td>
               <td>
                 <a [routerLink]="['/customer', customer._id]">

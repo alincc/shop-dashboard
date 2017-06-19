@@ -79,6 +79,7 @@ export class ProductFormComponent implements OnInit {
         quantity: 0,
         price: 0,
         active: true,
+        onSale: false,
       };
     }
 
@@ -90,6 +91,7 @@ export class ProductFormComponent implements OnInit {
       image: [this.product.image, Validators.required],
       category: [this.product.category, Validators.required],
       active: [this.product.active, Validators.required],
+      onSale: this.product.onSale,
     });
 
     this.form.valueChanges

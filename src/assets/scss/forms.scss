@@ -66,3 +66,11 @@ $errorColor: #9f3a38;
   /* IE 10+ */
   color: #bbb;
 }
+
+
+.form-horizontal {
+  .control-label {
+    margin-bottom: 7px;
+    text-align: right;
+  }
+}

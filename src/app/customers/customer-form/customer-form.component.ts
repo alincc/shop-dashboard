@@ -46,6 +46,7 @@ export class CustomerFormComponent implements OnInit {
         address: '',
         orders: [],
         active: true,
+        createdAt: '',
       });
     }
 
