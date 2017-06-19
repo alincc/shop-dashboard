@@ -16,40 +16,50 @@
 
     <div class="body">
 
-      <div class="table-responsive">
-      <table class="table" *ngIf="customers">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Country</th>
-            <th>Orders</th>
-            <th>Active</th>
-            <th>Customer since</th>
-            <th>Last visit</th>
-            <th></th>
-          </tr>
-        </thead>
+      <app-multi-select
+        [buttonDisable]="!selected.length"
+        [options]="actionOptions"
+        (submitEmitter)="doAction($event)">
+      </app-multi-select>
 
-        <tbody>
-          <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: currentPage }">
-            <td>{{ customer._id}}</td>
-            <td>{{ customer.getFullname() }}</td>
-            <td>{{ customer.email }}</td>
-            <td>{{ customer.country }}</td>
-            <td>{{ customer.orders.length }}</td>
-            <td>{{ customer.getStatus() }}</td>
-            <td>[customer since]</td>
-            <td>[last visit]</td>
-            <td>
-              <a [routerLink]="['/customer', customer._id]">
-                <i class="fa fa-edit"></i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table" *ngIf="customers">
+          <thead>
+            <tr>
+              <th></th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Country</th>
+              <th>Orders</th>
+              <th>Active</th>
+              <th>Customer since</th>
+              <th>Last visit</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+              <td class="text-center" style="width: 10px">
+                <input type="checkbox" (change)="onSelect(customer)" />
+              </td>
+              <td>{{ customer._id}}</td>
+              <td>{{ customer.getFullname() }}</td>
+              <td>{{ customer.email }}</td>
+              <td>{{ customer.country }}</td>
+              <td>{{ customer.orders.length }}</td>
+              <td>{{ customer.getStatus() }}</td>
+              <td>[customer since]</td>
+              <td>[last visit]</td>
+              <td>
+                <a [routerLink]="['/customer', customer._id]">
+                  <i class="fa fa-edit"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>

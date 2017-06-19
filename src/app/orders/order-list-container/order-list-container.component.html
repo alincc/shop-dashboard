@@ -8,17 +8,11 @@
 
     <div class="body">
 
-      <span class="text-muted">With selected: </span>
-
-      <app-select
+      <app-multi-select
+        [buttonDisable]="!selected.length"
         [options]="actionOptions"
-        [(ngModel)]="selectedActionOption"
-        [inline]="true"
-        width="240px"
-        label="Select an action">
-      </app-select>
-
-      <button class="btn btn-info btn-sm" (click)="doAction()" [disabled]="!selectedActionOption">Do action</button>
+        (submitEmitter)="doAction($event)">
+      </app-multi-select>
 
       <table class="table" *ngIf="orders">
         <thead>

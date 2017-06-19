@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import { OrderService } from '../../services';
+import { OrderService, ToastService } from '../../services';
 import { Order } from '../../model/interface';
 
 @Component({
@@ -10,15 +11,17 @@ import { Order } from '../../model/interface';
 })
 export class OrderListContainerComponent implements OnInit {
   selected = [];
-  selectedActionOption: string;
   currentPage: number = 1;
   orders: Order[];
   isFinished: boolean = false;
   actionOptions = [
     { value: 'delete', label: 'Delete' },
-  ]
+  ];
 
-  constructor(private orderService: OrderService) { }
+  constructor(
+    private orderService: OrderService,
+    private toastService: ToastService,
+  ) { }
 
   ngOnInit() {
     this.loadOrders();
@@ -34,17 +37,23 @@ export class OrderListContainerComponent implements OnInit {
   }
 
   removeSelected(): void {
-    this.selected.forEach(id => {
-      this.orderService.remove(id)
-        .subscribe(
-          () => {
-            this.orders = this.orders.filter(order => order._id !== id);
-          },
-          err => console.log(err),
-        )
-    });
+    const list: Observable<string>[] = this.selected.map(id => this.orderService.remove(id));
 
-    this.selected = [];
+    Observable.forkJoin(list)
+      .subscribe(
+        () => null,
+        err => console.log(err),
+        () => {
+          this.orders = this.orders
+            .filter(order => this.selected.indexOf(order._id) === -1)
+
+          if (this.selected.length) {
+            this.toastService.success('Removed!', 'The orders was removed from the catalog');
+          }
+
+          this.selected = [];
+        }
+      );
   }
 
   onSelect(order: Order): void {
@@ -58,8 +67,8 @@ export class OrderListContainerComponent implements OnInit {
     }
   }
 
-  doAction() {
-    switch (this.selectedActionOption) {
+  doAction(action) {
+    switch (action) {
       case 'delete':
         this.removeSelected();
         break;

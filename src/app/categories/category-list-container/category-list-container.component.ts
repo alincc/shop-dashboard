@@ -13,6 +13,10 @@ export class CategoryListContainerComponent implements OnInit {
   currentPage: number = 1;
   categories: Category[];
   isFinished: boolean = false;
+  selected = [];
+  actionOptions = [
+    { value: 'delete', label: 'Delete' },
+  ]
 
   constructor(
     private categoryService: CategoryService,
@@ -47,6 +51,45 @@ export class CategoryListContainerComponent implements OnInit {
         err => console.log(err),
         () => this.isFinished = true,
       );
+  }
+
+  onSelect(category: Category): void {
+    const exists = this.selected.find(id => id == category._id);
+
+    if (exists) {
+      this.selected = this.selected.filter(id => id !== category._id);
+    }
+    else {
+      this.selected.push(category._id);
+    }
+  }
+
+  removeSelected(): void {
+    const list: Observable<string>[] = this.selected.map(id => this.categoryService.removeCategory(id));
+
+    Observable.forkJoin(list)
+      .subscribe(
+        () => null,
+        err => console.log(err),
+        () => {
+          this.categories = this.categories
+            .filter(category => this.selected.indexOf(category._id) === -1)
+
+          if (this.selected.length) {
+            this.toastService.success('Removed!', 'The categories was removed from the catalog');
+          }
+
+          this.selected = [];
+        }
+      );
+  }
+
+  doAction(action) {
+    switch (action) {
+      case 'delete':
+        this.removeSelected();
+        break;
+    }
   }
 
 }

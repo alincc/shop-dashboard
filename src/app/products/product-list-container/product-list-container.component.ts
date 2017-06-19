@@ -14,6 +14,10 @@ export class ProductListContainerComponent implements OnInit {
   products: Product[];
   isFinished: boolean = false;
   errorMsg: Message;
+  selected = [];
+  actionOptions = [
+    { value: 'delete', label: 'Delete' },
+  ];
 
   constructor(
     private productService: ProductService,
@@ -51,6 +55,45 @@ export class ProductListContainerComponent implements OnInit {
 
   handleError(error: ErrorResponse) {
     this.errorMsg = new Message('negative', error.message, 'Ooops..');
+  }
+
+  removeSelected(): void {
+    const list: Observable<string>[] = this.selected.map(id => this.productService.removeProduct(id));
+
+    Observable.forkJoin(list)
+      .subscribe(
+        () => null,
+        err => console.log(err),
+        () => {
+          this.products = this.products
+            .filter(product => this.selected.indexOf(product._id) === -1)
+
+          if (this.selected.length) {
+            this.toastService.success('Removed!', 'The products was removed from the catalog');
+          }
+
+          this.selected = [];
+        }
+      );
+  }
+
+  onSelect(product: Product): void {
+    const exists = this.selected.find(id => id == product._id);
+
+    if (exists) {
+      this.selected = this.selected.filter(id => id !== product._id);
+    }
+    else {
+      this.selected.push(product._id);
+    }
+  }
+
+  doAction(action) {
+    switch (action) {
+      case 'delete':
+        this.removeSelected();
+        break;
+    }
   }
 
 }

@@ -15,9 +15,16 @@
 
     <div class="body">
 
+      <app-multi-select
+        [buttonDisable]="!selected.length"
+        [options]="actionOptions"
+        (submitEmitter)="doAction($event)">
+      </app-multi-select>
+
       <table class="table" *ngIf="categories">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Description</th>
             <th>Active</th>
@@ -27,6 +34,9 @@
 
         <tbody>
           <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+            <td class="text-center" style="width: 10px">
+              <input type="checkbox" (change)="onSelect(category)" />
+            </td>
             <td>{{ category.name }}</td>
             <td>[_description]</td>
             <td>[_active]</td>

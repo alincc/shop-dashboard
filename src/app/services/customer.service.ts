@@ -40,6 +40,12 @@ export class CustomerService {
       .catch(this.handleError);
   }
 
+  remove(id: string) {
+    return this.http.delete(`${this.url}/${id}`)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
     return Observable.throw(error.json() || 'Server error');
   }

@@ -17,9 +17,16 @@
 
     <div class="body">
 
+      <app-multi-select
+        [buttonDisable]="!selected.length"
+        [options]="actionOptions"
+        (submitEmitter)="doAction($event)">
+      </app-multi-select>
+
       <table class="table" *ngIf="products">
         <thead>
           <tr>
+            <th></th>
             <th>ID</th>
             <th>Image</th>
             <th>Name</th>
@@ -33,6 +40,9 @@
 
         <tbody>
           <tr *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+            <td class="text-center" style="width: 10px">
+              <input type="checkbox" (change)="onSelect(product)" />
+            </td>
             <td>ID</td>
             <td class="image-column"><img [src]="product.image" alt="Image" /></td>
             <td>{{ product.name }}</td>
