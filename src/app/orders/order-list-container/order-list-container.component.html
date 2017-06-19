@@ -1,0 +1,59 @@
+<app-title-pane heading="Orders" subtitle="Manage orders"></app-title-pane>
+
+<div class="order-list-container main">
+
+  <div class="box">
+
+    <div class="heading">Orders</div>
+
+    <div class="body">
+
+      <span class="text-muted">With selected: </span>
+
+      <app-select
+        [options]="actionOptions"
+        [(ngModel)]="selectedActionOption"
+        [inline]="true"
+        width="240px"
+        label="Select an action">
+      </app-select>
+
+      <button class="btn btn-info btn-sm" (click)="doAction()" [disabled]="!selectedActionOption">Do action</button>
+
+      <table class="table" *ngIf="orders">
+        <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let order of orders | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+            <td class="text-center" style="width: 10px">
+              <input type="checkbox" (change)="onSelect(order)" />
+            </td>
+            <td>{{ order._id }}</td>
+            <td>{{ order.total | currency:'USD':true }}</td>
+            <td>{{ order.getShippingStatus() }}</td>
+            <td>{{ order.createdAt | date:'short' }}</td>
+            <td>
+              <a [routerLink]="['/order', order._id]">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>
+
+    </div>
+
+  </div>
+
+</div>

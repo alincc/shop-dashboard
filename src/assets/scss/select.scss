@@ -1,5 +1,10 @@
 .dropdown {
   position: relative;
+
+  &.inline {
+    display: inline-block; 
+  }
+
   .select {
     border: 1px solid transparent;
     width: 100%;

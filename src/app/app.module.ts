@@ -4,19 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { JasperoConfirmationsModule } from '@jaspero/ng2-confirmations';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { TopMenuComponent } from './top-menu/top-menu.component';
-import { TitlePaneComponent } from './title-pane/title-pane.component';
-import { ProductListContainerComponent } from './product-list-container/product-list-container.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { ProductFormComponent } from './product-form/product-form.component';
-import { MessageComponent } from './message/message.component';
+
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
+import { ProductsModule } from './products/products.module';
+import { CustomersModule } from './customers/customers.module';
+import { CategoriesModule } from './categories/categories.module';
+import { OrdersModule } from './orders/orders.module';
 
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
 
@@ -28,50 +26,10 @@ import {
   ToastService,
   ConfirmationService,
 } from './services';
-import { ProductAddComponent } from './product-add/product-add.component';
-import { LatestOrdersComponent } from './latest-orders/latest-orders.component';
-import { CustomerListContainerComponent } from './customer-list-container/customer-list-container.component';
-import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
-import { CustomerFormComponent } from './customer-form/customer-form.component';
-import { CategoryListContainerComponent } from './category-list-container/category-list-container.component';
-import { CategoryDetailComponent } from './category-detail/category-detail.component';
-import { CategoryFormComponent } from './category-form/category-form.component';
-import { OrderListContainerComponent } from './order-list-container/order-list-container.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { CustomerNoteFormComponent } from './customer-note-form/customer-note-form.component';
-import { OrderUpdateStatusComponent } from './order-update-status/order-update-status.component';
-import { ShippingInfoComponent } from './shipping-info/shipping-info.component';
-import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
-import { SelectComponent } from './select/select.component';
-import { OrderProductListComponent } from './order-product-list/order-product-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    SidebarComponent,
-    TopMenuComponent,
-    TitlePaneComponent,
-    ProductListContainerComponent,
-    ProductDetailComponent,
-    ProductFormComponent,
-    MessageComponent,
-    ProductAddComponent,
-    LatestOrdersComponent,
-    CustomerListContainerComponent,
-    CustomerDetailComponent,
-    CustomerFormComponent,
-    CategoryListContainerComponent,
-    CategoryDetailComponent,
-    CategoryFormComponent,
-    OrderListContainerComponent,
-    OrderDetailComponent,
-    CustomerNoteFormComponent,
-    OrderUpdateStatusComponent,
-    ShippingInfoComponent,
-    ShippingAddressComponent,
-    SelectComponent,
-    OrderProductListComponent,
     RouterLinkStubDirective,
     RouterOutletStubComponent,
   ],
@@ -79,12 +37,17 @@ import { OrderProductListComponent } from './order-product-list/order-product-li
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    CoreModule,
+    SharedModule,
+    HomeModule,
+    ProductsModule,
+    CustomersModule,
+    OrdersModule,
+    CategoriesModule,
     SimpleNotificationsModule.forRoot(),
-    JasperoConfirmationsModule,
-    NgxPaginationModule,
+    AppRoutingModule,
   ],
   providers: [
     ProductService,

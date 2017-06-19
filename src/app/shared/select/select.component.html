@@ -1,0 +1,26 @@
+<div class="dropdown"
+  (click)="onSelectContainerClick($event)"
+  (window:click)="onWindowClick()"
+  [ngClass]="{'inline': inline}"
+  [ngStyle]="{'width': width}"
+>
+  <button class="select" (click)="isOpen = !isOpen" type="button">
+
+    <span class="text-muted">
+      {{ selected?.label || label }}
+    </span>
+
+    <span class="caret">
+      <i class="fa fa-caret-down"></i>
+    </span>
+
+  </button>
+
+  <ul class="choices" *ngIf="isOpen">
+    <li class="choice" *ngFor="let item of options">
+      <a href="javascript:void(0)" (click)="onSelect(item)" [ngClass]="{'active': selected?.value == item.value}">
+        {{ item.label }}
+      </a>
+    </li>
+  </ul>
+</div>
