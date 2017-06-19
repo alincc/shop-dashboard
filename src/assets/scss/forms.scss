@@ -24,6 +24,10 @@ $errorColor: #9f3a38;
 
     input, textarea {
       @include input;
+
+      &[type="checkbox"] {
+        width: auto;
+      }
     }
 
     &.error {

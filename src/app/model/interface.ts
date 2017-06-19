@@ -315,10 +315,11 @@ class Product {
 }
 
 class Shipping {
-  _id: String;
-  name: String;
-  price: Number;
-  description?: String;
+  _id: string;
+  name: string;
+  price: number;
+  description?: string;
+  active: boolean;
 }
 
 export {

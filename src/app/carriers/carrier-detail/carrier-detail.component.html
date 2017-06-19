@@ -1,0 +1,13 @@
+<app-title-pane heading="View carrier" subtitle="Manage carriers"></app-title-pane>
+
+<div class="carrier-detail main">
+
+  <app-message [data]="errorMsg"></app-message>
+
+  <app-carrier-form
+    *ngIf="carrier"
+    [carrier]="carrier"
+    (submitEmitter)="onSubmit($event)">
+  </app-carrier-form>
+
+</div>

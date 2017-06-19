@@ -38,7 +38,8 @@ export class ProductDetailComponent implements OnInit {
       .subscribe(
         res => this.toastService.success('Product saved!', 'The product was updated successfully'),
         err => console.log(err),
-      )
+        () => this.location.back()
+      );
   }
 
   onRemove() {

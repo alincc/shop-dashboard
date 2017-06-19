@@ -1,0 +1,73 @@
+<div class="carrier-form">
+
+  <div class="panel bordered-title" *ngIf="carrier">
+    <div class="options" *ngIf="!formOnly">
+      <i class="fa fa-edit cursor" (click)="toggleEdit()" *ngIf="!editing"></i>
+      <i class="fa fa-arrow-circle-o-left cursor" (click)="toggleEdit()" *ngIf="editing"></i>
+    </div>
+
+    <h4 class="text-thin">{{ carrier.name }}</h4>
+
+    <div class="content">
+
+      <table *ngIf="!editing">
+        <tr>
+          <td>Name</td>
+          <td>{{ carrier.name }}</td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td>{{ carrier.price | currency:'USD':true}}</td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>{{ carrier.description }}</td>
+        </tr>
+        <tr>
+          <td>Active</td>
+          <td><i class="fa" [ngClass]="{'fa-check text-success': carrier.active, 'fa-times text-danger': !carrier.active }"></i></td>
+        </tr>
+      </table>
+
+      <form *ngIf="editing" [formGroup]="form" class="form" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="field" [ngClass]="{'error': formErrors.name}">
+          <label for="name">Name</label>
+          <input formControlName="name" placeholder="Name">
+
+          <div *ngIf="formErrors.name" class="errors">{{ formErrors.name }}</div>
+        </div>
+
+        <div class="field" [ngClass]="{'error': formErrors.price}">
+          <label for="price">Price</label>
+          <input formControlName="price" placeholder="Price">
+
+          <div *ngIf="formErrors.price" class="errors">{{ formErrors.price }}</div>
+        </div>
+
+        <div class="field" [ngClass]="{'error': formErrors.description}">
+          <label for="description">Description</label>
+          <input formControlName="description" placeholder="Description">
+
+          <div *ngIf="formErrors.description" class="errors">{{ formErrors.description }}</div>
+        </div>
+
+        <div class="field">
+          <label for="active">Description</label>
+          <input formControlName="active" type="checkbox">
+        </div>
+
+        <button class="btn btn-sm btn-info btn-addon" type="submit" [disabled]="!form.valid">
+          <i class="fa fa-check" *ngIf="form.valid"></i>
+          <i class="fa fa-ban" *ngIf="!form.valid"></i>
+          Save
+        </button>
+
+        <button type="button" class="btn btn-sm btn-default" (click)="toggleEdit()">Cancel</button>
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

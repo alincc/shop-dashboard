@@ -1,0 +1,73 @@
+<app-title-pane heading="Carriers" subtitle="Manage carriers">
+  <div options>
+    <a class="btn btn-sm btn-info btn-addon" (click)="creating = !creating">
+      <i class="fa fa-plus"></i>
+      Create new
+    </a>
+  </div>
+</app-title-pane>
+
+<div class="carrier-list-container main">
+
+  <app-carrier-form
+    *ngIf="creating"
+    [formOnly]="true"
+    (cancelEmmiter)="creating = false"
+    (submitEmitter)="onCreate($event)">
+  </app-carrier-form>
+
+  <div class="box">
+
+    <div class="heading">Carriers</div>
+
+    <div class="body">
+
+      <app-multi-select
+        [buttonDisable]="!selected.length"
+        [options]="actionOptions"
+        (submitEmitter)="doAction($event)">
+      </app-multi-select>
+
+      <table class="table" *ngIf="carriers">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Active</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let carrier of carriers | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+            <td class="text-center" style="width: 10px">
+              <input type="checkbox" (change)="onSelect(carrier)" />
+            </td>
+            <td>{{ carrier.name }}</td>
+            <td>{{ carrier.description }}</td>
+            <td>{{ carrier.price | currency:'USD':true }}</td>
+            <td>
+              <i class="fa" [ngClass]="{'fa-check text-success': carrier.active, 'fa-times text-danger': !carrier.active }"></i>
+            </td>
+            <td>
+              <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/carrier', carrier._id]">
+                <i class="fa fa-edit"></i>
+              </a>
+
+              <a (click)="removeCarrier(carrier)" class="btn btn-sm btn-icon btn-danger">
+                <i class="fa fa-remove"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>
+
+    </div>
+
+  </div>
+
+</div>

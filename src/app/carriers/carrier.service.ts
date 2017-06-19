@@ -2,40 +2,39 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { Customer } from '../model/interface';
+import { Shipping } from '../model/interface';
 
 @Injectable()
-export class CustomerService {
-
-  private url = 'http://localhost:9000/api/customer';
+export class CarrierService {
+  private url = 'http://localhost:9000/api/shipping';
 
   constructor(private http: Http) { }
 
-  create(customer: Customer): Observable<any> {
+  create(carrier: Shipping): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.url, JSON.stringify(customer), options)
+    return this.http.post(this.url, JSON.stringify(carrier), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
-  update(id: string, customer: Customer): Observable<any> {
+  update(id: string, carrier: Shipping): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.put(this.url + '/' + id, JSON.stringify(customer), options)
+    return this.http.put(this.url + '/' + id, JSON.stringify(carrier), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
-  get(id: string): Observable<Customer> {
+  get(id: string): Observable<Shipping> {
     return this.http.get(`${this.url}/${id}`)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getAll(): Observable<Customer[]> {
+  getAll(): Observable<Shipping[]> {
     return this.http.get(`${this.url}`)
       .map(res => res.json())
       .catch(this.handleError);
