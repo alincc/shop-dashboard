@@ -1,7 +1,7 @@
 <div class="category-form">
 
   <div class="panel bordered-title" *ngIf="category">
-    <div class="options">
+    <div class="options" *ngIf="!formOnly">
       <i class="fa fa-edit cursor" (click)="toggleEdit()" *ngIf="!editing"></i>
       <i class="fa fa-arrow-circle-o-left cursor" (click)="toggleEdit()" *ngIf="editing"></i>
     </div>

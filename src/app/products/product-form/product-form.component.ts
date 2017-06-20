@@ -70,7 +70,7 @@ export class ProductFormComponent implements OnInit {
 
   buildForm(): void {
     if (!this.product) {
-      this.product = {
+      this.product = new Product({
         _id: '',
         name: '',
         category: null,
@@ -80,7 +80,7 @@ export class ProductFormComponent implements OnInit {
         price: 0,
         active: true,
         onSale: false,
-      };
+      });
     }
 
     this.form = this.fb.group({
@@ -92,12 +92,30 @@ export class ProductFormComponent implements OnInit {
       category: [this.product.category, Validators.required],
       active: [this.product.active, Validators.required],
       onSale: this.product.onSale,
+
+      discount: this.fb.group({
+        value: this.product.discount.value,
+        startDate: [this.fullDate(new Date(this.product.discount.startDate))],
+        endDate: [this.fullDate(new Date(this.product.discount.endDate))],
+      }),
     });
 
     this.form.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  fullDate(dateIn) {
+    const date = new Date(dateIn);
+
+    const month = ('0' + (date.getMonth()+1) ).slice(-2);
+
+    const dateString = date.getFullYear() + '-'
+      + ('0' + (date.getMonth()+1)).slice(-2) + '-'
+      + ('0' + date.getDate()).slice(-2);
+
+    return dateString;
   }
 
   onSubmit(): void {

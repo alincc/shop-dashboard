@@ -22,6 +22,15 @@ export class CategoryService {
                     .catch(this.handleError);
   }
 
+  create(category: Category): Observable<any> {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.url, JSON.stringify(category), options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   removeCategory(id: string) {
     return this.http.delete(`${this.url}/${id}`)
       .map((res: Response) => res.json())

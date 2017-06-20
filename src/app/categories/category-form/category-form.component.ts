@@ -11,6 +11,8 @@ import { Category } from '../../model/interface';
 export class CategoryFormComponent implements OnInit {
   @Input() category: Category;
   @Output() submitEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() cancelEmmiter: EventEmitter<any> = new EventEmitter();
+  @Input() formOnly: boolean = false;
 
   editing: boolean = false;
   form: FormGroup;
@@ -40,10 +42,19 @@ export class CategoryFormComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+
+    if (this.formOnly) {
+      this.editing = true;
+    }
   }
 
   toggleEdit(): void {
-    this.editing = !this.editing;
+    if (this.formOnly) {
+      this.cancelEmmiter.emit();
+    }
+    else {
+      this.editing = !this.editing;
+    }
   }
 
   buildForm(): void {
@@ -73,6 +84,10 @@ export class CategoryFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitEmitter.emit(this.form.value);
+
+    if (!this.formOnly) {
+      this.editing = false;
+    }
   }
 
   onValueChanged(data?: any) {

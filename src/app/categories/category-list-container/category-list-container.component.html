@@ -1,6 +1,6 @@
 <app-title-pane heading="Categories" subtitle="Manage categories">
   <div options>
-    <a class="btn btn-sm btn-info btn-addon" routerLink="/category/create">
+    <a class="btn btn-sm btn-info btn-addon" (click)="creating = !creating">
       <i class="fa fa-plus"></i>
       Create new
     </a>
@@ -8,6 +8,13 @@
 </app-title-pane>
 
 <div class="category-list-container main">
+
+  <app-category-form
+    *ngIf="creating"
+    [formOnly]="true"
+    (cancelEmmiter)="creating = false"
+    (submitEmitter)="onCreate($event)">
+  </app-category-form>
 
   <div class="box">
 

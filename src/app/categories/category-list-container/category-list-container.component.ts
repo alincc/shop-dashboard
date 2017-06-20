@@ -13,6 +13,7 @@ export class CategoryListContainerComponent implements OnInit {
   currentPage: number = 1;
   categories: Category[];
   isFinished: boolean = false;
+  creating: boolean = false;
   selected = [];
   actionOptions = [
     { value: 'delete', label: 'Delete' },
@@ -50,6 +51,21 @@ export class CategoryListContainerComponent implements OnInit {
         },
         err => console.log(err),
         () => this.isFinished = true,
+      );
+  }
+
+  onCreate(category: Category) {
+    this.isFinished = false;
+
+    this.categoryService.create(category)
+      .subscribe(
+        res => this.categories.push(category),
+        err => console.log(err),
+        () => {
+          this.isFinished = true;
+          this.creating = false;
+          this.toastService.success('Success!', 'The category was created');
+        },
       );
   }
 

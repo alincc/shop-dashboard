@@ -49,8 +49,6 @@
         </div>
 
         <div class="tab-pane" *ngIf="activeTab == 'category'">
-          Category
-
           <div class="field" [ngClass]="{'error': formErrors.category}">
             <label for="category">Category</label>
 
@@ -69,7 +67,7 @@
         <div class="tab-pane" *ngIf="activeTab == 'pricing'">
           <div class="field" [ngClass]="{'error': formErrors.price}">
             <label for="price">Price</label>
-            <input formControlName="price" placeholder="Price">
+            <input formControlName="price" placeholder="Price" type="number">
 
             <div *ngIf="formErrors.price" class="errors">{{ formErrors.price }}</div>
           </div>
@@ -80,6 +78,29 @@
             <input formControlName="onSale" type="checkbox">
             <span class="text-muted text-xs">Do you want the product to be labeled as "On Sale"?</span>
           </div>
+
+          <div formGroupName="discount">
+
+            <div class="field">
+              <label for="Discount">Add discount</label>
+
+              <input formControlName="value" type="number" placeholder="Discount (%)">
+            </div>
+
+            <div class="field">
+              <div class="row">
+                <div class="col-md-6 col-xs-12">
+                  <input formControlName="startDate" placeholder="Discount starts (YYYY-MM-DD)">
+                </div>
+
+                <div class="col-md-6 col-xs-12">
+                  <input formControlName="endDate" placeholder="Discount ends (YYYY-MM-DD)">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
         <div class="tab-pane" *ngIf="activeTab == 'quantities'">
