@@ -44,7 +44,7 @@ export class CarrierListComponent implements OnInit {
 
     this.carrierService.create(carrier)
       .subscribe(
-        res => this.carriers.push(carrier),
+        res => this.carriers.push(res.data),
         err => console.log(err),
         () => {
           this.isFinished = true;

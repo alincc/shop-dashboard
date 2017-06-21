@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 
-import { CategoryService } from '../../services';
-import { Product, Category, IOption } from '../../model/interface';
+import { CategoryService, AttributeService } from '../../services';
+import { Product, Category, Attribute, Combination, IOption } from '../../model/interface';
 
 @Component({
   selector: 'app-product-form',
@@ -15,6 +15,8 @@ export class ProductFormComponent implements OnInit {
   @Output() removeEmitter: EventEmitter<any> = new EventEmitter();
 
   categories: Category[];
+  attributes: Attribute[];
+  selectedCombinations: Combination[] = [];
 
   activeTab: string = 'basic';
 
@@ -53,9 +55,11 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService,
+    private attributeService: AttributeService,
   ) { }
 
   ngOnInit() {
+    this.loadAttributes();
     this.categoryService.getCategories()
       .subscribe(
         categories => this.categories = categories,
@@ -80,6 +84,7 @@ export class ProductFormComponent implements OnInit {
         price: 0,
         active: true,
         onSale: false,
+        combinations: [],
       });
     }
 
@@ -98,12 +103,34 @@ export class ProductFormComponent implements OnInit {
         startDate: [this.fullDate(new Date(this.product.discount.startDate))],
         endDate: [this.fullDate(new Date(this.product.discount.endDate))],
       }),
+      combinations: this.fb.array(
+        this.initCombinations(),
+      ),
+      combinationsGroup: this.fb.group({
+        combinations: this.fb.array(
+          this.initCombinations(),
+        ),
+      })
     });
 
     this.form.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  initCombinations() {
+    return this.product.combinations.map(combination =>
+      this.fb.group({
+        quantity: combination.quantity,
+        attributes: this.fb.array(combination.attributes.map(attribute => (
+          this.fb.group({
+            attribute: attribute.attribute,
+            value: attribute.value,
+          })
+        ))),
+      })
+    );
   }
 
   fullDate(dateIn) {
@@ -119,6 +146,8 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.form.value.combinations = this.form.value.combinationsGroup.combinations;
+
     this.submitEmitter.emit(this.form.value);
   }
 
@@ -142,6 +171,14 @@ export class ProductFormComponent implements OnInit {
         }
       }
     }
+  }
+
+  loadAttributes(): void {
+    this.attributeService.getAll()
+      .subscribe(
+        attributes => this.attributes = attributes,
+        err => console.log(err),
+      );
   }
 
   setTab(tab: string) {

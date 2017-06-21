@@ -24,6 +24,7 @@ import {
   CategoryService,
   OrderService,
   CustomerService,
+  AttributeService,
   ToastService,
   ConfirmationService,
 } from './services';
@@ -56,6 +57,7 @@ import {
     CategoryService,
     OrderService,
     CustomerService,
+    AttributeService,
     ToastService,
     ConfirmationService,
   ],

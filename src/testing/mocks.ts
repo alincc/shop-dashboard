@@ -47,7 +47,7 @@ export const FAKE_CATEGORY2: Category = {
 
 export const FAKE_CATEGORIES: Category[] = [FAKE_CATEGORY1, FAKE_CATEGORY2];
 
-export const FAKE_PRODUCT1: Product = {
+export const FAKE_PRODUCT1: Product = new Product({
   _id: "1",
   name: "Product 1",
   description: "Description 1",
@@ -55,9 +55,10 @@ export const FAKE_PRODUCT1: Product = {
   price: 100,
   active: true,
   onSale: false,
-};
+  combinations: [],
+});
 
-export const FAKE_PRODUCT2: Product = {
+export const FAKE_PRODUCT2: Product = new Product({
   _id: "2",
   name: "Product 2",
   description: "Description 2",
@@ -65,7 +66,8 @@ export const FAKE_PRODUCT2: Product = {
   price: 100,
   active: true,
   onSale: false,
-};
+  combinations: [],
+});
 
 export const FAKE_PRODUCTS: Product[] = [FAKE_PRODUCT1, FAKE_PRODUCT2];
 

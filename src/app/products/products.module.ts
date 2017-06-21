@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ProductsRoutingModule, routedComponents } from './products.routing';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { AttributeEditorComponent } from './attribute-editor/attribute-editor.component';
+import { CombinationControlComponent } from './attribute-editor/combination-control.component';
 
 @NgModule({
   imports: [
@@ -12,6 +14,8 @@ import { ProductFormComponent } from './product-form/product-form.component';
   declarations: [
     routedComponents,
     ProductFormComponent,
+    AttributeEditorComponent,
+    CombinationControlComponent,
   ]
 })
 export class ProductsModule { }

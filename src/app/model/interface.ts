@@ -172,17 +172,32 @@ class IOrderLine {
   product: Product;
   quantity: number;
   price: number;
+  combination?: {
+    attribute: Attribute;
+    value: {
+      label: string;
+      value: string;
+    }
+  }[];
 }
 
 class OrderLine implements IOrderLine {
   product: Product;
   quantity: number;
   price: number;
+  combination?: {
+    attribute: Attribute;
+    value: {
+      label: string;
+      value: string;
+    }
+  }[];
 
   constructor(orderLine: IOrderLine) {
     this.product = new Product(orderLine.product);
     this.quantity = orderLine.quantity;
     this.price = orderLine.price;
+    this.combination = orderLine.combination ? orderLine.combination : [];
   }
 
   public getTotalPrice(): number {
@@ -318,6 +333,40 @@ class Order implements IOrder {
   }
 }
 
+export class Combination {
+  quantity: number;
+  attributes: [{
+    attribute: Attribute,
+    value: AttributeValue,
+  }]
+}
+
+export interface AttributeValue {
+  label: string;
+  value: string;
+}
+
+export class Attribute {
+  constructor(
+    public name: string,
+    public values: AttributeValue[],
+    public _id?: string,
+  ) {}
+}
+
+export interface AttributeLineValue {
+  value: string;
+  label: string;
+  quantity: number;
+}
+
+export class AttributeLine {
+  constructor(
+    public attribute: Attribute,
+    public values: AttributeLineValue[],
+  ) {}
+}
+
 interface IProduct {
   _id: string;
   category?: Category;
@@ -330,6 +379,7 @@ interface IProduct {
   active: boolean;
   onSale: boolean;
   discount?: Discount;
+  combinations: Combination[];
 }
 
 class Product implements IProduct {
@@ -344,6 +394,7 @@ class Product implements IProduct {
   active: boolean;
   onSale: boolean;
   discount?: Discount;
+  combinations: Combination[];
 
   constructor (product: IProduct) {
     this._id = product._id;
@@ -357,6 +408,7 @@ class Product implements IProduct {
     this.active = product.active;
     this.onSale = product.onSale;
     this.discount = product.discount;
+    this.combinations = product.combinations;
   }
 
   /**

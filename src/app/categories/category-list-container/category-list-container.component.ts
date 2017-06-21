@@ -59,7 +59,7 @@ export class CategoryListContainerComponent implements OnInit {
 
     this.categoryService.create(category)
       .subscribe(
-        res => this.categories.push(category),
+        res => this.categories.push(res.data),
         err => console.log(err),
         () => {
           this.isFinished = true;
