@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 
 import { CategoryService, AttributeService } from '../../services';
 import { Product, Category, Attribute, Combination, IOption } from '../../model/interface';
@@ -103,14 +103,14 @@ export class ProductFormComponent implements OnInit {
         startDate: [this.fullDate(new Date(this.product.discount.startDate))],
         endDate: [this.fullDate(new Date(this.product.discount.endDate))],
       }),
-      combinations: this.fb.array(
-        this.initCombinations(),
-      ),
+      // combinations: this.fb.array(
+      //   this.initCombinations(),
+      // ),
       combinationsGroup: this.fb.group({
         combinations: this.fb.array(
           this.initCombinations(),
         ),
-      })
+      }),
     });
 
     this.form.valueChanges
@@ -146,9 +146,19 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.form.value.combinations = this.form.value.combinationsGroup.combinations;
+    this.form.value.combinations = this.form.value.combinationsGroup.combinations.filter(combination => {
+      return combination.attributes.length > 0;
+    });
 
     this.submitEmitter.emit(this.form.value);
+  }
+
+  /**
+   * Whether the form has combinations active
+   * @return {boolean} True if form has combinations
+   */
+  hasCombinations(): boolean {
+    return this.form.value.combinationsGroup.combinations.length > 0;
   }
 
   onRemove(): void {

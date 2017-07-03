@@ -48,7 +48,7 @@
             <td>{{ product.name }}</td>
             <td>{{ product.category?.name || "No category" }}</td>
             <td>{{ product.price }}</td>
-            <td>{{ product.quantity }}</td>
+            <td>{{ product.getQuantity() }}</td>
             <td>
               <i class="fa" [ngClass]="{'fa-check text-success': product.active, 'fa-times text-danger': !product.active }"></i>
             </td>

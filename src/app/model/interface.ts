@@ -445,6 +445,32 @@ class Product implements IProduct {
 
     return this.price - ((this.price * this.getActiveDiscount().value) / 100);
   }
+
+  /**
+   * Whether or not the product has combinations
+   * @return {boolean} True if product has combinations, else false
+   */
+  public hasCombinations(): boolean {
+    return this.combinations.length > 0;
+  }
+
+  /**
+   * Get the quantity of the product, depending on
+   * whether the product has combinations
+   * @param  {Combination = null}        Get quantity for specific combination
+   * @return {number} Product quantity
+   */
+  public getQuantity(combination: Combination = null): number {
+    if (!this.hasCombinations()) {
+      return this.quantity;
+    }
+
+    if (combination !== null) {
+      return combination.quantity;
+    }
+
+    return this.combinations.reduce((sum, combination) => (sum + combination.quantity), 0);
+  }
 }
 
 class Shipping {

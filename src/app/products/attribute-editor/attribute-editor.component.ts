@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Attribute, AttributeValue, Combination, Product } from '../../model/interface';
+import { Attribute, AttributeValue, Combination, Product, ResolveEmit } from '../../model/interface';
+import { ConfirmationService, ToastService } from '../../services';
 
 import * as _ from 'lodash';
 
@@ -19,10 +20,14 @@ export class AttributeEditorComponent implements OnInit {
   created: boolean = false;
   enabledAttributesIds: any = {};
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private confirmationService: ConfirmationService,
+    private toastService: ToastService,
+  ) { }
 
   ngOnInit() {
-    this.enabledAttributesIds = this.product.combinations.reduce((enabled, combination) => {
+    this.enabledAttributesIds = this.combinationForm.value.combinations.reduce((enabled, combination) => {
       combination.attributes
         .map(item => item.attribute._id)
         .forEach(id => enabled[id] = true);
@@ -75,8 +80,64 @@ export class AttributeEditorComponent implements OnInit {
     control.removeAt(index);
   }
 
+  initCombinations() {
+    return this.product.combinations.map(combination =>
+      this.fb.group({
+        quantity: combination.quantity,
+        attributes: this.fb.array(combination.attributes.map(attribute => (
+          this.fb.group({
+            attribute: attribute.attribute,
+            value: attribute.value,
+          })
+        ))),
+      })
+    );
+  }
+
   onDeattachAttribute(attribute: Attribute): void {
-    // TODO: implement
+    this.confirmationService
+      .create('Are you sure?', 'Deattaching an attribute will remove the attribute from previously created combinations')
+      .subscribe((ans: ResolveEmit) => {
+        if (ans.resolved) {
+          this.deattachAttribute(attribute);
+        }
+      });
+  }
+
+  deattachAttribute(attribute: Attribute): void {
+    let items = this.combinationForm.get('combinations') as FormArray;
+    for (let i = items.controls.length - 1; i >= 0; i--) {
+
+      let attributes = items.at(i).get('attributes') as FormArray;
+
+      for (let y = attributes.controls.length - 1; y >= 0; y--) {
+        let attributeName = attributes.at(y).get('attribute').value.name;
+
+        if (attribute.name == attributeName) {
+          attributes.removeAt(y);
+        }
+      }
+
+      // If the combinations have no attributes after deattaching, remove the combination
+      if (attributes.value.length <= 0) {
+        items.removeAt(i);
+      }
+    }
+
+    // If the deattached attribute is currently selected, remove it from selected attributes
+    this.selectedAttributes = this.selectedAttributes.filter(item => item.attribute._id !== attribute._id);
+
+    // Remove the attribute from enabled attributes
+    delete this.enabledAttributesIds[attribute._id];
+  }
+
+  /**
+   * Returns true if there is enabled attributes that have not been selected
+   * Returns false if all enabled attributes have been selected
+   * @return {boolean}
+   */
+  notAllAttributesSelected(): boolean {
+    return Object.keys(this.enabledAttributesIds).length !== this.selectedAttributes.length;
   }
 
   isSelected(attribute: Attribute, value: AttributeValue): boolean {

@@ -32,7 +32,7 @@ export class ProductListContainerComponent implements OnInit {
   loadProducts(): void {
     this.productService.getProducts()
       .subscribe(
-        products => this.products = products,
+        products => this.products = products.map(product => new Product(product)),
         err => this.handleError(err),
         () => this.isFinished = true,
       );

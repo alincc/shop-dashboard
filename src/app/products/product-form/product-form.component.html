@@ -119,9 +119,12 @@
         </div>
 
         <div class="tab-pane" *ngIf="activeTab == 'quantities'">
-          Quantities
 
-          <div class="field" [ngClass]="{'error': formErrors.quantity}">
+          <div *ngIf="hasCombinations()" class="message info">
+            This product has combinations, specify the quantity under the "Attribute" tab.
+          </div>
+
+          <div class="field" [ngClass]="{'error': formErrors.quantity}" *ngIf="!hasCombinations()">
             <label for="quantity">Quantity</label>
             <input formControlName="quantity" placeholder="Quantity">
 

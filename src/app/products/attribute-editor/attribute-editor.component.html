@@ -12,12 +12,16 @@
     </div>
 
     <div class="m-t">
-      <button class="btn btn-info" [disabled]="!selectedAttributes.length" type="button" (click)="onCreateCombination()">Create combination</button>
+      <button class="btn btn-info" [disabled]="!selectedAttributes.length || notAllAttributesSelected()" type="button" (click)="onCreateCombination()">Create combination</button>
     </div>
 
     <h4>Combinations</h4>
 
-    <div [formGroup]="combinationForm">
+    <div *ngIf="!combinationForm.value.combinations.length">
+      This product does not have any combinations added
+    </div>
+
+    <div [formGroup]="combinationForm" *ngIf="combinationForm.value.combinations.length">
 
       <div formArrayName="combinations">
         <div *ngFor="let combination of combinationForm.controls.combinations.controls; let i = index">
