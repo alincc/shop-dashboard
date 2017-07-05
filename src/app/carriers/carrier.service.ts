@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { HttpService } from '../core/http.service';
 import { Shipping } from '../model/interface';
 
 @Injectable()
 export class CarrierService {
-  private url = 'http://localhost:9000/api/shipping';
+  private url = 'shipping';
 
-  constructor(private http: Http) { }
+  constructor(
+    private http: HttpService,
+  ) { }
 
   create(carrier: Shipping): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
@@ -23,7 +26,7 @@ export class CarrierService {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.put(this.url + '/' + id, JSON.stringify(carrier), options)
+    return this.http.put(`${this.url}/${id}`, JSON.stringify(carrier), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
@@ -35,7 +38,7 @@ export class CarrierService {
   }
 
   getAll(): Observable<Shipping[]> {
-    return this.http.get(`${this.url}`)
+    return this.http.get(this.url)
       .map(res => res.json())
       .catch(this.handleError);
   }

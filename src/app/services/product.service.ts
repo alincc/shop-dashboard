@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions, Headers } from '@angular/http';
+import { Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { HttpService } from '../core/http.service';
 import { Product } from '../model/interface';
 
 @Injectable()
 export class ProductService {
-  private url = 'http://localhost:9000/api/product';
+  private url = 'product';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   getProducts(): Observable<Product[]> {
     return this.http.get(this.url)

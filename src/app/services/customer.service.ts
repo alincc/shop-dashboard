@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { HttpService } from '../core/http.service';
 import { Customer } from '../model/interface';
 
 @Injectable()
 export class CustomerService {
 
-  private url = 'http://localhost:9000/api/customer';
+  private url = 'customer';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   create(customer: Customer): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });

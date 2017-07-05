@@ -41,7 +41,7 @@ import {
     HttpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    CoreModule,
+    CoreModule.forRoot(),
     SharedModule,
     HomeModule,
     ProductsModule,

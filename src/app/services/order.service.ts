@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { HttpService } from '../core/http.service';
 import { Order } from '../model/interface';
 
 @Injectable()
 export class OrderService {
 
-  private url = 'http://localhost:9000/api/order';
+  private url = 'order';
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpService) { }
 
   getOrders(): Observable<Order[]> {
     return this.http.get(this.url)
