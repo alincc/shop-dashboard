@@ -75,7 +75,7 @@
                   <dt>Name</dt>
                   <dd>{{ order.customer.getFullname() }}</dd>
                   <dt>Registration date</dt>
-                  <dd><i class="fa fa-calendar-o m-r-xs"></i> {{ order.customer.createdAt || '' }}</dd>
+                  <dd><i class="fa fa-calendar-o m-r-xs"></i> {{ order.customer.createdAt | date:'medium' || '' }}</dd>
                   <dt>Orders placed</dt>
                   <dd>{{ order.customer.orders.length }}</dd>
                 </dl>
