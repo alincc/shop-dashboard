@@ -22,11 +22,11 @@
       </td>
       <td>{{ item.product.name }}</td>
       <td [ngClass]="{'text-danger': priceDecreased(item), 'text-success': priceIncreased(item), 'text-bold': priceDiffers(item)}">
-        <input type="text" [(ngModel)]="item.price" *ngIf="toggle[i]">
+        <input type="number" [(ngModel)]="item.price" *ngIf="toggle[i]">
         <span *ngIf="!toggle[i]">{{ item.price | currency:'USD':true }}</span>
       </td>
       <td>
-        <input type="text" [(ngModel)]="item.quantity" *ngIf="toggle[i]">
+        <input type="number" [(ngModel)]="item.quantity" *ngIf="toggle[i]">
         <span *ngIf="!toggle[i]">{{ item.quantity }}</span>
       </td>
       <td>{{ item.product.quantity }}</td>
