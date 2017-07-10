@@ -1,0 +1,35 @@
+.dropdown {
+  display: inline-block;
+  position: relative;
+
+  .icon {
+    cursor: pointer;
+  }
+
+  .label {
+
+  }
+
+  &.open-right {
+    .menu {
+      right: 0;
+    }
+  }
+
+  .menu {
+    background: #fff;
+    position: absolute;
+    min-width: 160px;
+    border: 1px solid rgba(34,36,38,.15);
+
+    .item {
+      padding: 5px 15px;
+      line-height: normal;
+      display: block;;
+
+      &:hover {
+        background: rgba(0,0,0,.05);
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import { CustomerNoteFormComponent } from './customer-note-form/customer-note-fo
 import { MessageComponent } from './message/message.component';
 import { SelectComponent } from './select/select.component';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule, NgxPaginationModule, ReactiveFormsModule, JasperoConfirmationsModule],
@@ -22,6 +23,7 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
     CustomerNoteFormComponent,
     MessageComponent,
     SelectComponent,
+    DropdownComponent,
     MultiSelectComponent,
     JasperoConfirmationsModule,
     RouterModule,
@@ -32,6 +34,7 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
     MessageComponent,
     SelectComponent,
     MultiSelectComponent,
+    DropdownComponent,
   ]
 })
 export class SharedModule { }

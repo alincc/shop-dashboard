@@ -3,10 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CustomerListContainerComponent } from './customer-list-container/customer-list-container.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { IndexComponent } from '../index/index.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'customers', component: CustomerListContainerComponent },
-  { path: 'customer/:id', component: CustomerDetailComponent },
+  { path: '', canActivate: [AuthGuard], component: IndexComponent, children: [
+    { path: 'customers', component: CustomerListContainerComponent },
+    { path: 'customer/:id', component: CustomerDetailComponent },
+  ] },
 ];
 
 @NgModule({

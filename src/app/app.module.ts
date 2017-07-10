@@ -16,6 +16,8 @@ import { CustomersModule } from './customers/customers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
 import { CarriersModule } from './carriers/carriers.module';
+import { IndexModule } from './index/index.module';
+import { AuthModule } from './auth/auth.module';
 
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
 
@@ -46,6 +48,8 @@ import {
     HomeModule,
     ProductsModule,
     CustomersModule,
+    AuthModule,
+    IndexModule,
     OrdersModule,
     CategoriesModule,
     CarriersModule,

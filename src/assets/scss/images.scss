@@ -36,3 +36,13 @@
     vertical-align: middle;
   }
 }
+
+.avatar {
+  border-radius: 500px;
+  white-space: nowrap;
+
+  img {
+    width: 100%;
+    border-radius: 500px;
+  }
+}

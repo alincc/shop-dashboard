@@ -5,5 +5,23 @@
   height: 100%;
   background: #fff;
   color: #58666e;
-  padding: 0 12px;
+
+  .top-menu-right {
+    float: right;
+    padding-left: 15px;
+
+    .top-menu-item {
+      float: left;
+      padding: 0 15px;
+
+      &:hover {
+        cursor: pointer;
+        background: rgba(0,0,0,.05);
+      }
+    }
+  }
+
+  .icons {
+
+  }
 }

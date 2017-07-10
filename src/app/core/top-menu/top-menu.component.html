@@ -1,3 +1,23 @@
 <div class="top-menu">
-  <i class="fa fa-dedent fa-fw"></i>
+
+  <div class="top-menu-right">
+
+    <div class="top-menu-item">
+      <i class="fa fa-envelope-o"></i>
+    </div>
+
+    <div class="top-menu-item">
+      <app-dropdown [items]="profileDropdownValues()" [openRight]="true">
+        <span class="thumb-sm avatar">
+          <img src="assets/img/profile.png" alt="">
+        </span>
+      </app-dropdown>
+    </div>
+
+  </div>
+
+  <div class="icons padder">
+    <i class="fa fa-dedent fa-fw"></i>
+  </div>
+
 </div>

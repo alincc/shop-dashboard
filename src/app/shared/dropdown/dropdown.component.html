@@ -1,0 +1,17 @@
+<div class="dropdown" [ngClass]="{'open-right': openRight}">
+  <div class="icon" *ngIf="icon">
+    <i [className]="icon" (click)="toggle()" aria-hidden="true"></i>
+  </div>
+
+  <div class="label" (click)="toggle()" *ngIf="label">{{ label }}</div>
+
+  <div class="cursor" (click)="toggle()">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="menu" *ngIf="visible && items">
+    <a class="item" [routerLink]="item.value" *ngFor="let item of items">
+      {{ item.label }}
+    </a>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import {
     XHRBackend
 } from '@angular/http';
 
+import { CustomRequestOptions } from './custom-request.options';
 import { LoaderService } from './loader/loader.service';
 
 @Injectable()
@@ -20,7 +21,7 @@ export class HttpService extends Http {
 
   constructor(
     backend: XHRBackend,
-    defaultOptions: RequestOptions,
+    defaultOptions: CustomRequestOptions,
     private loaderService: LoaderService,
   ) {
     super(backend, defaultOptions);
@@ -29,7 +30,7 @@ export class HttpService extends Http {
   get(url: string, options?: RequestOptionsArgs): Observable<any> {
     this.showLoader();
 
-    return super.get(this.getFullUrl(url), options)
+    return super.get(this.getFullUrl(url), this.requestOptions(options))
       .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
       .catch(this.onCatch)
       .do((res: Response) => {
@@ -107,8 +108,19 @@ export class HttpService extends Http {
   }
 
   private getFullUrl(url: string): string {
-    console.log(this.apiUrl);
     return this.apiUrl + url;
+  }
+
+  private requestOptions(options?: RequestOptionsArgs): RequestOptionsArgs {
+    if (options == null) {
+      options = new CustomRequestOptions();
+    }
+
+    if (options.headers == null) {
+      options.headers = new Headers();
+    }
+
+    return options;
   }
 
   private showLoader(): void {
