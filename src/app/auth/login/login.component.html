@@ -3,7 +3,7 @@
   <form class="form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
 
     <h1>Login</h1>
-    
+
     <div class="field">
       <input type="text" placeholder="Username" [(ngModel)]="form.username" name="username">
     </div>
@@ -14,5 +14,13 @@
 
     <button type="submit" class="btn btn-primary">Sign in</button>
   </form>
+
+  <div class="text-center text-muted text-xs m">
+    <a routerLink="/forgot">Forgot password?</a>
+  </div>
+
+  <div class="texte-center text-muted text-xs m">
+    <span>Copyright &copy; 2017 Markus Hederström All Rights Reserved.</span>
+  </div>
 
 </div>
