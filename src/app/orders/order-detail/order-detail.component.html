@@ -122,6 +122,7 @@
             <app-order-product-list
               [items]="order.items"
               (updateEmitter)="onUpdateProducts($event)"
+              (removeEmitter)="onRemoveProduct($event)"
               (addEmitter)="onAddProduct($event)">
             </app-order-product-list>
 

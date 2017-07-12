@@ -49,6 +49,7 @@
             <button type="button" (click)="toggle[i] = !toggle[i]" class="btn btn-xs btn-default">Cancel</button>
           </div>
           <button type="button" (click)="toggle[i] = !toggle[i]" class="btn btn-xs btn-info" *ngIf="!toggle[i]">Edit</button>
+          <button type="button" (click)="onRemoveProduct(item)" class="btn btn-xs btn-danger" *ngIf="!toggle[i]">Remove</button>
         </td>
       </tr>
 

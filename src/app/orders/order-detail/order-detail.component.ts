@@ -73,6 +73,10 @@ export class OrderDetailComponent implements OnInit {
       )
   }
 
+  onRemoveProduct(line: OrderLine): void {
+    this.onUpdate({ items: this.order.items.filter(item => line != item) });
+  }
+
   handleError(error: ErrorResponse) {
     this.errorMsg = new Message('negative', error.message, 'Ooops..');
   }

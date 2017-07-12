@@ -11,6 +11,7 @@ export class OrderProductListComponent implements OnInit {
   @Input() items: OrderLine[];
   @Output() updateEmitter: EventEmitter<OrderLine[]> = new EventEmitter();
   @Output() addEmitter: EventEmitter<OrderLine> = new EventEmitter();
+  @Output() removeEmitter: EventEmitter<OrderLine> = new EventEmitter();
 
   toggle = {};
 
@@ -25,6 +26,9 @@ export class OrderProductListComponent implements OnInit {
 
   onAddProduct(line: OrderLine) {
     this.addEmitter.emit(line);
+  }
+  onRemoveProduct(line: OrderLine) {
+    this.removeEmitter.emit(line);
   }
 
   priceDiffers(line: OrderLine): boolean {
