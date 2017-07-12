@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { OrderLine } from '../../model/interface';
+import { OrderLine, Order } from '../../model/interface';
 
 @Component({
   selector: 'app-order-product-list',
@@ -10,6 +10,7 @@ import { OrderLine } from '../../model/interface';
 export class OrderProductListComponent implements OnInit {
   @Input() items: OrderLine[];
   @Output() updateEmitter: EventEmitter<OrderLine[]> = new EventEmitter();
+  @Output() addEmitter: EventEmitter<OrderLine> = new EventEmitter();
 
   toggle = {};
 
@@ -20,6 +21,10 @@ export class OrderProductListComponent implements OnInit {
 
   onSave() {
     this.updateEmitter.emit(this.items);
+  }
+
+  onAddProduct(line: OrderLine) {
+    this.addEmitter.emit(line);
   }
 
   priceDiffers(line: OrderLine): boolean {

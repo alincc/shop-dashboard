@@ -1,0 +1,80 @@
+<div class="product-add-container">
+  <div *ngIf="show">
+    <h4 class="add-title">Add Product to Order</h4>
+
+    <div *ngIf="!selected.item">
+      <form>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-6">
+            <input type="text" class="input" [formControl]="term" placeholder="Search product...">
+          </div>
+          <div class="col-md-6 col-xs-6">
+            <button type="button" class="btn btn" (click)="show = false">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div *ngIf="!items.length && isFinished && term.value.length">
+        No items found
+      </div>
+
+      <ul *ngIf="items && isFinished && term.value.length" class="results">
+        <li *ngFor="let item of items">
+          <span (click)="onSelectItem(item)" class="cursor label bg-primary">{{ item.name }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="selected.item">
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>In Stock</th>
+            <th *ngIf="selected.item.combinations.length">Combination</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="text-bold">{{ selected.item.name }}</span></td>
+            <td>{{ selected.item.getQuantity(selected.combination) }}</td>
+            <td *ngIf="selected.item.combinations.length">
+
+              <app-select
+                [options]="combinationOptions()"
+                [(ngModel)]="selected.combination"
+                label="Combinations"
+              >
+              </app-select>
+
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="selected.price" placeholder="Price">
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="selected.quantity" placeholder="Quantity">
+            </td>
+            <td>
+              <div class="col-xs">
+                <button class="btn btn-sm btn-info" type="button" (click)="onSubmit()">Add</button>
+                <button class="btn btn-sm" type="button" (click)="onCancel()">Cancel</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <button type="button" class="btn btn-addon btn-sm btn-primary" (click)="toggle()" *ngIf="!show">
+    <i class="fa fa-plus"></i>
+    Add product
+  </button>
+</div>

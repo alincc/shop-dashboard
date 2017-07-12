@@ -3,7 +3,7 @@ import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from '../core/http.service';
-import { Order } from '../model/interface';
+import { Order, OrderLine } from '../model/interface';
 
 @Injectable()
 export class OrderService {
@@ -35,6 +35,15 @@ export class OrderService {
 
   remove(id: string) {
     return this.http.delete(`${this.url}/${id}`)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  addProduct(id: string, line: OrderLine) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.put(`${this.url}/${id}/add-product`, JSON.stringify(line), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }

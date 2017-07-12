@@ -119,7 +119,11 @@
 
             <div class="message info" *ngIf="!order.items.length">There are no products attatched to this order</div>
 
-            <app-order-product-list [items]="order.items" (updateEmitter)="onUpdateProducts($event)"></app-order-product-list>
+            <app-order-product-list
+              [items]="order.items"
+              (updateEmitter)="onUpdateProducts($event)"
+              (addEmitter)="onAddProduct($event)">
+            </app-order-product-list>
 
           </div>
 

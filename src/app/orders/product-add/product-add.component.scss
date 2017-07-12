@@ -1,0 +1,16 @@
+.product-add-container {
+  table {
+    input[type="number"] {
+      max-width: 60px;
+    }
+  }
+
+  .add-title {
+    margin-bottom: 20px;
+  }
+
+  .results {
+    list-style: none;
+    padding: 0;
+  }
+}

@@ -6,6 +6,7 @@ import { OrderUpdateStatusComponent } from './order-update-status/order-update-s
 import { OrderProductListComponent } from './order-product-list/order-product-list.component';
 import { ShippingInfoComponent } from './shipping-info/shipping-info.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
     OrderProductListComponent,
     ShippingInfoComponent,
     ShippingAddressComponent,
+    ProductAddComponent,
   ]
 })
 export class OrdersModule { }

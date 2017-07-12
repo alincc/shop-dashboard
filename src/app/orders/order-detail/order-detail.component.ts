@@ -62,6 +62,17 @@ export class OrderDetailComponent implements OnInit {
       );
   }
 
+  onAddProduct(line: OrderLine): void {
+    this.orderService.addProduct(this.order._id, line)
+      .subscribe(
+        res => {
+          this.toastService.success('Product added', 'The product was added to the order');
+          this.order = new Order(res.data);
+        },
+        err => console.log(err),
+      )
+  }
+
   handleError(error: ErrorResponse) {
     this.errorMsg = new Message('negative', error.message, 'Ooops..');
   }

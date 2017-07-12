@@ -1,45 +1,61 @@
-<table class="table" *ngIf="items.length">
+<div>
+  <table class="table" *ngIf="items.length">
 
-  <thead>
-    <tr>
-      <th></th>
-      <th>Product</th>
-      <th>Unit Price</th>
-      <th>Quantity</th>
-      <th>Available quantity</th>
-      <th>Total</th>
-      <th></th>
-    </tr>
-  </thead>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Available quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <tbody>
+    <tbody>
 
-    <tr *ngFor="let item of items; let i = index">
-      <td>
-        <a class="thumb-md" [routerLink]="['/product', item.product._id]">
-          <img [src]="item.product.image" alt="Image" />
-        </a>
-      </td>
-      <td>{{ item.product.name }}</td>
-      <td [ngClass]="{'text-danger': priceDecreased(item), 'text-success': priceIncreased(item), 'text-bold': priceDiffers(item)}">
-        <input type="number" [(ngModel)]="item.price" *ngIf="toggle[i]">
-        <span *ngIf="!toggle[i]">{{ item.price | currency:'USD':true }}</span>
-      </td>
-      <td>
-        <input type="number" [(ngModel)]="item.quantity" *ngIf="toggle[i]">
-        <span *ngIf="!toggle[i]">{{ item.quantity }}</span>
-      </td>
-      <td>{{ item.product.quantity }}</td>
-      <td>{{ item.getTotalPrice() | currency:'USD':true }}</td>
-      <td>
-        <div *ngIf="toggle[i]">
-          <button type="button" (click)="onSave(); toggle[i] = !toggle[i]" class="btn btn-xs btn-info">Save</button>
-          <button type="button" (click)="toggle[i] = !toggle[i]" class="btn btn-xs btn-default">Cancel</button>
-        </div>
-        <button type="button" (click)="toggle[i] = !toggle[i]" class="btn btn-xs btn-info" *ngIf="!toggle[i]">Edit</button>
-      </td>
-    </tr>
+      <tr *ngFor="let item of items; let i = index">
+        <td>
+          <a class="thumb-md" [routerLink]="['/product', item.product._id]">
+            <img [src]="item.product.image" alt="Image" />
+          </a>
+        </td>
+        <td>
+          <strong>{{ item.product.name }}</strong>
 
-  </tbody>
+          <div *ngIf="item.combination.length">
+            <ul class="product-attributes">
+              <li *ngFor="let attribute of item.combination">
+                <span *ngIf="attribute.value && attribute.attribute">{{ attribute.attribute.name }}: {{ attribute.value.label }}</span>
+              </li>
+            </ul>
+          </div>
 
-</table>
+        </td>
+        <td [ngClass]="{'text-danger': priceDecreased(item), 'text-success': priceIncreased(item), 'text-bold': priceDiffers(item)}">
+          <input type="number" [(ngModel)]="item.price" *ngIf="toggle[i]">
+          <span *ngIf="!toggle[i]">{{ item.price | currency:'USD':true }}</span>
+        </td>
+        <td>
+          <input type="number" [(ngModel)]="item.quantity" *ngIf="toggle[i]">
+          <span *ngIf="!toggle[i]">{{ item.quantity }}</span>
+        </td>
+        <td>{{ item.product.getQuantity(item.selectedCombination) }}</td>
+        <td>{{ item.getTotalPrice() | currency:'USD':true }}</td>
+        <td>
+          <div *ngIf="toggle[i]">
+            <button type="button" (click)="onSave(); toggle[i] = !toggle[i]" class="btn btn-xs btn-info">Save</button>
+            <button type="button" (click)="toggle[i] = !toggle[i]" class="btn btn-xs btn-default">Cancel</button>
+          </div>
+          <button type="button" (click)="toggle[i] = !toggle[i]" class="btn btn-xs btn-info" *ngIf="!toggle[i]">Edit</button>
+        </td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+  <app-product-add (addEmitter)="onAddProduct($event)"></app-product-add>
+
+</div>

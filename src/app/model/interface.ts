@@ -179,6 +179,7 @@ class IOrderLine {
       value: string;
     }
   }[];
+  selectedCombination?: Combination;
 }
 
 class OrderLine implements IOrderLine {
@@ -192,12 +193,14 @@ class OrderLine implements IOrderLine {
       value: string;
     }
   }[];
+  selectedCombination?: Combination;
 
   constructor(orderLine: IOrderLine) {
     this.product = new Product(orderLine.product);
     this.quantity = orderLine.quantity;
     this.price = orderLine.price;
     this.combination = orderLine.combination ? orderLine.combination : [];
+    this.selectedCombination = orderLine.selectedCombination ? orderLine.selectedCombination : null;
   }
 
   public getTotalPrice(): number {
@@ -333,12 +336,32 @@ class Order implements IOrder {
   }
 }
 
-export class Combination {
+export interface ICombination {
   quantity: number;
   attributes: [{
     attribute: Attribute,
     value: AttributeValue,
-  }]
+  }];
+  _id?: string;
+}
+
+export class Combination implements ICombination {
+  quantity: number;
+  attributes: [{
+    attribute: Attribute,
+    value: AttributeValue,
+  }];
+  _id?: string;
+
+  constructor(combination: ICombination) {
+    this._id = combination._id;
+    this.quantity = combination.quantity;
+    this.attributes = combination.attributes;
+  }
+
+  public valuesToString(): string {
+    return this.attributes.map(attribute => attribute.value.label).join(', ');
+  }
 }
 
 export interface AttributeValue {
@@ -408,7 +431,7 @@ class Product implements IProduct {
     this.active = product.active;
     this.onSale = product.onSale;
     this.discount = product.discount;
-    this.combinations = product.combinations;
+    this.combinations = product.combinations ? product.combinations.map(combination => new Combination(combination)) : [];
   }
 
   /**
@@ -466,7 +489,9 @@ class Product implements IProduct {
     }
 
     if (combination !== null) {
-      return combination.quantity;
+      const found = this.combinations.find(c => combination._id == c._id);
+
+      return found && found.quantity;
     }
 
     return this.combinations.reduce((sum, combination) => (sum + combination.quantity), 0);
