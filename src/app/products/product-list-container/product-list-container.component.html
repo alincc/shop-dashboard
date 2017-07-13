@@ -27,27 +27,62 @@
         <thead>
           <tr>
             <th></th>
-            <th>ID</th>
+            <th class="cursor" (click)="setOrder('id')">
+              <i class="fa pull-right" [ngClass]="{'fa-caret-down': isActiveSorting('id', true), 'fa-caret-up': isActiveSorting('id', false)}" aria-hidden="true"></i>
+              ID
+            </th>
             <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Status</th>
+            <th class="cursor" (click)="setOrder('name')">
+              <i class="fa pull-right" [ngClass]="{'fa-caret-down': isActiveSorting('name', true), 'fa-caret-up': isActiveSorting('name', false)}" aria-hidden="true"></i>
+              Name
+            </th>
+            <th class="cursor" (click)="setOrder('category.name')">
+              <i class="fa pull-right" [ngClass]="{'fa-caret-down': isActiveSorting('category.name', true), 'fa-caret-up': isActiveSorting('category.name', true)}" aria-hidden="true"></i>
+              Category
+            </th>
+            <th class="cursor" (click)="setOrder('price')">
+              <i class="fa pull-right" [ngClass]="{'fa-caret-down': isActiveSorting('price', true), 'fa-caret-up': isActiveSorting('price', false)}" aria-hidden="true"></i>
+              Price
+            </th>
+            <th class="cursor" (click)="setOrder('quantity')">
+              <i class="fa pull-right" [ngClass]="{'fa-caret-down': isActiveSorting('quantity', true), 'fa-caret-up': isActiveSorting('quantity', false)}" aria-hidden="true"></i>
+              Quantity
+            </th>
+            <th class="cursor" (click)="setOrder('active')">
+              <i class="fa pull-right" [ngClass]="{'fa-caret-down': isActiveSorting('active', true), 'fa-caret-up': isActiveSorting('active', false)}" aria-hidden="true"></i>
+              Status
+            </th>
             <th></th>
           </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+          <tr>
+            <td></td>
+            <td>
+              <input type="text" class="input input-filter" [(ngModel)]="filter._id" placeholder="Filter by ID...">
+            </td>
+            <td></td>
+            <td>
+              <input type="text" class="input input-filter" [(ngModel)]="filter.name" placeholder="Filter by name...">
+            </td>
+            <td></td>
+            <td>
+              <input type="text" class="input input-filter" [(ngModel)]="filter.price" placeholder="Filter by price...">
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr *ngFor="let product of products | filter: filter | orderBy:order:reverse | paginate: { itemsPerPage: 10, currentPage: currentPage }">
             <td class="text-center" style="width: 10px">
               <input type="checkbox" (change)="onSelect(product)" />
             </td>
-            <td>ID</td>
+            <td>{{ product._id }}</td>
             <td class="image-column"><img [src]="product.image" alt="Image" /></td>
             <td>{{ product.name }}</td>
             <td>{{ product.category?.name || "No category" }}</td>
-            <td>{{ product.price }}</td>
+            <td>{{ product.price | currency:'USD':true }}</td>
             <td>{{ product.getQuantity() }}</td>
             <td>
               <i class="fa" [ngClass]="{'fa-check text-success': product.active, 'fa-times text-danger': !product.active }"></i>

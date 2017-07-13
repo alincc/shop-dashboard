@@ -11,10 +11,14 @@ import { MessageComponent } from './message/message.component';
 import { SelectComponent } from './select/select.component';
 import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule, NgxPaginationModule, ReactiveFormsModule, JasperoConfirmationsModule],
   exports: [
+    OrderByPipe,
+    FilterPipe,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
@@ -29,6 +33,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     RouterModule,
   ],
   declarations: [
+    OrderByPipe,
+    FilterPipe,
     TitlePaneComponent,
     CustomerNoteFormComponent,
     MessageComponent,

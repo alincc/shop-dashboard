@@ -12,13 +12,16 @@ import { ProductService, ToastService, ConfirmationService } from '../../service
 export class ProductListContainerComponent implements OnInit {
   currentPage: number = 1;
   products: Product[];
+  reverse: boolean = false;
+  order: string = 'name';
   isFinished: boolean = false;
   errorMsg: Message;
   selected = [];
   actionOptions = [
     { value: 'delete', label: 'Delete' },
   ];
-
+  filter: any = {};
+  
   constructor(
     private productService: ProductService,
     private confirmationService: ConfirmationService,
@@ -94,6 +97,18 @@ export class ProductListContainerComponent implements OnInit {
         this.removeSelected();
         break;
     }
+  }
+
+  setOrder(value: string): void {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+
+    this.order = value;
+  }
+
+  isActiveSorting(value: string, reverse: boolean): boolean {
+    return this.order === value && this.reverse === reverse;
   }
 
 }

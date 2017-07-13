@@ -78,7 +78,7 @@ export class HttpService extends Http {
   delete(url: string, options?: RequestOptionsArgs) {
     this.showLoader();
 
-    return super.post(this.getFullUrl(url), options)
+    return super.delete(this.getFullUrl(url), options)
       .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
       .catch(this.onCatch)
       .do((res: Response) => {
