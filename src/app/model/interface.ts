@@ -334,6 +334,12 @@ class Order implements IOrder {
   public getShippingStatus(): string {
     return ShippingStatus[this.status];
   }
+
+  public getNumberOfProducts(): number {
+    return this.items.reduce((count, line) => {
+      return count + line.quantity;
+    }, 0);
+  }
 }
 
 export interface ICombination {

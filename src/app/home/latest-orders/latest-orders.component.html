@@ -5,11 +5,27 @@
 
     <div class="message info" *ngIf="!orders.length">No orders have been made</div>
 
-    <div *ngIf="orders">
-      <div *ngFor="let order of orders">
-        {{ order._id }}
-      </div>
-    </div>
+    <table class="table" *ngIf="orders">
+      <thead>
+        <tr>
+          <th>Customer</th>
+          <th>Products</th>
+          <th>Total</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.customer?.firstname }} {{ order.customer?.lastname }}</td>
+          <td>{{ order.getNumberOfProducts() }}</td>
+          <td>{{ order.total | currency:'USD':true }}</td>
+          <td>{{ order.createdAt | date:'short' }}</td>
+          <td><span class="label bg-primary">{{ order.getShippingStatus() }}</span></td>
+        </tr>
+      </tbody>
+    </table>
 
   </div>
 </div>

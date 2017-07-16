@@ -22,7 +22,7 @@ export class LatestOrdersComponent implements OnInit {
   loadOrders(): void {
     this.orderService.getOrders()
       .subscribe(
-        orders => this.orders = orders,
+        orders => this.orders = orders.map(order => new Order(order)),
         err => console.log(err),
         () => this.isFinished = true,
       );
