@@ -12,6 +12,8 @@ export class LatestOrdersComponent implements OnInit {
 
   isFinished: boolean = false;
   orders: Order[] = [];
+  nrOfOrders: number = 5;   // Number of orders to display
+  sort: string = 'asc';     // Sorting order of the orders created date. Valid options: asc / desc
 
   constructor(private orderService: OrderService) { }
 
@@ -20,7 +22,7 @@ export class LatestOrdersComponent implements OnInit {
   }
 
   loadOrders(): void {
-    this.orderService.getOrders()
+    this.orderService.getOrders({ limit: this.nrOfOrders, sort: this.sort })
       .subscribe(
         orders => this.orders = orders.map(order => new Order(order)),
         err => console.log(err),

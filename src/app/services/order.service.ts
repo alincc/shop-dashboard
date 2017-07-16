@@ -12,8 +12,8 @@ export class OrderService {
 
   constructor(private http: HttpService) { }
 
-  getOrders(): Observable<Order[]> {
-    return this.http.get(this.url)
+  getOrders({ limit = 99999, sort = 'asc' } = {}): Observable<Order[]> {
+    return this.http.get(`${this.url}?limit=${limit}&sort=${sort}`)
                     .map(res => res.json())
                     .catch(this.handleError);
   }
