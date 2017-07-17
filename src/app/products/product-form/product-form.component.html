@@ -159,9 +159,14 @@
       Save
     </button>
 
-    <button class="btn btn-sm btn-danger btn-addon" type="button" *ngIf="product._id" (click)="onRemove()">
+    <button class="btn btn-sm btn-danger btn-addon" type="button" *ngIf="product._id && !product.deleted" (click)="onRemove(true)">
       <i class="fa fa-trash-o"></i>
       Remove
+    </button>
+
+    <button class="btn btn-sm btn-danger btn-addon" type="button" *ngIf="product._id && product.deleted" (click)="onRemove(false)">
+      <i class="fa fa-trash-o"></i>
+      Delete forever
     </button>
 
   </form>

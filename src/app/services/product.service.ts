@@ -47,8 +47,8 @@ export class ProductService {
       .catch(this.handleError);
   }
 
-  removeProduct(id: string) {
-    return this.http.delete(`${this.url}/${id}`)
+  removeProduct(id: string, soft: boolean = true) {
+    return this.http.delete(`${this.url}/${id}?soft=${soft}`)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }

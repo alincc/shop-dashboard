@@ -41,12 +41,12 @@ export class ProductDetailComponent implements OnInit {
       );
   }
 
-  onRemove() {
+  onRemove(soft: boolean = true) {
     if (!this.product._id) return false;
-
+    
     this.confirmationService
       .create('Are you sure?', 'Do you really want to delete this item?')
-      .switchMap((ans: ResolveEmit) => ans.resolved ? this.productService.removeProduct(this.product._id) : Observable.of(null))
+      .switchMap((ans: ResolveEmit) => ans.resolved ? this.productService.removeProduct(this.product._id, soft) : Observable.of(null))
       .subscribe(
         res => {
           if (res) {

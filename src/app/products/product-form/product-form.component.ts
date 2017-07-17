@@ -163,8 +163,8 @@ export class ProductFormComponent implements OnInit {
     return this.form.value.combinationsGroup.combinations.length > 0;
   }
 
-  onRemove(): void {
-    this.removeEmitter.emit();
+  onRemove(soft: boolean = true): void {
+    this.removeEmitter.emit(soft);
   }
 
   onRestore(): void {
