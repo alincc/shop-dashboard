@@ -1,5 +1,47 @@
-.table-responsive {
-  overflow: auto;
+$break-max-width: 760px;
+$break-min-device-width: 768px;
+$break-max-device-width: 1024px;
+
+@media
+only screen and (max-width: $break-max-width),
+(min-device-width: $break-min-device-width) and (max-device-width: $break-max-device-width)  {
+  .table-responsive {
+    display: block;
+
+    thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -99999px;
+    }
+
+    tr {
+      border: 1px solid #ccc;
+    }
+
+    td {
+      border: none;
+      position: relative;
+      padding-left: 40% !important;
+    }
+
+    td:before {
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      width: 55%;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+    }
+
+    td.no-label {
+      padding-left: 1em !important;
+    }
+  }
 }
 
 .table {

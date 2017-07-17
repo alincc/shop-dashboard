@@ -1,5 +1,57 @@
 @import '../../assets/scss/variables.scss';
 
+@media (max-width: 640px) {
+  .app {
+    .sidebar {
+      width: 15% !important;
+    }
+
+    .top-menu-container {
+      margin-left: 15% !important;
+      width: 100% - 15% !important;
+    }
+
+    .content {
+      margin-left: 15% !important;
+    }
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1280px) {
+  .app {
+    .sidebar {
+      width: 10% !important;
+    }
+
+    .top-menu-container {
+      margin-left: 10% !important;
+      width: 100% - 10% !important;
+    }
+
+    .content {
+      margin-left: 10% !important;
+    }
+  }
+}
+
+@media (min-width: 1280px) {
+  .app {
+    .sidebar {
+      width: 15% !important;
+    }
+
+    .top-menu-container {
+      margin-left: 15% !important;
+      width: 10% - 15% !important;
+    }
+
+    .content {
+      margin-left: 15% !important;
+    }
+  }
+}
+
+
 .app {
   position: relative;
 

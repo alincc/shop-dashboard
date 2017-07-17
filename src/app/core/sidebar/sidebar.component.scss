@@ -1,5 +1,59 @@
 @import "../../../assets/scss/variables.scss";
 
+@media (max-width: 640px) {
+  .sidebar {
+    text-align: center;
+
+    .title-header {
+      display: none;
+    }
+
+    ul {
+      li {
+        line-height: 60px;
+
+        a {
+          padding: 0 !important;
+
+          i {
+            font-size: 1.5em;
+          }
+        }
+
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 640px) and (max-width: 1280px) {
+  .sidebar {
+    text-align: center;
+
+    .title-header {
+      display: none;
+    }
+
+    ul {
+      li {
+        line-height: 80px;
+
+        a {
+          padding: 0 !important;
+
+          i {
+            font-size: 2em;
+          }
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 .sidebar {
   background: $sidebarBgColor;
 
@@ -17,6 +71,7 @@
     margin: 0;
 
     li {
+      white-space: nowrap;
 
       a {
         display: block;

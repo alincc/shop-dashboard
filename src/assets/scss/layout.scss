@@ -69,3 +69,13 @@ a {
 .main {
   padding: 20px;
 }
+
+@media (min-width: 780px) and (max-width: 1280px) {
+  .sidebar {
+
+    // i {
+    //   font-size: 2em;
+    // }
+    // width: 10% !important;
+  }
+}

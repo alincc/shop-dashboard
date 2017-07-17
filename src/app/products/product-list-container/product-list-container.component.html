@@ -23,7 +23,7 @@
         (submitEmitter)="doAction($event)">
       </app-multi-select>
 
-      <table class="table" *ngIf="products">
+      <table class="table table-responsive" *ngIf="products">
         <thead>
           <tr>
             <th></th>
@@ -59,15 +59,15 @@
         <tbody>
           <tr>
             <td></td>
-            <td>
+            <td class="no-label">
               <input type="text" class="input input-filter" [(ngModel)]="filter._id" placeholder="Filter by ID...">
             </td>
             <td></td>
-            <td>
+            <td class="no-label">
               <input type="text" class="input input-filter" [(ngModel)]="filter.name" placeholder="Filter by name...">
             </td>
             <td></td>
-            <td>
+            <td class="no-label">
               <input type="text" class="input input-filter" [(ngModel)]="filter.price" placeholder="Filter by price...">
             </td>
             <td></td>
@@ -75,19 +75,19 @@
             <td></td>
           </tr>
           <tr *ngFor="let product of products | filter: filter | orderBy:order:reverse | paginate: { itemsPerPage: 10, currentPage: currentPage }">
-            <td class="text-center" style="width: 10px">
+            <td class="text-center no-label" style="width: 10px">
               <input type="checkbox" (change)="onSelect(product)" />
             </td>
-            <td>{{ product._id }}</td>
-            <td class="image-column"><img [src]="product.image" alt="Image" /></td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category?.name || "No category" }}</td>
-            <td>{{ product.price | currency:'USD':true }}</td>
-            <td>{{ product.getQuantity() }}</td>
-            <td>
+            <td data-label="ID">{{ product._id }}</td>
+            <td class="image-column" data-label="Image"><img [src]="product.image" alt="Image" /></td>
+            <td data-label="Name">{{ product.name }}</td>
+            <td data-label="Category">{{ product.category?.name || "No category" }}</td>
+            <td data-label="Price">{{ product.price | currency:'USD':true }}</td>
+            <td data-label="Quantity">{{ product.getQuantity() }}</td>
+            <td data-label="Status">
               <i class="fa" [ngClass]="{'fa-check text-success': product.active, 'fa-times text-danger': !product.active }"></i>
             </td>
-            <td>
+            <td class="no-label">
 
               <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/product', product._id]">
                 <i class="fa fa-edit"></i>

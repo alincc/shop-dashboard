@@ -28,7 +28,7 @@
         (submitEmitter)="doAction($event)">
       </app-multi-select>
 
-      <table class="table" *ngIf="categories">
+      <table class="table table-responsive" *ngIf="categories">
         <thead>
           <tr>
             <th></th>
@@ -41,15 +41,15 @@
 
         <tbody>
           <tr *ngFor="let category of categories | paginate: { itemsPerPage: 10, currentPage: currentPage }">
-            <td class="text-center" style="width: 10px">
+            <td class="text-center no-label" style="width: 10px">
               <input type="checkbox" (change)="onSelect(category)" />
             </td>
-            <td>{{ category.name }}</td>
-            <td>{{ category.description }}</td>
-            <td>
+            <td data-label="Name">{{ category.name }}</td>
+            <td data-label="Description">{{ category.description }}</td>
+            <td data-label="Active">
               <i class="fa" [ngClass]="{'fa-check text-success': category.active, 'fa-times text-danger': !category.active }"></i>
             </td>
-            <td>
+            <td class="no-label">
               <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/category', category._id]">
                 <i class="fa fa-edit"></i>
               </a>

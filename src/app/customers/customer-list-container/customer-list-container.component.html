@@ -22,45 +22,43 @@
         (submitEmitter)="doAction($event)">
       </app-multi-select>
 
-      <div class="table-responsive">
-        <table class="table" *ngIf="customers">
-          <thead>
-            <tr>
-              <th></th>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Country</th>
-              <th>Orders</th>
-              <th>Active</th>
-              <th>Customer since</th>
-              <th>Last visit</th>
-              <th></th>
-            </tr>
-          </thead>
+      <table class="table table-responsive" *ngIf="customers">
+        <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Country</th>
+            <th>Orders</th>
+            <th>Active</th>
+            <th>Customer since</th>
+            <th>Last visit</th>
+            <th></th>
+          </tr>
+        </thead>
 
-          <tbody>
-            <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: currentPage }">
-              <td class="text-center" style="width: 10px">
-                <input type="checkbox" (change)="onSelect(customer)" />
-              </td>
-              <td>{{ customer._id}}</td>
-              <td>{{ customer.getFullname() }}</td>
-              <td>{{ customer.email }}</td>
-              <td>{{ customer.country }}</td>
-              <td>{{ customer.orders.length }}</td>
-              <td>{{ customer.getStatus() }}</td>
-              <td>{{ customer.createdAt | date:'short' }}</td>
-              <td>[last visit]</td>
-              <td>
-                <a [routerLink]="['/customer', customer._id]">
-                  <i class="fa fa-edit"></i>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <tbody>
+          <tr *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+            <td class="text-center no-label" style="width: 10px">
+              <input type="checkbox" (change)="onSelect(customer)" />
+            </td>
+            <td data-label="ID">{{ customer._id}}</td>
+            <td data-label="Name">{{ customer.getFullname() }}</td>
+            <td data-label="Email">{{ customer.email }}</td>
+            <td data-label="Country">{{ customer.country }}</td>
+            <td data-label="Orders">{{ customer.orders.length }}</td>
+            <td data-label="Active">{{ customer.getStatus() }}</td>
+            <td data-label="Customer Since">{{ customer.createdAt | date:'short' }}</td>
+            <td data-label="Last Visit">[last visit]</td>
+            <td class="no-label">
+              <a [routerLink]="['/customer', customer._id]">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>
 

@@ -6,7 +6,8 @@
   .sidebar {
     position: fixed;
     background: $sidebarBgColor;
-    width: $sidebarWidth;
+    // width: $sidebarWidth;
+    width: 10%;
     z-index: 999;
     height: 100%;
   }
