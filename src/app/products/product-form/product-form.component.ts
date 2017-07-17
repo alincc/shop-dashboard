@@ -99,15 +99,11 @@ export class ProductFormComponent implements OnInit {
       category: [this.product.category, Validators.required],
       active: [this.product.active, Validators.required],
       onSale: this.product.onSale,
-
       discount: this.fb.group({
-        value: this.product.discount.value,
-        startDate: [this.fullDate(new Date(this.product.discount.startDate))],
-        endDate: [this.fullDate(new Date(this.product.discount.endDate))],
+        value: this.product.discount ? this.product.discount.value : null,
+        startDate: this.product.discount ? [this.fullDate(new Date(this.product.discount.startDate))] : null,
+        endDate: this.product.discount ? this.product.discount && [this.fullDate(new Date(this.product.discount.endDate))] : null,
       }),
-      // combinations: this.fb.array(
-      //   this.initCombinations(),
-      // ),
       combinationsGroup: this.fb.group({
         combinations: this.fb.array(
           this.initCombinations(),
@@ -148,6 +144,10 @@ export class ProductFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.form.value.discount && !this.form.value.discount.value) {
+      this.form.value.discount = null;
+    }
+
     this.form.value.combinations = this.form.value.combinationsGroup.combinations.filter(combination => {
       return combination.attributes.length > 0;
     });
