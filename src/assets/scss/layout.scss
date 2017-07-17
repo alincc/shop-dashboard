@@ -62,6 +62,15 @@ a {
   }
 }
 
+.bg-danger {
+  background: #f05050;
+  color: #fff;
+
+  .text-muted {
+    color: #e6e6e6 !important;
+  }
+}
+
 .cursor {
   cursor: pointer;
 }

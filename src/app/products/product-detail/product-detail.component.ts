@@ -58,6 +58,25 @@ export class ProductDetailComponent implements OnInit {
       );
   }
 
+  onRestore() {
+    if (!this.product._id) return false;
+
+    this.confirmationService
+      .create('Are you sure?', 'The product will be restored and visible to customers')
+      .switchMap((ans: ResolveEmit) => ans.resolved ? this.productService.restoreProduct(this.product._id) : Observable.of(null))
+      .subscribe(
+        res => {
+          if (res) {
+            this.toastService.success('Product was restored!', 'The product was restored to the catalog');
+            if (res.data) {
+              this.product = res.data;
+            }
+          }
+        },
+        err => console.log(err),
+      );
+  }
+
   handleError(error: ErrorResponse) {
     this.errorMsg = new Message('negative', error.message, 'Ooops..');
   }

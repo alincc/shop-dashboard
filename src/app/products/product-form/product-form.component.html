@@ -25,6 +25,13 @@
       </div>
 
       <div class="tab-content">
+
+        <div class="message negative" *ngIf="product.deleted">
+          <button class="btn btn-sm btn-default pull-right" type="button" (click)="onRestore()">Restore</button>
+
+          This product is removed and not visible to customers
+        </div>
+
         <div class="tab-pane" *ngIf="activeTab == 'basic'">
 
           <div class="field" [ngClass]="{'error': formErrors.name}">

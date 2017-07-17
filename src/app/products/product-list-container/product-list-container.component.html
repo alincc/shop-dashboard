@@ -17,6 +17,13 @@
 
     <div class="body">
 
+      <div class="pull-right">
+
+        <input type="checkbox" [(ngModel)]="displayRemoved" (change)="toggleDisplayRemoved()" id="display-removed">
+        <label for="display-removed" class="cursor">Display removed products</label>
+
+      </div>
+
       <app-multi-select
         [buttonDisable]="!selected.length"
         [options]="actionOptions"
@@ -80,7 +87,13 @@
             </td>
             <td data-label="ID">{{ product._id }}</td>
             <td class="image-column" data-label="Image"><img [src]="product.image" alt="Image" /></td>
-            <td data-label="Name">{{ product.name }}</td>
+            <td data-label="Name">
+              {{ product.name }}
+
+              <span *ngIf="product.deleted" class="label bg-danger">
+                Deleted
+              </span>
+            </td>
             <td data-label="Category">{{ product.category?.name || "No category" }}</td>
             <td data-label="Price">{{ product.price | currency:'USD':true }}</td>
             <td data-label="Quantity">{{ product.getQuantity() }}</td>
@@ -89,12 +102,16 @@
             </td>
             <td class="no-label">
 
-              <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/product', product._id]">
+              <a class="btn btn-sm btn-icon btn-info" [routerLink]="['/product', product._id]" title="Modify">
                 <i class="fa fa-edit"></i>
               </a>
 
-              <a (click)="removeProduct(product)" class="btn btn-sm btn-icon btn-danger">
+              <a (click)="removeProduct(product)" class="btn btn-sm btn-icon btn-danger" *ngIf="!product.deleted" title="Remove">
                 <i class="fa fa-remove"></i>
+              </a>
+
+              <a (click)="restoreProduct(product)" class="btn btn-sm btn-icon btn-success" *ngIf="product.deleted" title="Restore">
+                <i class="fa fa-life-saver"></i>
               </a>
 
             </td>

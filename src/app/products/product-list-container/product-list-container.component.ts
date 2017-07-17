@@ -21,7 +21,8 @@ export class ProductListContainerComponent implements OnInit {
     { value: 'delete', label: 'Delete' },
   ];
   filter: any = {};
-  
+  displayRemoved: boolean = false;
+
   constructor(
     private productService: ProductService,
     private confirmationService: ConfirmationService,
@@ -32,10 +33,16 @@ export class ProductListContainerComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts(): void {
+  loadProducts(displayRemoved = false): void {
     this.productService.getProducts()
       .subscribe(
-        products => this.products = products.map(product => new Product(product)),
+        products => {
+          if (!displayRemoved) {
+            products = products.filter(product => product.deleted === false).map(product => new Product(product));
+          }
+
+          this.products = products.map(product => new Product(product));
+        },
         err => this.handleError(err),
         () => this.isFinished = true,
       );
@@ -109,6 +116,31 @@ export class ProductListContainerComponent implements OnInit {
 
   isActiveSorting(value: string, reverse: boolean): boolean {
     return this.order === value && this.reverse === reverse;
+  }
+
+  toggleDisplayRemoved(): void {
+    this.loadProducts(this.displayRemoved);
+  }
+
+  restoreProduct(product: Product) {
+    this.confirmationService
+      .create('Are you sure?', 'The product will be restored and visible to customers')
+      .switchMap((ans: ResolveEmit) => ans.resolved ? this.productService.restoreProduct(product._id) : Observable.of(null))
+      .subscribe(
+        res => {
+          if (res) {
+            this.toastService.success('Product was restored!', 'The product was restored to the catalog');
+
+            this.products = this.products.map(item => {
+              if (item._id == product._id) {
+                item.deleted = false;
+              }
+              return item;
+            });
+          }
+        },
+        err => console.log(err),
+      );
   }
 
 }

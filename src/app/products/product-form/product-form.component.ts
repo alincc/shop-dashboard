@@ -13,6 +13,7 @@ export class ProductFormComponent implements OnInit {
   @Input() product: Product;
   @Output() submitEmitter: EventEmitter<any> = new EventEmitter();
   @Output() removeEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() restoreEmitter: EventEmitter<any> = new EventEmitter();
 
   categories: Category[];
   attributes: Attribute[];
@@ -85,6 +86,7 @@ export class ProductFormComponent implements OnInit {
         active: true,
         onSale: false,
         combinations: [],
+        deleted: false,
       });
     }
 
@@ -163,6 +165,10 @@ export class ProductFormComponent implements OnInit {
 
   onRemove(): void {
     this.removeEmitter.emit();
+  }
+
+  onRestore(): void {
+    this.restoreEmitter.emit();
   }
 
   onValueChanged(data?: any) {

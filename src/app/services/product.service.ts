@@ -53,6 +53,12 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  restoreProduct(id: string) {
+    return this.http.get(`${this.url}/${id}/restore`)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
     return Observable.throw(error.json() || 'Server error');
   }

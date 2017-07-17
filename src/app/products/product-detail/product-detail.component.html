@@ -11,6 +11,7 @@
   <app-product-form [product]="product"
     *ngIf="product"
     (removeEmitter)="onRemove($event)"
-    (submitEmitter)="onSubmit($event)">
+    (submitEmitter)="onSubmit($event)"
+    (restoreEmitter)="onRestore($event)">
   </app-product-form>
 </div>
