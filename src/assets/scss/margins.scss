@@ -1,38 +1,49 @@
 $mTiny: 5px;
 $mSmall: 10px;
 $mDefault: 15px;
+$mMedium: 20px;
 $mLarge: 30px;
 $mHuge: 40px;
 
 .m-b-xs { margin-bottom: $mTiny; }
 .m-b-sm { margin-bottom: $mSmall; }
 .m-b { margin-bottom: $mDefault; }
+.m-b-md { margin-bottom: $mMedium; }
 .m-b-lg { margin-bottom: $mLarge; }
 .m-b-xl { margin-bottom: $mHuge; }
 
 .m-t-xs { margin-top: $mTiny; }
 .m-t-sm { margin-top: $mSmall; }
 .m-t { margin-top: $mDefault; }
+.m-t-md { margin-top: $mMedium; }
 .m-t-lg { margin-top: $mLarge; }
 .m-t-xl { margin-top: $mHuge; }
 
 .m-l-xs { margin-left: $mTiny; }
 .m-l-sm { margin-left: $mSmall; }
 .m-l { margin-left: $mDefault; }
+.m-l-md { margin-left: $mMedium; }
 .m-l-lg { margin-left: $mLarge; }
 .m-l-xl { margin-left: $mHuge; }
 
 .m-r-xs { margin-right: $mTiny; }
 .m-r-sm { margin-right: $mSmall; }
 .m-r { margin-right: $mDefault; }
+.m-r-md { margin-right: $mMedium; }
 .m-r-lg { margin-right: $mLarge; }
 .m-r-xl { margin-right: $mHuge; }
 
 .m-xs { margin: $mTiny; }
 .m-sm { margin: $mSmall; }
 .m { margin: $mDefault; }
+.m-md { margin: $mMedium; }
 .m-lg { margin: $mLarge; }
 .m-xl { margin: $mHuge; }
+
+.m-l-n-md { margin-left: -$mMedium; }
+.m-r-n-md { margin-right: -$mMedium; }
+.m-t-n-md { margin-top: -$mMedium; }
+.m-b-n-md { margin-bottom: -$mMedium; }
 
 .padder-v {
   padding-top: $mDefault;

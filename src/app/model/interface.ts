@@ -1,10 +1,12 @@
+import { Message as CustomerMessage } from '../messages/message';
+
 export interface IOption {
   value: any;
   label: string;
   disabled?: boolean;
 }
 
-interface User {
+interface IUser {
   _id: String,
   admin: boolean;
   username: String;
@@ -12,6 +14,33 @@ interface User {
   email: string;
   customer?: Customer;
   ip: String;
+  image?: string;
+}
+
+class User implements IUser {
+  _id: String;
+  admin: boolean;
+  username: String;
+  password: String;
+  email: string;
+  customer?: Customer;
+  ip: String;
+  image?: string;
+
+  constructor(user: IUser) {
+    this._id = user._id;
+    this.admin = user.admin;
+    this.username = user.username;
+    this.password = user.password;
+    this.email = user.email;
+    this.customer = user.customer ? user.customer : null;
+    this.ip = user.ip;
+    this.image = user.image ? user.image : 'no-pic.png';
+  }
+
+  public getImagePath(): string {
+    return 'assets/img/' + this.image;
+  }
 }
 
 interface Discount {
@@ -296,6 +325,7 @@ interface IOrder {
   shipping?: ShippingLine;
   shippingAddress?: ShippingAddress;
   payment?: Payment;
+  messages: CustomerMessage[];
 }
 
 class Order implements IOrder {
@@ -310,6 +340,7 @@ class Order implements IOrder {
   shipping?: ShippingLine;
   shippingAddress?: ShippingAddress;
   payment?: Payment;
+  messages: CustomerMessage[];
 
   constructor(order: IOrder) {
     this._id = order._id;
@@ -323,6 +354,7 @@ class Order implements IOrder {
     this.shipping = order.shipping ? order.shipping : null;
     this.payment = order.payment ? order.payment : null;
     this.shippingAddress = order.shippingAddress ? new ShippingAddress(order.shippingAddress) : null;
+    this.messages = order.messages.map(message => new CustomerMessage(message));
   }
 
   public calculateSubTotal(): number {

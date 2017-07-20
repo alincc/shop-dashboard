@@ -7,11 +7,13 @@ import { OrderProductListComponent } from './order-product-list/order-product-li
 import { ShippingInfoComponent } from './shipping-info/shipping-info.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { ProductAddComponent } from './product-add/product-add.component';
+import { MessagesModule } from '../messages/messages.module';
 
 @NgModule({
   imports: [
     OrdersRoutingModule,
     SharedModule,
+    MessagesModule,
   ],
   declarations: [
     routedComponents,

@@ -47,6 +47,24 @@
 
         </div>
 
+        <div class="panel bordered-title">
+
+          <h4 class="text-thin">
+            Message
+          </h4>
+
+          <div class="content">
+
+            <div *ngIf="order.messages" class="m-b b-l m-l-md pos-rlt">
+              <app-message-item *ngFor="let message of order.messages" [message]="message"></app-message-item>
+            </div>
+
+            <app-message-form (submitEmitter)="onSubmitMessage($event)"></app-message-form>
+
+          </div>
+
+        </div>
+
       </div>
 
       <div class="col-md-6 col-xs-12">

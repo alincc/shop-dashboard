@@ -3,6 +3,8 @@ import { ActivatedRoute, Params }   from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Order, OrderLine, ErrorResponse, Message, Customer, ShippingStatus, ShippingLine, ShippingAddress } from '../../model/interface';
+import { MessageService } from '../../messages/message.service';
+import { Message as CustomerMessage } from '../../messages/message';
 import { OrderService, CustomerService, ToastService } from '../../services';
 
 @Component({
@@ -20,6 +22,7 @@ export class OrderDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private orderService: OrderService,
     private customerService: CustomerService,
+    private messageService: MessageService,
     private toastService: ToastService,
   ) { }
 
@@ -39,6 +42,17 @@ export class OrderDetailComponent implements OnInit {
         err => console.log(err),
         () => this.toastService.success('Note saved!', 'The customer note was saved'),
       );
+  }
+
+  onSubmitMessage(message: CustomerMessage) {
+    this.messageService.create(message)
+      .switchMap(res => this.orderService.addMessage(this.order._id, res.data))
+      .subscribe(
+        res => {
+          this.order = new Order(res.data);
+        },
+        err => console.log(err),
+      )
   }
 
   onUpdateProducts(items: OrderLine[]) {

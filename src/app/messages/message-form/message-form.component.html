@@ -1,0 +1,8 @@
+<form class="form" (ngSubmit)="onSubmitMessage()" *ngIf="message">
+  <div class="field">
+    <label for="message">Message</label>
+    <input type="text" id="message" [(ngModel)]="message.body" name="body">
+  </div>
+
+  <button type="submit" class="btn btn-info" [disabled]="!message.body.length">Send</button>
+</form>

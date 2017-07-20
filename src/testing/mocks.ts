@@ -119,7 +119,7 @@ export const MOCK_CUSTOMER2: Customer = new Customer({
   createdAt: '',
 });
 
-export const FAKE_USER1: User = {
+export const FAKE_USER1: User = new User({
   _id: "1",
   admin: false,
   username: "john",
@@ -127,7 +127,7 @@ export const FAKE_USER1: User = {
   email: "johndoe@email.com",
   ip: "212.213.12.2",
   customer: MOCK_CUSTOMER1,
-};
+});
 
 export const MOCK_SHIPPING1: Shipping = {
   _id: "100",
@@ -150,6 +150,7 @@ export const MOCK_ORDER1 = new Order({
     customer: MOCK_CUSTOMER1,
     // shipping: MOCK_SHIPPING1
     shipping: FAKE_SHIPPING_LINE1,
+    messages: [],
 });
 
 export const MOCK_SHIPPINGS: Shipping[] = [MOCK_SHIPPING1];

@@ -1,6 +1,6 @@
 <div class="top-menu">
 
-  <div class="top-menu-right">
+  <div class="top-menu-right" *ngIf="user">
 
     <div class="top-menu-item">
       <i class="fa fa-envelope-o"></i>
@@ -9,7 +9,7 @@
     <div class="top-menu-item">
       <app-dropdown [items]="profileDropdownValues()" [openRight]="true">
         <span class="thumb-sm avatar">
-          <img src="assets/img/profile.png" alt="">
+          <img [src]="user.getImagePath()" alt="">
         </span>
       </app-dropdown>
     </div>

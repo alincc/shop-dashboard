@@ -15,6 +15,7 @@ import { ProductsModule } from './products/products.module';
 import { CustomersModule } from './customers/customers.module';
 import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
+import { MessagesModule } from './messages/messages.module';
 import { CarriersModule } from './carriers/carriers.module';
 import { IndexModule } from './index/index.module';
 import { AuthModule } from './auth/auth.module';
@@ -52,6 +53,7 @@ import {
     IndexModule,
     OrdersModule,
     CategoriesModule,
+    MessagesModule,
     CarriersModule,
     SimpleNotificationsModule.forRoot(),
     AppRoutingModule,

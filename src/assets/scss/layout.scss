@@ -4,6 +4,7 @@
 @import 'tables.scss';
 @import 'forms.scss';
 @import 'buttons.scss';
+@import 'borders.scss';
 @import 'messages.scss';
 @import 'pagination.scss';
 @import 'colors.scss';
@@ -87,4 +88,16 @@ a {
     // }
     // width: 10% !important;
   }
+}
+
+.b-a {
+  border: 1px solid #dee5e7;
+}
+
+.b-b {
+  border-bottom: 1px solid #dee5e7;
+}
+
+.pos-rlt {
+  position: relative;
 }

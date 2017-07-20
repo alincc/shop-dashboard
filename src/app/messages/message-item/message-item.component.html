@@ -1,0 +1,16 @@
+<div>
+  <a class="pull-left thumb-sm avatar m-l-n-md">
+    <img [src]="message.user.getImagePath()" alt="">
+  </a>
+
+  <div class="m-l-lg panel no-padding b-a">
+    <div class="panel-heading pos-rlt b-b b-light">
+      <span class="arrow left"></span>
+      <a href>{{ message.user.username }}</a>
+      <span class="text-muted pull-right text-xs">
+        <i class="fa fa-clock-o"></i> {{ message.createdAt | date:'short' }}
+      </span>
+    </div>
+    <div class="panel-body">{{ message.body }}</div>
+  </div>
+</div>

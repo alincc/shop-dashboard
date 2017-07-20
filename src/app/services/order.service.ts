@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { Message } from '../messages/message';
 import { HttpService } from '../core/http.service';
 import { Order, OrderLine } from '../model/interface';
 
@@ -44,6 +45,15 @@ export class OrderService {
     const options = new RequestOptions({ headers: headers });
 
     return this.http.put(`${this.url}/${id}/add-product`, JSON.stringify(line), options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  addMessage(id: string, message: Message) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.put(`${this.url}/${id}/add-message`, JSON.stringify(message), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }

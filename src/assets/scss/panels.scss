@@ -25,10 +25,56 @@
     }
   }
 
+  &.no-padding {
+    padding: 0 !important;
+  }
+
   .options {
     line-height: 3;
     float: right;
     display: block;
     padding: 0 15px;
   }
+
+  .panel-heading {
+    padding: 10px 15px;
+  }
+
+  .panel-body {
+    padding: 15px;
+  }
+}
+
+.arrow {
+  z-index: 10;
+  border-width: 9px;
+
+  &:after {
+    border-width: 8px;
+    content: "";
+  }
+
+  &.left {
+    top: 50%;
+    left: -9px;
+    margin-top: -9px;
+    border-right-color: rgba(0,0,0,.1);
+    border-left-width: 0;
+
+    &:after {
+      bottom: -8px;
+      left: 1px;
+      border-right-color: #fff;
+      border-left-width: 0;
+    }
+  }
+}
+
+.arrow, .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
 }
