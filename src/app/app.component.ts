@@ -4,6 +4,13 @@ import { Subscription } from 'rxjs/Subscription';
 import { LoaderService } from './core/loader/loader.service';
 import { LoaderState } from './core/loader/loader';
 
+// import { Store } from "@ngrx/store";
+// import { State } from "./state-management/state/main-state";
+//
+import { Store } from '@ngrx/store';
+import { State } from "./state-management/state/main-state";
+import { INCREMENT } from "./state-management/actions/main-action.creator";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -24,7 +31,18 @@ export class AppComponent implements OnInit, OnDestroy {
       animate: 'fromRight',
   }
 
-  constructor(private loaderService: LoaderService) { }
+  constructor(
+    private loaderService: LoaderService,
+    private store: Store<State>,
+  ) {
+    store.select('mainStoreReducer')
+      .subscribe( (data:State) => {
+        console.log(data);
+      })
+
+    this.store.dispatch({ type: INCREMENT });
+
+  }
 
   ngOnInit() {
     this.loaderSubscription = this.loaderService.loaderState

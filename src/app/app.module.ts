@@ -20,6 +20,9 @@ import { CarriersModule } from './carriers/carriers.module';
 import { IndexModule } from './index/index.module';
 import { AuthModule } from './auth/auth.module';
 
+import { mainStoreReducer } from "./state-management/reducers/main-reducer";
+import { StoreModule } from "@ngrx/store";
+
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
 
 import {
@@ -56,6 +59,10 @@ import {
     MessagesModule,
     CarriersModule,
     SimpleNotificationsModule.forRoot(),
+    StoreModule.provideStore({mainStoreReducer}),
+
+
+    // StoreModule.forRoot(mainStoreReducer),
     AppRoutingModule,
   ],
   providers: [
