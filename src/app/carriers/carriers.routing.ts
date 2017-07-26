@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CarrierListComponent } from './carrier-list/carrier-list.component';
-import { CarrierDetailComponent } from './carrier-detail/carrier-detail.component';
+import { CarrierCollectionComponent } from './containers/carrier-collection/carrier-collection.component';
+import { CarrierViewComponent } from './containers/carrier-view/carrier-view.component';
 import { IndexComponent } from '../index/index.component';
 import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   { path: '', canActivate: [AuthGuard], component: IndexComponent, children: [
-    { path: 'carriers', component: CarrierListComponent, canActivate: [AuthGuard] },
-    { path: 'carrier/:id', component: CarrierDetailComponent, canActivate: [AuthGuard] },
+    { path: 'carriers', component: CarrierCollectionComponent, canActivate: [AuthGuard] },
+    { path: 'carrier/:id', component: CarrierViewComponent, canActivate: [AuthGuard] },
   ]}
 ];
 
@@ -19,4 +19,4 @@ const routes: Routes = [
 })
 export class CarriersRoutingModule { }
 
-export const routedComponents = [CarrierListComponent, CarrierDetailComponent];
+export const routedComponents = [CarrierCollectionComponent, CarrierViewComponent];

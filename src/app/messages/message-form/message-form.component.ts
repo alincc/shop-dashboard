@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Message } from '../message';
-import { AuthService } from '../../auth/auth.service';
+import * as fromAuth from '../../auth/reducers';
 
 @Component({
   selector: 'app-message-form',
@@ -14,10 +15,12 @@ export class MessageFormComponent implements OnInit, OnDestroy {
   message: Message;
   subscription: Subscription;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private store: Store<fromAuth.State>
+  ) { }
 
   ngOnInit() {
-    this.subscription = this.authService.getUserInfo()
+    this.subscription = this.store.select(fromAuth.getUser)
       .subscribe(
         user => {
           this.message = {
@@ -25,8 +28,8 @@ export class MessageFormComponent implements OnInit, OnDestroy {
             user: user,
           }
         },
-        e => console.log(e),
-      )
+        err => console.log(err),
+      );
   }
 
   ngOnDestroy() {

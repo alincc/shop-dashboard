@@ -47,7 +47,7 @@ export class CoreModule {
           provide: HttpService,
           useFactory: httpServiceFactory,
           deps: [XHRBackend, RequestOptions, LoaderService ],
-        }
+        },
       ]
     }
   }

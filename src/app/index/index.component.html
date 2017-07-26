@@ -1,6 +1,6 @@
-<div class="app">
+<div class="app" [ngClass]="{'no-sidebar': !(showSidenav$ | async)}" *ngIf="loggedIn$ | async">
 
-  <div class="sidebar">
+  <div class="sidebar" *ngIf="showSidenav$ | async">
 
     <app-sidebar></app-sidebar>
 
@@ -8,7 +8,11 @@
 
   <div class="top-menu-container">
 
-    <app-top-menu></app-top-menu>
+    <app-top-menu
+      [user]="user$ | async"
+      (toggleSideNav)="onToggleSideNav($event)"
+      [showSidenav]="showSidenav$ | async">
+    </app-top-menu>
 
     <app-loader></app-loader>
 

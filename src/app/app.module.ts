@@ -20,8 +20,10 @@ import { CarriersModule } from './carriers/carriers.module';
 import { IndexModule } from './index/index.module';
 import { AuthModule } from './auth/auth.module';
 
-import { mainStoreReducer } from "./state-management/reducers/main-reducer";
 import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducers, developmentReducerFactory } from './reducers';
 
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
 
@@ -59,10 +61,18 @@ import {
     MessagesModule,
     CarriersModule,
     SimpleNotificationsModule.forRoot(),
-    StoreModule.provideStore({mainStoreReducer}),
 
+    StoreModule.forRoot(reducers, {
+      reducerFactory: developmentReducerFactory,
+      // reducerFactory: !environment.production
+        // ? developmentReducerFactory
+        // : undefined,
+    }),
 
-    // StoreModule.forRoot(mainStoreReducer),
+    StoreDevtoolsModule.instrument(),
+
+    EffectsModule.forRoot([]),
+
     AppRoutingModule,
   ],
   providers: [

@@ -4,12 +4,13 @@ import {
   Customer,
   Product,
   User,
-  Shipping,
   ShippingStatus,
   Category,
   Payment,
   ShippingLine,
 } from '../app/model/interface';
+
+import { Carrier } from '../app/carriers/models/carrier';
 
 export const FAKE_PAYMENT1: Payment = {
   _id: "1",
@@ -129,7 +130,7 @@ export const FAKE_USER1: User = new User({
   customer: MOCK_CUSTOMER1,
 });
 
-export const MOCK_SHIPPING1: Shipping = {
+export const MOCK_SHIPPING1: Carrier = {
   _id: "100",
   name: "name",
   description: "description",
@@ -148,9 +149,8 @@ export const MOCK_ORDER1 = new Order({
     statusLog: [],
     items: MOCK_ITEMS,
     customer: MOCK_CUSTOMER1,
-    // shipping: MOCK_SHIPPING1
     shipping: FAKE_SHIPPING_LINE1,
     messages: [],
 });
 
-export const MOCK_SHIPPINGS: Shipping[] = [MOCK_SHIPPING1];
+export const MOCK_SHIPPINGS: Carrier[] = [MOCK_SHIPPING1];

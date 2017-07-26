@@ -55,6 +55,16 @@
 .app {
   position: relative;
 
+  &.no-sidebar {
+    .top-menu-container {
+      margin-left: 0 !important;
+    }
+
+    .content {
+      margin-left: 0 !important;
+    }
+  }
+
   .sidebar {
     position: fixed;
     background: $sidebarBgColor;

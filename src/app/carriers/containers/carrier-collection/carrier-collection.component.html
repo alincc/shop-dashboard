@@ -1,0 +1,6 @@
+<app-carrier-list
+  [carriers]="carriers$ | async"
+  (create)="onCreate($event)"
+  (remove)="onRemove($event)"
+  (removeSelected)="onRemoveSelected($event)">
+</app-carrier-list>

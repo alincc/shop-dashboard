@@ -1,38 +1,31 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import { DropdownValue, User } from '../../model/interface';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-top-menu',
   templateUrl: './top-menu.component.html',
   styleUrls: ['./top-menu.component.scss']
 })
-export class TopMenuComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
-  user: User;
+export class TopMenuComponent implements OnInit {
+  @Input() showSidenav: boolean;
+  @Input() user: User;
+  @Output() toggleSideNav: EventEmitter<any> = new EventEmitter();
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.subscription = this.authService.getUserInfo()
-      .subscribe(
-        user => {
-          this.user = new User(user);
-        },
-        e => console.log(e),
-      )
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.user = new User(this.user);
   }
 
   profileDropdownValues(): DropdownValue[] {
     return [
       new DropdownValue("/logout", "Logout"),
     ];
+  }
+
+  onToggleSideNav(): void {
+    this.toggleSideNav.emit({ show: !this.showSidenav });
   }
 
 }

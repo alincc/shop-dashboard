@@ -3,7 +3,7 @@ import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from '../core/http.service';
-import { Shipping } from '../model/interface';
+import { Carrier } from './models/carrier';
 
 @Injectable()
 export class CarrierService {
@@ -13,7 +13,7 @@ export class CarrierService {
     private http: HttpService,
   ) { }
 
-  create(carrier: Shipping): Observable<any> {
+  create(carrier: Carrier): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
@@ -22,7 +22,7 @@ export class CarrierService {
       .catch(this.handleError);
   }
 
-  update(id: string, carrier: Shipping): Observable<any> {
+  update(id: string, carrier: Carrier): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
@@ -31,13 +31,13 @@ export class CarrierService {
       .catch(this.handleError);
   }
 
-  get(id: string): Observable<Shipping> {
+  get(id: string): Observable<Carrier> {
     return this.http.get(`${this.url}/${id}`)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getAll(): Observable<Shipping[]> {
+  getAll(): Observable<Carrier[]> {
     return this.http.get(this.url)
       .map(res => res.json())
       .catch(this.handleError);

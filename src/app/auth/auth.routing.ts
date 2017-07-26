@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
+import { LogoutComponent } from './containers/logout/logout.component';
+import { LoginPageComponent } from './containers/login-page.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginPageComponent },
   { path: 'logout', component: LogoutComponent },
 ];
 
@@ -15,4 +15,4 @@ const routes: Routes = [
 })
 export class AuthRoutingModule { }
 
-export const routedComponents = [LoginComponent, LogoutComponent];
+export const routedComponents = [LogoutComponent, LoginPageComponent];

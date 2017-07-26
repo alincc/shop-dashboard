@@ -1,4 +1,5 @@
 import { Message as CustomerMessage } from '../messages/message';
+import { Carrier } from '../carriers/models/carrier';
 
 export interface IOption {
   value: any;
@@ -268,7 +269,7 @@ class ShippingStatusEntry {
 
 export class ShippingLine {
   constructor(
-    public value: Shipping,
+    public value: Carrier,
     public trackingNumber: string,
     public price: number,
     public weight: number,
@@ -539,13 +540,6 @@ class Product implements IProduct {
   }
 }
 
-class Shipping {
-  _id: string;
-  name: string;
-  price: number;
-  description?: string;
-  active: boolean;
-}
 
 export {
   Category,
@@ -560,6 +554,5 @@ export {
   IOrder,
   Order,
   User,
-  Shipping,
   Product,
 }
