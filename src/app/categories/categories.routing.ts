@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CategoryListContainerComponent } from './category-list-container/category-list-container.component';
-import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { CategoryViewComponent } from './containers/category-view.component';
+import { CategoryCollectionComponent } from './containers/category-collection.component';
 import { IndexComponent } from '../index/index.component';
 import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   { path: '', canActivate: [AuthGuard], component: IndexComponent, children: [
-    { path: 'categories', component: CategoryListContainerComponent },
-    { path: 'category/:id', component: CategoryDetailComponent },
+    { path: 'categories', component: CategoryCollectionComponent },
+    { path: 'category/:id', component: CategoryViewComponent },
   ] }
 ];
 
@@ -19,4 +19,4 @@ const routes: Routes = [
 })
 export class CategoriesRoutingModule { }
 
-export const routedComponents = [CategoryListContainerComponent, CategoryDetailComponent];
+export const routedComponents = [CategoryCollectionComponent, CategoryViewComponent];

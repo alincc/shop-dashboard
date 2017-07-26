@@ -1,18 +1,18 @@
 import { Action } from '@ngrx/store';
 import { Carrier } from '../models/carrier';
 
-export const ADD_SHIPPING = '[Collection] Add Shipping';
-export const ADD_SHIPPING_SUCCESS = '[Collection] Add Shipping Success';
-export const ADD_SHIPPING_FAIL = '[Collection] Add Shipping Fail';
-export const REMOVE_SHIPPING = '[Collection] Remove Shipping';
-export const REMOVE_SHIPPING_SUCCESS = '[Collection] Remove Shipping Success';
-export const REMOVE_SHIPPING_FAIL = '[Collection] Remove Shipping Fail';
-export const LOAD = '[Collection] Load';
-export const LOAD_SUCCESS = '[Collection] Load Success';
-export const LOAD_FAIL = '[Collection] Load Fail';
+export const ADD_SHIPPING = '[Carrier Collection] Add Carrier';
+export const ADD_SHIPPING_SUCCESS = '[Carrier Collection] Add Carrier Success';
+export const ADD_SHIPPING_FAIL = '[Carrier Collection] Add Carrier Fail';
+export const REMOVE_SHIPPING = '[Carrier Collection] Remove Carrier';
+export const REMOVE_SHIPPING_SUCCESS = '[Carrier Collection] Remove Carrier Success';
+export const REMOVE_SHIPPING_FAIL = '[Carrier Collection] Remove Carrier Fail';
+export const LOAD = '[Carrier Collection] Load';
+export const LOAD_SUCCESS = '[Carrier Collection] Load Success';
+export const LOAD_FAIL = '[Carrier Collection] Load Fail';
 
 /**
- * Add Shipping to Collection Actions
+ * Add Carrier to Collection Actions
  */
 export class AddShippingAction implements Action {
   readonly type = ADD_SHIPPING;
