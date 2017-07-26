@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
       return this.store.select(fromAuth.getLoggedIn).take(1).map(authed => {
         if (!authed) {
           if (localStorage.getItem('token')) {
-            this.store.dispatch(new authActions.GetUser({ user: true }));
+            this.store.dispatch(new authActions.GetUser({ user: true, redirect: false }));
             return true;
           }
 

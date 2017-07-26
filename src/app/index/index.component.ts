@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,7 +14,7 @@ import * as authActions from '../auth/actions/auth';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class IndexComponent implements OnInit, OnDestroy {
+export class IndexComponent implements OnInit {
   showSidenav$: Observable<boolean>;
   loggedIn$: Observable<boolean>;
   user$: Observable<User>;
@@ -27,17 +27,6 @@ export class IndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.userSubscription = this.user$.subscribe(user => {
-      if (!user) {
-        if (localStorage.getItem('token')) {
-          this.store.dispatch(new authActions.GetUser({ user: true }));
-        }
-      }
-    })
-  }
-
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
   }
 
   onToggleSideNav(event: any): void {

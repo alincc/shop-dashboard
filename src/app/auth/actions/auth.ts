@@ -18,13 +18,13 @@ export class Login implements Action {
 export class LoginSuccess implements Action {
   readonly type = LOGIN_SUCCESS;
 
-  constructor(public payload: { user: User }) {}
+  constructor(public payload: { user: User, redirect: boolean }) {}
 }
 
 export class GetUser implements Action {
   readonly type = LOGIN_GET_USER;
 
-  constructor(public payload: { user: boolean }) {}
+  constructor(public payload: { user: boolean, redirect: boolean }) {}
 }
 
 export class LoginFailure implements Action {

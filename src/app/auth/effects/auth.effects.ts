@@ -22,7 +22,7 @@ export class AuthEffects {
         .validate(auth.username, auth.password)
         .map(valid => {
           if (valid === true) {
-            return new Auth.GetUser({ user: valid });
+            return new Auth.GetUser({ user: valid, redirect: true });
           }
           return new Auth.LoginFailure('Invalid credentials');
         })
@@ -44,7 +44,7 @@ export class AuthEffects {
       this.authService
         .getUserInfo()
         .map(user => {
-          return new Auth.LoginSuccess({ user });
+          return new Auth.LoginSuccess({ user, redirect: auth.redirect });
         })
         .catch(error => of(new Auth.LoginFailure(error)))
     );
@@ -52,7 +52,11 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   loginSuccess$ = this.actions$
     .ofType(Auth.LOGIN_SUCCESS)
-    .do(() => this.router.navigate(['/']));
+    .do((action: Auth.LoginSuccess) => {
+      if (action.payload.redirect === true) {
+        this.router.navigate(['/'])
+      }
+    });
 
   @Effect({ dispatch: false })
   loginRedirect$ = this.actions$
