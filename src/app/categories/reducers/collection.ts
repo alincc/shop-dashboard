@@ -55,6 +55,14 @@ export function reducer(
       });
     }
 
+    case collection.REMOVE_MANY_CATEGORIES_SUCCESS: {
+      const removedIds = action.payload;
+
+      return Object.assign({}, state, {
+        ids: state.ids.filter(id => removedIds.indexOf(id) < 0),
+      });
+    }
+
     default: {
       return state;
     }

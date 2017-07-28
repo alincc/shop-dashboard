@@ -13,6 +13,7 @@ import { of } from 'rxjs/observable/of';
 
 import * as collection from '../actions/collection';
 import { CarrierService } from '../carrier.service';
+import { ToastService } from '../../services';
 
 @Injectable()
 export class CollectionEffects {
@@ -43,6 +44,13 @@ export class CollectionEffects {
         .catch(() => of(new collection.AddShippingFailAction(carrier)));
     });
 
+  @Effect({ dispatch: false })
+  addCarrierSuccess$ = this.actions$
+    .ofType(collection.ADD_SHIPPING_SUCCESS)
+    .do(() => {
+      this.toastService.success('Success!', 'The carrier was created');
+    });
+
   @Effect()
   removeCarrierFromCollection$: Observable<Action> = this.actions$
     .ofType(collection.REMOVE_SHIPPING)
@@ -53,5 +61,26 @@ export class CollectionEffects {
         .catch(() => of(new collection.RemoveShippingFailAction(carrier)));
     });
 
-  constructor(private actions$: Actions, private service: CarrierService) {}
+  @Effect()
+  removeManyCarrierFromCollection$: Observable<Action> = this.actions$
+    .ofType(collection.REMOVE_MANY_SHIPPING)
+    .map((action: collection.RemoveManyShippingAction) => action.payload)
+    .switchMap(ids => {
+      return this.service.removeMany(ids)
+        .map(() => new collection.RemoveManyShippingSuccessAction(ids))
+        .catch(() => of(new collection.RemoveManyShippingFailAction(ids)));
+    });
+
+  @Effect({ dispatch: false })
+  removeCarrierSuccess$ = this.actions$
+    .ofType(collection.REMOVE_SHIPPING_SUCCESS, collection.REMOVE_MANY_SHIPPING_SUCCESS)
+    .do(() => {
+      this.toastService.success('Removed!', 'The carrier was removed from the catalog');
+    });
+
+  constructor(
+    private actions$: Actions,
+    private service: CarrierService,
+    private toastService: ToastService,
+  ) {}
 }

@@ -7,6 +7,9 @@ export const ADD_CATEGORY_FAIL = '[Category Collection] Add Category Fail';
 export const REMOVE_CATEGORY = '[Category Collection] Remove Category';
 export const REMOVE_CATEGORY_SUCCESS = '[Category Collection] Remove Category Success';
 export const REMOVE_CATEGORY_FAIL = '[Category Collection] Remove Category Fail';
+export const REMOVE_MANY_CATEGORIES = '[Category Collection] Remove Many Category';
+export const REMOVE_MANY_CATEGORIES_SUCCESS = '[Category Collection] Remove Many Category Success';
+export const REMOVE_MANY_CATEGORIES_FAIL = '[Category Collection] Remove Many Category Fail';
 export const LOAD = '[Category Collection] Load';
 export const LOAD_SUCCESS = '[Category Collection] Load Success';
 export const LOAD_FAIL = '[Category Collection] Load Fail';
@@ -54,6 +57,28 @@ export class RemoveCategoryFailAction implements Action {
 }
 
 /**
+ * Remove Many from Collection Actions
+ */
+export class RemoveManyCategoriesAction implements Action {
+  readonly type = REMOVE_MANY_CATEGORIES;
+
+  constructor(public payload: string[]) {}
+}
+
+export class RemoveManyCategoriesSuccessAction implements Action {
+  readonly type = REMOVE_MANY_CATEGORIES_SUCCESS;
+
+  constructor(public payload: string[]) {}
+}
+
+export class RemoveManyCategoriesFailAction implements Action {
+  readonly type = REMOVE_MANY_CATEGORIES_FAIL;
+
+  constructor(public payload: string[]) {}
+}
+
+
+/**
  * Load Collection Actions
  */
 export class LoadAction implements Action {
@@ -79,6 +104,9 @@ export type Actions =
   | RemoveCategoryAction
   | RemoveCategorySuccessAction
   | RemoveCategoryFailAction
+  | RemoveManyCategoriesAction
+  | RemoveManyCategoriesSuccessAction
+  | RemoveManyCategoriesFailAction
   | LoadAction
   | LoadSuccessAction
   | LoadFailAction;

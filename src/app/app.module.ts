@@ -28,10 +28,6 @@ import { reducers, developmentReducerFactory } from './reducers';
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
 
 import {
-  ProductService,
-  CategoryService,
-  OrderService,
-  CustomerService,
   AttributeService,
   ToastService,
   ConfirmationService,
@@ -76,10 +72,6 @@ import {
     AppRoutingModule,
   ],
   providers: [
-    ProductService,
-    CategoryService,
-    OrderService,
-    CustomerService,
     AttributeService,
     ToastService,
     ConfirmationService,

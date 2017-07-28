@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { OrderService } from '../../services';
-import { Order } from '../../model/interface';
+import { OrderService } from '../../orders/order.service';
+import { Order } from '../../orders/models/order';
 
 @Component({
   selector: 'app-latest-orders',

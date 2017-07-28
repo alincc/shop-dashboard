@@ -49,6 +49,19 @@ export class CarrierService {
       .catch(this.handleError);
   }
 
+  removeMany(ids: string[]) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    const body = {
+      ids,
+    };
+
+    return this.http.post(`${this.url}/delete-many`, JSON.stringify(body), options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
     return Observable.throw(error.json() || 'Server error');
   }

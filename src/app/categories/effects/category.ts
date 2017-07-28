@@ -13,7 +13,7 @@ import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
 import * as categoryActions from '../actions/category';
-import { CategoryService } from '../../services/category.service';
+import { CategoryService } from '../category.service';
 
 @Injectable()
 export class CategoryEffects {

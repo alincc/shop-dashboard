@@ -1,7 +1,4 @@
 import {
-  Order,
-  OrderLine,
-  Customer,
   Product,
   User,
   ShippingStatus,
@@ -10,6 +7,8 @@ import {
   ShippingLine,
 } from '../app/model/interface';
 
+import { Order, OrderLine } from '../app/orders/models/order';
+import { Customer } from '../app/customers/models/customer';
 import { Carrier } from '../app/carriers/models/carrier';
 
 export const FAKE_PAYMENT1: Payment = {

@@ -1,0 +1,98 @@
+<app-title-pane heading="View customer" subtitle="Manage customers"></app-title-pane>
+
+<div class="customer-detail main">
+
+  <div class="message info" *ngIf="!customer">Customer not found</div>
+
+  <div *ngIf="customer">
+
+    <div class="row">
+
+      <div class="col-md-6 col-xs-12">
+
+        <app-customer-form [customer]="customer" (submitEmitter)="onSubmit($event)"></app-customer-form>
+
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+
+        <div class="panel bordered-title">
+
+          <h4 class="text-thin">
+            Add note
+          </h4>
+
+          <div class="content">
+
+            <div class="message info">This note will not be displayed to the customer</div>
+
+            <app-customer-note-form [customer]="customer" (noteEmitter)="onSubmitNote($event)"></app-customer-note-form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-6 col-xs-12">
+
+        <div class="panel bordered-title">
+
+          <h4 class="text-thin">
+            Orders
+          </h4>
+
+          <div class="content">
+
+            <div class="message info" *ngIf="!customer.orders.length">No orders have been made by this customer</div>
+
+            <table class="table" *ngIf="customer.orders.length">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Payment</th>
+                  <th>Status</th>
+                  <th>Products</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let order of customer.orders">
+                  <td>{{ order._id }}</td>
+                  <td>{{ order.createdAt | date:'short' }}</td>
+                  <td>{{ order.payment?.name || 'Unknown' }}</td>
+                  <td>
+
+                    <div [ngSwitch]="order.status">
+                      <span *ngSwitchCase="ShippingStatus.Pending">Pending</span>
+                      <span *ngSwitchCase="ShippingStatus.AwaitingShipment">Awaiting Shipment</span>
+                      <span *ngSwitchCase="ShippingStatus.Shipped">Shipped</span>
+                      <span *ngSwitchCase="ShippingStatus.Completed">Completed</span>
+                    </div>
+
+                  </td>
+                  <td>{{ order.items?.length }}</td>
+                  <td>${{ order.total }}</td>
+                  <td>
+                    <a [routerLink]="['/order', order._id]">
+                      <i class="fa fa-edit"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

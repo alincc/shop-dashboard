@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Customer } from '../../model/interface';
+import { Customer } from '../../customers/models/customer';
 
 @Component({
   selector: 'app-customer-note-form',

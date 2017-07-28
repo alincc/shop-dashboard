@@ -8,6 +8,7 @@ import { CategoryFormComponent } from './components/category-form/category-form.
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { CategorySelectedComponent } from './containers/category-selected.component';
+import { CategoryService } from './category.service';
 import { CollectionEffects } from './effects/collection';
 import { CategoryEffects } from './effects/category';
 import { reducers } from './reducers';
@@ -27,6 +28,9 @@ import { reducers } from './reducers';
     CategoryListComponent,
     CategoryDetailComponent,
     CategorySelectedComponent,
-  ]
+  ],
+  providers: [
+    CategoryService,
+  ],
 })
 export class CategoriesModule { }

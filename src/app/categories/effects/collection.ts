@@ -12,7 +12,8 @@ import { defer } from 'rxjs/observable/defer';
 import { of } from 'rxjs/observable/of';
 
 import * as collection from '../actions/collection';
-import { CategoryService } from '../../services/category.service';
+import { ToastService } from '../../services';
+import { CategoryService } from '../category.service';
 
 @Injectable()
 export class CollectionEffects {
@@ -43,6 +44,7 @@ export class CollectionEffects {
         .catch(() => of(new collection.AddCategorySuccessAction(category)));
     });
 
+
   @Effect()
   removeCategoryFromCollection$: Observable<Action> = this.actions$
     .ofType(collection.REMOVE_CATEGORY)
@@ -53,5 +55,33 @@ export class CollectionEffects {
         .catch(() => of(new collection.RemoveCategoryFailAction(category)));
     });
 
-  constructor(private actions$: Actions, private service: CategoryService) {}
+  @Effect({ dispatch: false })
+  removeCategorySuccess$ = this.actions$
+    .ofType(collection.REMOVE_CATEGORY_SUCCESS, collection.REMOVE_MANY_CATEGORIES_SUCCESS)
+    .do(() => {
+      this.toastService.success('Removed!', 'The category was removed from the catalog');
+    });
+
+  @Effect({ dispatch: false })
+  addCategorySuccess$ = this.actions$
+    .ofType(collection.ADD_CATEGORY_SUCCESS)
+    .do(() => {
+      this.toastService.success('Success!', 'The category was created');
+    });
+
+  @Effect()
+  removeManyCategoriesFromCollection$: Observable<Action> = this.actions$
+    .ofType(collection.REMOVE_MANY_CATEGORIES)
+    .map((action: collection.RemoveManyCategoriesAction) => action.payload)
+    .switchMap(ids => {
+      return this.service.removeMany(ids)
+        .map(() => new collection.RemoveManyCategoriesSuccessAction(ids))
+        .catch(() => of(new collection.RemoveManyCategoriesFailAction(ids)));
+    });
+
+  constructor(
+    private actions$: Actions,
+    private service: CategoryService,
+    private toastService: ToastService,
+  ) {}
 }
