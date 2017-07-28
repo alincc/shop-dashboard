@@ -11,6 +11,7 @@ import { OrderSelectedComponent } from './containers/order-selected.component';
 import { OrderListContainerComponent } from './components/order-list-container/order-list-container.component';
 import { ShippingInfoComponent } from './components/shipping-info/shipping-info.component';
 import { ShippingAddressComponent } from './components/shipping-address/shipping-address.component';
+import { ShippingStatusComponent } from './components/shipping-status.component';
 import { ProductAddComponent } from './components/product-add/product-add.component';
 import { MessagesModule } from '../messages/messages.module';
 import { OrderService } from './order.service';
@@ -35,8 +36,12 @@ import { reducers } from './reducers';
     OrderDetailComponent,
     OrderListContainerComponent,
     ShippingInfoComponent,
+    ShippingStatusComponent,
     ShippingAddressComponent,
     ProductAddComponent,
+  ],
+  exports: [
+    ShippingStatusComponent,
   ],
   providers: [
     OrderService,

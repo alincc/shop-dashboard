@@ -8,6 +8,7 @@
     <table class="table" *ngIf="orders">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Customer</th>
           <th>Products</th>
           <th>Total</th>
@@ -18,11 +19,19 @@
 
       <tbody>
         <tr *ngFor="let order of orders">
-          <td>{{ order.customer?.firstname }} {{ order.customer?.lastname }}</td>
+          <td><a [routerLink]="['/order', order._id]">{{ order._id }}</a></td>
+          <td>
+            <div *ngIf="order.customer">
+              <a [routerLink]="['/customer', order.customer._id]">{{ order.customer?.getFullname() }}</a>
+            </div>
+            <div *ngIf="!order.customer">
+              <em>Guest</em>
+            </div>
+          </td>
           <td>{{ order.getNumberOfProducts() }}</td>
           <td>{{ order.total | currency:'USD':true }}</td>
           <td>{{ order.createdAt | date:'short' }}</td>
-          <td><span class="label bg-primary">{{ order.getShippingStatus() }}</span></td>
+          <td><app-shipping-status [status]="order.status"></app-shipping-status></td>
         </tr>
       </tbody>
     </table>

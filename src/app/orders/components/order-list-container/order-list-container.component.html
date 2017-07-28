@@ -33,7 +33,9 @@
             </td>
             <td>{{ order._id }}</td>
             <td>{{ order.total | currency:'USD':true }}</td>
-            <td><span class="label bg-primary">{{ order.getShippingStatus() }}</span></td>
+            <td>
+              <app-shipping-status [status]="order.status"></app-shipping-status>
+            </td>
             <td>{{ order.createdAt | date:'short' }}</td>
             <td>
               <a [routerLink]="['/order', order._id]">
