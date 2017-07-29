@@ -142,11 +142,51 @@
         <div class="tab-pane" *ngIf="activeTab == 'image'">
           Images
 
-          <div class="field" [ngClass]="{'error': formErrors.image}">
-            <label for="image">Image</label>
-            <input formControlName="image" placeholder="Image">
+          <div formArrayName="images">
+            <div *ngFor="let image of formArrayImages.controls; let i=index" [formGroupName]="i">
+              <div class="row" *ngIf="image.value.saved">
+                <div class="col-xs-4 col-md-2">
+                  <img [src]="image.value.url" class="image-preview" alt="">
+                </div>
 
-            <div *ngIf="formErrors.image" class="errors">{{ formErrors.image }}</div>
+                <div class="col-xs-8 col-md-10">
+                  <span>{{ image.value.label || 'No label' }}</span>
+                  <div>
+                    <label>Default image: </label>
+                    <input type="checkbox" formControlName="main" (change)="onChangeDefaultImage(formArrayImages.controls[i].value)">
+                  </div>
+                  <div class="pull-right">
+                    <button type="button" class="btn btn-danger" (click)="removeImage(i)">Remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Add image</h3>
+
+            <div formArrayName="images">
+              <div *ngFor="let image of formArrayImages.controls; let i=index" [formGroupName]="i">
+                <div class="new-image m-b" *ngIf="!image.value.saved">
+                  <div class="row">
+                    <div class="col-xs-10">
+                      <div class="field">
+                        <input type="text" formControlName="url" placeholder="http://">
+                      </div>
+                      <div class="field">
+                        <input type="text" formControlName="label" placeholder="Label">
+                      </div>
+                    </div>
+                    <div class="col-xs-2">
+                      <button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeImage(i)">Remove</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-info" (click)="addImage()">Add another image</button>
           </div>
         </div>
 

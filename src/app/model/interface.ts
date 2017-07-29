@@ -1,6 +1,7 @@
 import { Message as CustomerMessage } from '../messages/message';
 import { Carrier } from '../carriers/models/carrier';
 import { Customer } from '../customers/models/customer';
+import { ProductImage } from '../products/models/product';
 
 export interface IOption {
   value: any;
@@ -263,7 +264,7 @@ interface IProduct {
   category_id?: String;
   name: String;
   description: String;
-  image: String;
+  images?: ProductImage[];
   quantity?: number;
   price: number;
   active: boolean;
@@ -279,7 +280,7 @@ class Product implements IProduct {
   category_id?: String;
   name: String;
   description: String;
-  image: String;
+  images?: ProductImage[];
   quantity?: number;
   price: number;
   active: boolean;
@@ -294,7 +295,7 @@ class Product implements IProduct {
     this.category_id = product.category_id;
     this.name = product.name;
     this.description = product.description;
-    this.image = product.image;
+    this.images = product.images;
     this.quantity = product.quantity;
     this.price = product.price;
     this.active = product.active;
@@ -337,6 +338,20 @@ class Product implements IProduct {
     }
 
     return this.price - ((this.price * this.getActiveDiscount().value) / 100);
+  }
+
+  /**
+   * Get the default image for the product
+   * @return {string} Image path as string
+   */
+  public get image(): string {
+    if (this.images.length <= 0) {
+      return null;
+    }
+
+    const defaultImage = this.images.find(image => image.main === true);
+
+    return defaultImage ? defaultImage.url : this.images[0].url;
   }
 
   /**

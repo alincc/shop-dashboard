@@ -30,7 +30,6 @@ export class ProductFormComponent implements OnInit {
     quantity: '',
     description: '',
     category: '',
-    image: '',
   };
 
   validationMessages = {
@@ -45,9 +44,6 @@ export class ProductFormComponent implements OnInit {
     },
     'description': {
       'required':      'Description is required',
-    },
-    'image': {
-      'required':      'Image is required',
     },
     'category': {
       'required':      'Category is required',
@@ -67,21 +63,14 @@ export class ProductFormComponent implements OnInit {
         categories => this.categories = categories,
         err => console.log(err),
       );
-    this.buildForm();
-  }
 
-  categoryOptions(): IOption[] {
-    return this.categories.map(category => ({ label: category.name, value: category }));
-  }
-
-  buildForm(): void {
     if (!this.product) {
       this.product = new Product({
         _id: '',
         name: '',
         category: null,
         description: '',
-        image: '',
+        images: [],
         quantity: 0,
         price: 0,
         active: true,
@@ -91,19 +80,35 @@ export class ProductFormComponent implements OnInit {
       });
     }
 
+    this.buildForm();
+  }
+
+  categoryOptions(): IOption[] {
+    return this.categories.map(category => ({ label: category.name, value: category }));
+  }
+
+  buildForm(product: Product = this.product): void {
     this.form = this.fb.group({
-      name: [this.product.name, Validators.required],
-      price: [this.product.price, Validators.required],
-      quantity: [this.product.quantity, Validators.required],
-      description: [this.product.description, Validators.required],
-      image: [this.product.image, Validators.required],
-      category: [this.product.category, Validators.required],
-      active: [this.product.active, Validators.required],
-      onSale: this.product.onSale,
+      name: [product.name, Validators.required],
+      price: [product.price, Validators.required],
+      quantity: [product.quantity, Validators.required],
+      description: [product.description, Validators.required],
+      images: this.fb.array(product.images.map(image =>
+        this.fb.group({
+          _id: image._id,
+          url: image.url,
+          label: image.label,
+          main: image.main,
+          saved: true,
+        })
+      )),
+      category: [product.category, Validators.required],
+      active: [product.active, Validators.required],
+      onSale: product.onSale,
       discount: this.fb.group({
-        value: this.product.discount ? this.product.discount.value : null,
-        startDate: this.product.discount ? [this.fullDate(new Date(this.product.discount.startDate))] : null,
-        endDate: this.product.discount ? this.product.discount && [this.fullDate(new Date(this.product.discount.endDate))] : null,
+        value: product.discount ? product.discount.value : null,
+        startDate: product.discount ? [this.fullDate(new Date(product.discount.startDate))] : null,
+        endDate: product.discount ? product.discount && [this.fullDate(new Date(product.discount.endDate))] : null,
       }),
       combinationsGroup: this.fb.group({
         combinations: this.fb.array(
@@ -116,6 +121,24 @@ export class ProductFormComponent implements OnInit {
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
+  }
+
+  get formArrayImages(): FormArray {
+    return this.form.get('images') as FormArray;
+  };
+
+  addImage(): void {
+    this.formArrayImages.push(this.fb.group({
+      _id: null,
+      url: '',
+      label: '',
+      main: false,
+      saved: false,
+    }));
+  }
+
+  removeImage(index: number): void {
+    this.formArrayImages.removeAt(index);
   }
 
   initCombinations() {
@@ -144,6 +167,16 @@ export class ProductFormComponent implements OnInit {
     return dateString;
   }
 
+  onChangeDefaultImage(selectedImage): void {
+    // Set default image to false on all images, except the one selected
+    this.form.patchValue({
+      images: this.form.controls['images'].value.map(image => ({
+        ...image,
+        main: (image == selectedImage) ? true : false,
+      }))
+    })
+  }
+
   onSubmit(): void {
     if (this.form.value.discount && !this.form.value.discount.value) {
       this.form.value.discount = null;
@@ -153,7 +186,13 @@ export class ProductFormComponent implements OnInit {
       return combination.attributes.length > 0;
     });
 
-    this.submitEmitter.emit(this.form.value);
+    const data = {
+      ...this.form.value,
+      images: this.form.value.images.filter(image => image.url.length),
+    }
+
+    this.submitEmitter.emit(data);
+    this.buildForm(data);
   }
 
   /**
