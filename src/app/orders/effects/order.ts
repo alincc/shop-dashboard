@@ -13,6 +13,8 @@ import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
 import * as orderActions from '../actions/order';
+import * as threadActions from '../../messages/actions/thread';
+import * as threadCollection from '../../messages/actions/collection';
 import { OrderService } from '../order.service';
 import { ToastService } from '../../services';
 
@@ -43,6 +45,27 @@ export class OrderEffects {
       return this.service.addProduct(payload.order._id, payload.line)
         .map((data) => new orderActions.AddProductSuccessAction(data.data))
         .catch(() => of(new orderActions.AddProductFailAction(payload)));
+    });
+
+  @Effect()
+  addThread$: Observable<Action> = this.actions$
+    .ofType(orderActions.ADD_NEW_THREAD)
+    .map((action: orderActions.AddNewThreadAction) => action.payload)
+    .switchMap((payload) => {
+      return this.service.addThread(payload.order._id)
+        .map((data) => new orderActions.AddNewThreadSuccessAction({ order: data.data, addMessage: { message: payload.addMessage.message, threadId: data.data.thread._id }}))
+        .catch(() => of(new orderActions.AddNewThreadFailAction(payload.order)));
+    });
+
+  @Effect()
+  addThreadSuccess$: Observable<Action> = this.actions$
+    .ofType(orderActions.ADD_NEW_THREAD_SUCCESS)
+    .map((action: orderActions.AddNewThreadSuccessAction) => action.payload)
+    .mergeMap((payload) => {
+      return [
+        new threadActions.AddMessageAction(payload.addMessage),
+        new threadCollection.AddThreadSuccessAction(payload.order.thread),
+      ];
     });
 
   @Effect({ dispatch: false })

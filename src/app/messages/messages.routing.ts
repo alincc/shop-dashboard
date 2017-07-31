@@ -2,12 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IndexComponent } from '../index/index.component';
-import { MessageListContainerComponent } from './message-list-container/message-list-container.component';
+import { MessageListContainerComponent } from './components/message-list-container/message-list-container.component';
+import { ThreadCollectionComponent } from './containers/thread-collection.component';
+import { ThreadViewComponent } from './containers/thread-view.component';
 import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   { path: '', canActivate: [AuthGuard], component: IndexComponent, children: [
-    { path: 'messages', component: MessageListContainerComponent },
+    { path: 'customer-service', component: ThreadCollectionComponent },
+    { path: 'thread/:id', component: ThreadViewComponent },
   ] },
 ];
 
@@ -17,4 +20,4 @@ const routes: Routes = [
 })
 export class MessagesRoutingModule { }
 
-export const routedComponents = [MessageListContainerComponent];
+export const routedComponents = [ThreadCollectionComponent, ThreadViewComponent];

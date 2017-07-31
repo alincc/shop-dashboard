@@ -8,13 +8,19 @@
 
     <div class="body">
 
+      <div class="message info" *ngIf="!orders.length">
+        <h3>No orders exists</h3>
+        <p>There have been no orders made yet</p>
+      </div>
+
       <app-multi-select
+        *ngIf="orders.length"
         [buttonDisable]="!selected.length"
         [options]="actionOptions"
         (submitEmitter)="doAction($event)">
       </app-multi-select>
 
-      <table class="table" *ngIf="orders">
+      <table class="table" *ngIf="orders.length">
         <thead>
           <tr>
             <th></th>
@@ -46,7 +52,7 @@
         </tbody>
       </table>
 
-      <pagination-controls (pageChange)="currentPage = $event" class="pagination"></pagination-controls>
+      <pagination-controls (pageChange)="currentPage = $event" class="pagination" *ngIf="orders.length"></pagination-controls>
 
     </div>
 

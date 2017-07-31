@@ -12,6 +12,7 @@ import {
 import * as fromSearch from './search';
 import * as fromOrders from './orders';
 import * as fromCollection from './collection';
+import * as fromThreads from '../../messages/reducers';
 
 export interface OrdersState {
   search: fromSearch.State;
@@ -111,3 +112,14 @@ export const isSelectedOrderInCollection = createSelector(
     return ids.indexOf(selected) > -1;
   }
 );
+
+export const getSelectedOrderThread = createSelector(
+  getSelectedOrder,
+  fromThreads.getThreadEntities,
+  (order, threadEntities) => {
+    if (!order || !threadEntities) return null;
+    if (order.thread == null) return null;
+
+    return threadEntities[order.thread._id]
+  }
+)

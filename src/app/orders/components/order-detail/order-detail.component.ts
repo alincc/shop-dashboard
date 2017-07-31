@@ -1,15 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 
 import { ErrorResponse, Message, ShippingStatus, ShippingLine, ShippingAddress } from '../../../model/interface';
 import { Order, OrderLine } from '../../models/order';
-
 import { Customer } from '../../../customers/models/customer';
-import { MessageService } from '../../../messages/message.service';
-import { Message as CustomerMessage } from '../../../messages/message';
-import { ToastService } from '../../../services';
-import { OrderService } from '../../order.service';
+import { Message as CustomerMessage, AddMessage, Thread } from '../../../messages/message';
 
 @Component({
   selector: 'app-order-detail',
@@ -18,17 +12,15 @@ import { OrderService } from '../../order.service';
 })
 export class OrderDetailComponent implements OnInit {
   @Input() order: Order;
+  @Input() thread: Thread;
   @Output() update: EventEmitter<Order> = new EventEmitter();
   @Output() addProduct: EventEmitter<any> = new EventEmitter();
   @Output() addCustomerNote: EventEmitter<any> = new EventEmitter();
+  @Output() addMessage: EventEmitter<{ addMessage: AddMessage, order: Order }> = new EventEmitter();
   private errorMsg: Message;
   isFinished: boolean = false;
 
   constructor(
-    private route: ActivatedRoute,
-    private orderService: OrderService,
-    private messageService: MessageService,
-    private toastService: ToastService,
   ) { }
 
   ngOnInit() {
@@ -39,14 +31,8 @@ export class OrderDetailComponent implements OnInit {
   }
 
   onSubmitMessage(message: CustomerMessage) {
-    this.messageService.create(message) // TODO: create action and reducer
-      .switchMap(res => this.orderService.addMessage(this.order._id, res.data))
-      .subscribe(
-        res => {
-          this.order = new Order(res.data);
-        },
-        err => console.log(err),
-      )
+    const threadId = this.order.thread ? this.order.thread._id : null;
+    this.addMessage.emit({ addMessage: { threadId, message }, order: this.order });
   }
 
   onUpdateProducts(items: OrderLine[]) {

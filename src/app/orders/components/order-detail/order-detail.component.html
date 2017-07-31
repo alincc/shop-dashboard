@@ -55,8 +55,8 @@
 
           <div class="content">
 
-            <div *ngIf="order.messages" class="m-b b-l m-l-md pos-rlt">
-              <app-message-item *ngFor="let message of order.messages" [message]="message"></app-message-item>
+            <div *ngIf="thread?.messages" class="m-b b-l m-l-md pos-rlt">
+              <app-message-item *ngFor="let message of thread.messages" [message]="message"></app-message-item>
             </div>
 
             <app-message-form (submitEmitter)="onSubmitMessage($event)"></app-message-form>

@@ -66,6 +66,18 @@ export function reducer(
       };
     }
 
+    case order.ADD_NEW_THREAD_SUCCESS: {
+      const order = action.payload.order;
+
+      return {
+        ids: state.ids,
+        entities: Object.assign({}, state.entities, {
+          [order._id]: new Order(order),
+        }),
+        selectedOrderId: state.selectedOrderId,
+      };
+    }
+
     case order.SAVE_SUCCESS: {
       const order = action.payload;
 

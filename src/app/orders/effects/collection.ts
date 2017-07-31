@@ -12,6 +12,7 @@ import { defer } from 'rxjs/observable/defer';
 import { of } from 'rxjs/observable/of';
 
 import * as collection from '../actions/collection';
+import * as threadCollection from '../../messages/actions/collection';
 import { ToastService } from '../../services';
 import { OrderService } from '../order.service';
 
@@ -33,17 +34,6 @@ export class CollectionEffects {
         })
         .catch(() => of(new collection.LoadSuccessAction([])));
     });
-
-  // @Effect()
-  // addOrderToCollection$: Observable<Action> = this.actions$
-  //   .ofType(collection.ADD_ORDER)
-  //   .map((action: collection.AddOrderAction) => action.payload)
-  //   .switchMap((order) => {
-  //     return this.service.create(order)
-  //       .map((newOrder) => new collection.AddOrderSuccessAction(newOrder.data))
-  //       .catch(() => of(new collection.AddOrderSuccessAction(order)));
-  //   });
-
 
   @Effect()
   removeOrderFromCollection$: Observable<Action> = this.actions$

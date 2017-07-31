@@ -3,42 +3,42 @@ import { Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from '../core/http.service';
-import { Message } from './message';
+import { Thread, Message, AddMessage } from './message';
 
 @Injectable()
-export class MessageService {
+export class ThreadService {
 
-  private url = 'message';
+  private url = 'thread';
 
   constructor(
     private http: HttpService,
   ) { }
 
-  create(message: Message): Observable<any> {
+  create(thread: Thread): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.url, JSON.stringify(message), options)
+    return this.http.post(this.url, JSON.stringify(thread), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
-  update(id: string, message: Message): Observable<any> {
+  update(id: string, thread: Thread): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });
 
-    return this.http.put(`${this.url}/${id}`, JSON.stringify(message), options)
+    return this.http.put(`${this.url}/${id}`, JSON.stringify(thread), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
-  get(id: string): Observable<Message> {
+  get(id: string): Observable<Thread> {
     return this.http.get(`${this.url}/${id}`)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
-  getAll(): Observable<Message[]> {
+  getAll(): Observable<Thread[]> {
     return this.http.get(this.url)
       .map(res => res.json())
       .catch(this.handleError);
@@ -59,6 +59,15 @@ export class MessageService {
     };
 
     return this.http.post(`${this.url}/delete-many`, JSON.stringify(body), options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
+  addMessage(addMessage: AddMessage) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.post(`${this.url}/add-message`, JSON.stringify(addMessage), options)
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }

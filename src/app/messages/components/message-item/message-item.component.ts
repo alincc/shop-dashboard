@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Message } from '../message';
+import { Message } from '../../message';
 
 @Component({
   selector: 'app-message-item',

@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Message } from '../message';
-import * as fromAuth from '../../auth/reducers';
+import { Message } from '../../message';
+import * as fromAuth from '../../../auth/reducers';
 
 @Component({
   selector: 'app-message-form',
@@ -24,6 +24,7 @@ export class MessageFormComponent implements OnInit, OnDestroy {
       .subscribe(
         user => {
           this.message = {
+            _id: null,
             body: '',
             user: user,
           }

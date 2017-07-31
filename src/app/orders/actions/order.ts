@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { Order, OrderLine, AddProduct } from '../models/order';
+import { AddMessage } from '../../messages/message';
 
 export const SEARCH = '[Order] Search';
 export const SEARCH_COMPLETE = '[Order] Search Complete';
@@ -12,6 +13,9 @@ export const SAVE_FAIL = '[Order] Save Failure';
 export const ADD_PRODUCT = '[Order] Add Product';
 export const ADD_PRODUCT_SUCCESS = '[Order] Add Product Success';
 export const ADD_PRODUCT_FAIL = '[Order] Add Product Fail';
+export const ADD_NEW_THREAD = '[Order] Add New Thread';
+export const ADD_NEW_THREAD_SUCCESS = '[Order] Add New Thread Success';
+export const ADD_NEW_THREAD_FAIL = '[Order] Add New Thread Fail';
 
 export class SearchAction implements Action {
   readonly type = SEARCH;
@@ -73,6 +77,24 @@ export class AddProductFailAction implements Action {
   constructor(payload: any) {}
 }
 
+export class AddNewThreadAction implements Action {
+  readonly type = ADD_NEW_THREAD;
+
+  constructor(public payload: { order: Order, addMessage: AddMessage }) {}
+}
+
+export class AddNewThreadSuccessAction implements Action {
+  readonly type = ADD_NEW_THREAD_SUCCESS;
+
+  constructor(public payload: { order: Order, addMessage: AddMessage }) {}
+}
+
+export class AddNewThreadFailAction implements Action {
+  readonly type = ADD_NEW_THREAD_FAIL;
+
+  constructor(payload: any) {}
+}
+
 /**
  * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
@@ -87,4 +109,7 @@ export type Actions =
   | AddProductSuccessAction
   | AddProductFailAction
   | LoadAction
-  | SelectAction;
+  | SelectAction
+  | AddNewThreadAction
+  | AddNewThreadSuccessAction
+  | AddNewThreadFailAction;

@@ -1,6 +1,6 @@
 import { ShippingStatus, ShippingStatusEntry, ShippingAddress, Payment, ShippingLine, Product, Attribute, Combination } from '../../model/interface';
 import { Customer } from '../../customers/models/customer';
-import { Message as CustomerMessage } from '../../messages/message';
+import { Message as CustomerMessage, Thread } from '../../messages/message';
 
 export interface IOrder {
   _id: string;
@@ -15,7 +15,8 @@ export interface IOrder {
   shipping?: ShippingLine;
   shippingAddress?: ShippingAddress;
   payment?: Payment;
-  messages: CustomerMessage[];
+  messages: CustomerMessage[]; // TODO: deprecate
+  thread?: Thread;
 }
 
 export class Order implements IOrder {
@@ -31,6 +32,7 @@ export class Order implements IOrder {
   shippingAddress?: ShippingAddress;
   payment?: Payment;
   messages: CustomerMessage[];
+  thread?: Thread;
 
   constructor(order: IOrder) {
     this._id = order._id;
@@ -45,6 +47,7 @@ export class Order implements IOrder {
     this.payment = order.payment ? order.payment : null;
     this.shippingAddress = order.shippingAddress ? new ShippingAddress(order.shippingAddress) : null;
     this.messages = order.messages.map(message => new CustomerMessage(message));
+    this.thread = order.thread ? new Thread(order.thread) : null;
   }
 
   public calculateSubTotal(): number {

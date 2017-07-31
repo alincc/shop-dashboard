@@ -62,6 +62,15 @@ export class OrderService {
       .catch(this.handleError);
   }
 
+  addThread(id: string) {
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    const options = new RequestOptions({ headers: headers });
+
+    return this.http.put(`${this.url}/${id}/add-thread`, JSON.stringify({}), options)
+      .map((res: Response) => res.json())
+      .catch(this.handleError);
+  }
+
   addMessage(id: string, message: Message) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers });

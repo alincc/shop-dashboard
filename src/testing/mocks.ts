@@ -10,6 +10,7 @@ import {
 import { Order, OrderLine } from '../app/orders/models/order';
 import { Customer } from '../app/customers/models/customer';
 import { Carrier } from '../app/carriers/models/carrier';
+import { Thread } from '../app/messages/message';
 
 export const FAKE_PAYMENT1: Payment = {
   _id: "1",
@@ -138,6 +139,11 @@ export const MOCK_SHIPPING1: Carrier = {
 }
 export const FAKE_SHIPPING_LINE1 = new ShippingLine(MOCK_SHIPPING1, "111", 1, 1);
 
+export const MOCK_THREAD = new Thread({
+  _id: "id",
+  messages: [],
+  status: 0,
+});
 
 export const MOCK_ORDER1 = new Order({
     _id: "100",
@@ -150,6 +156,7 @@ export const MOCK_ORDER1 = new Order({
     customer: MOCK_CUSTOMER1,
     shipping: FAKE_SHIPPING_LINE1,
     messages: [],
+    thread: MOCK_THREAD,
 });
 
 export const MOCK_SHIPPINGS: Carrier[] = [MOCK_SHIPPING1];

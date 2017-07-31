@@ -57,6 +57,7 @@ a {
 
 .bg-info {
   background: #23b7e5;
+  color: #fff;
 
   .text-muted {
     color: #b0e1f1 !important;
@@ -70,6 +71,26 @@ a {
   .text-muted {
     color: #e6e6e6 !important;
   }
+}
+
+.bg-success {
+  color: #fff;
+  background-color: #27c24c;
+}
+
+.bg-dark {
+  color: #a6a8b1;
+  background-color: #3a3f51;
+}
+
+.bg-warning {
+  color: #fffefa;
+  background-color: #fad733;
+}
+
+.bg-light {
+  background-color: #e4eaec;
+  color: #58666e;
 }
 
 .cursor {
