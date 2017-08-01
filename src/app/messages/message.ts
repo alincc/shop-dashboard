@@ -1,4 +1,5 @@
 import { User } from '../model/interface';
+import { Order } from '../orders/models/order';
 
 export interface IMessage {
   _id: string;
@@ -30,10 +31,17 @@ export enum ThreadStatus {
   CLOSED = 2,
 };
 
+export interface ThreadCustomer {
+  name: string;
+  email: string;
+}
+
 export interface IThread {
   _id: string;
   messages: Message[];
+  order?: string;
   status: ThreadStatus;
+  customer: ThreadCustomer;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -41,14 +49,18 @@ export interface IThread {
 export class Thread implements IThread {
   _id: string;
   messages: Message[];
+  order?: string;
   status: ThreadStatus;
+  customer: ThreadCustomer;
   createdAt?: string;
   updatedAt?: string;
 
   constructor(thread: IThread) {
     this._id = thread._id;
     this.messages = thread.messages.map(message => new Message(message));
+    this.order = thread.order ? thread.order : null;
     this.status = thread.status;
+    this.customer = thread.customer;
     this.createdAt = thread.createdAt;
     this.updatedAt = thread.updatedAt;
   }

@@ -43,6 +43,7 @@ export class ProductAddComponent implements OnInit {
   }
 
   handleTermChanges(): void {
+    // TODO: should use search action in store
     this.term.valueChanges
       .debounceTime(400)
       .distinctUntilChanged()

@@ -13,6 +13,7 @@ import * as fromSearch from './search';
 import * as fromOrders from './orders';
 import * as fromCollection from './collection';
 import * as fromThreads from '../../messages/reducers';
+import * as fromRoot from '../../reducers';
 
 export interface OrdersState {
   search: fromSearch.State;
@@ -20,7 +21,7 @@ export interface OrdersState {
   collection: fromCollection.State;
 }
 
-export interface State extends fromOrders.State {
+export interface State extends fromRoot.State {
   'orders': OrdersState;
 }
 

@@ -31,7 +31,9 @@ import { Thread } from '../message';
 
             <tbody>
               <tr *ngFor="let thread of threads | paginate: { itemsPerPage: 10, currentPage: currentPage }">
-                <td>[customer]</td>
+                <td>
+                  <span *ngIf="thread.customer.name">{{ thread.customer.name }}</span>
+                </td>
                 <td>
                   <app-thread-status [status]="thread.status"></app-thread-status>
                 </td>

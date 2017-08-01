@@ -13,12 +13,14 @@ import { MultiSelectComponent } from './multi-select/multi-select.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule, NgxPaginationModule, ReactiveFormsModule, JasperoConfirmationsModule],
   exports: [
     OrderByPipe,
     FilterPipe,
+    TimeAgoPipe,
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
@@ -35,6 +37,7 @@ import { FilterPipe } from './pipes/filter.pipe';
   declarations: [
     OrderByPipe,
     FilterPipe,
+    TimeAgoPipe,
     TitlePaneComponent,
     CustomerNoteFormComponent,
     MessageComponent,

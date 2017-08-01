@@ -12,6 +12,7 @@ import {
 import * as fromSearch from './search';
 import * as fromCarriers from './carriers';
 import * as fromCollection from './collection';
+import * as fromRoot from '../../reducers';
 
 export interface CarriersState {
   search: fromSearch.State;
@@ -19,7 +20,7 @@ export interface CarriersState {
   collection: fromCollection.State;
 }
 
-export interface State extends fromCarriers.State {
+export interface State extends fromRoot.State {
   'carriers': CarriersState;
 }
 

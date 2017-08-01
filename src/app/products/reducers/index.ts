@@ -12,6 +12,7 @@ import {
 import * as fromSearch from './search';
 import * as fromProducts from './products';
 import * as fromCollection from './collection';
+import * as fromRoot from '../../reducers';
 
 export interface ProductsState {
   search: fromSearch.State;
@@ -19,7 +20,7 @@ export interface ProductsState {
   collection: fromCollection.State;
 }
 
-export interface State extends fromProducts.State {
+export interface State extends fromRoot.State {
   'products': ProductsState;
 }
 

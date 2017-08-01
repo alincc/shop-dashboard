@@ -22,6 +22,7 @@ export class LatestOrdersComponent implements OnInit {
   }
 
   loadOrders(): void {
+    // TODO: should use state
     this.orderService.getOrders({ limit: this.nrOfOrders, sort: this.sort })
       .subscribe(
         orders => this.orders = orders.map(order => new Order(order)),

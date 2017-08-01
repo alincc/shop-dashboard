@@ -68,7 +68,7 @@ export function reducer(
 
     case thread.SAVE_SUCCESS: {
       const thread = action.payload;
-  
+
       return {
         ids: state.ids,
         entities: Object.assign({}, state.entities, {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromOrders from '../reducers';
 import * as collectionActions from '../actions/collection';
+import * as orderActions from '../actions/order';
 import { Order } from '../models/order';
 
 @Component({
