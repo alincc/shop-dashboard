@@ -3213,6 +3213,10 @@ ngx-pagination@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ngx-pagination/-/ngx-pagination-3.0.1.tgz#5a8000e40c0424d9c41c9d6d592562e1547abf24"
 
+ngx-uploader@^3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/ngx-uploader/-/ngx-uploader-3.3.4.tgz#7f78813396a612709708814035758aed75eb32e3"
+
 no-case@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.1.tgz#7aeba1c73a52184265554b7dc03baf720df80081"

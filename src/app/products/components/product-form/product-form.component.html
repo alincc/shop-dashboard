@@ -144,7 +144,7 @@
 
           <div formArrayName="images">
             <div *ngFor="let image of formArrayImages.controls; let i=index" [formGroupName]="i">
-              <div class="row" *ngIf="image.value.saved">
+              <div class="row">
                 <div class="col-xs-4 col-md-2">
                   <img [src]="image.value.url" class="image-preview" alt="">
                 </div>
@@ -163,31 +163,8 @@
             </div>
           </div>
 
-          <div>
-            <h3>Add image</h3>
+          <app-image-upload (uploadComplete)="onImageAdd($event)"></app-image-upload>
 
-            <div formArrayName="images">
-              <div *ngFor="let image of formArrayImages.controls; let i=index" [formGroupName]="i">
-                <div class="new-image m-b" *ngIf="!image.value.saved">
-                  <div class="row">
-                    <div class="col-xs-10">
-                      <div class="field">
-                        <input type="text" formControlName="url" placeholder="http://">
-                      </div>
-                      <div class="field">
-                        <input type="text" formControlName="label" placeholder="Label">
-                      </div>
-                    </div>
-                    <div class="col-xs-2">
-                      <button type="button" class="btn btn-danger btn-xs pull-right" (click)="removeImage(i)">Remove</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button type="button" class="btn btn-info" (click)="addImage()">Add another image</button>
-          </div>
         </div>
 
       </div>

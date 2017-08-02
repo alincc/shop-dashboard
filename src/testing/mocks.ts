@@ -143,6 +143,10 @@ export const MOCK_THREAD = new Thread({
   _id: "id",
   messages: [],
   status: 0,
+  customer: {
+    name: 'Name',
+    email: 'Email',
+  },
 });
 
 export const MOCK_ORDER1 = new Order({

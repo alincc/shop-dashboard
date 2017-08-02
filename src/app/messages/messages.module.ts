@@ -5,7 +5,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from '../shared/shared.module';
 import { CustomersModule } from '../customers/customers.module';
 import { MessagesRoutingModule, routedComponents } from './messages.routing';
-import { MessageListContainerComponent } from './components/message-list-container/message-list-container.component';
 import { ThreadListComponent } from './components/thread-list.component';
 import { ThreadDetailComponent } from './components/thread-detail.component';
 import { ThreadStatusComponent } from './components/thread-status.component';
@@ -31,7 +30,6 @@ import { reducers } from './reducers';
   ],
   declarations: [
     routedComponents,
-    MessageListContainerComponent,
     MessageItemComponent,
     MessageFormComponent,
     ThreadListComponent,

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, Valid
 import { AttributeService } from '../../../services';
 import { CategoryService } from '../../../categories/category.service';
 import { Product, Category, Attribute, Combination, IOption } from '../../../model/interface';
+import { ProductImage } from '../../models/product';
 
 @Component({
   selector: 'app-product-form',
@@ -127,16 +128,6 @@ export class ProductFormComponent implements OnInit {
     return this.form.get('images') as FormArray;
   };
 
-  addImage(): void {
-    this.formArrayImages.push(this.fb.group({
-      _id: null,
-      url: '',
-      label: '',
-      main: false,
-      saved: false,
-    }));
-  }
-
   removeImage(index: number): void {
     this.formArrayImages.removeAt(index);
   }
@@ -239,6 +230,20 @@ export class ProductFormComponent implements OnInit {
 
   setTab(tab: string) {
     this.activeTab = tab;
+  }
+
+  onImageAdd(data: any): void {
+    const image: ProductImage = {
+      _id: null,
+      url: data.path,
+      label: '',
+      main: false,
+    }
+
+    this.formArrayImages.push(this.fb.group({
+      ...image,
+      saved: false,
+    }));
   }
 
 }

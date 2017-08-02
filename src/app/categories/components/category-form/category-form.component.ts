@@ -108,4 +108,10 @@ export class CategoryFormComponent implements OnInit {
     }
   }
 
+  onImageAdd(event: any): void {
+    this.form.patchValue({
+      image: event.path,
+    });
+  }
+
 }

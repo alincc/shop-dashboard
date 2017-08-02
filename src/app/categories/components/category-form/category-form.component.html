@@ -49,6 +49,9 @@
         </div>
 
         <div class="field" [ngClass]="{'error': formErrors.image}">
+
+          <app-image-upload (uploadComplete)="onImageAdd($event)"></app-image-upload>
+
           <label for="image">Image</label>
           <input formControlName="image" placeholder="Image">
 
