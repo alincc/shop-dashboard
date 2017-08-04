@@ -15,6 +15,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { ImageUploadComponent } from './image-upload.component';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     OrderByPipe,
     FilterPipe,
     TimeAgoPipe,
+    CapitalizePipe,
     ReactiveFormsModule,
     ImageUploadComponent,
     NgUploaderModule,
@@ -39,6 +41,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     RouterModule,
   ],
   declarations: [
+    CapitalizePipe,
     OrderByPipe,
     ImageUploadComponent,
     FilterPipe,

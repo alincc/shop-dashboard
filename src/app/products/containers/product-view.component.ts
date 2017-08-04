@@ -14,17 +14,16 @@ import * as productActions from '../actions/product';
   styles: [],
 })
 export class ProductViewComponent implements OnDestroy {
-
   actionsSubscription: Subscription;
 
-   constructor(store: Store<fromProducts.State>, route: ActivatedRoute) {
-     this.actionsSubscription = route.params
-       .map(params => new productActions.SelectAction(params.id))
-       .subscribe(store);
-   }
+  constructor(store: Store<fromProducts.State>, route: ActivatedRoute) {
+    this.actionsSubscription = route.params
+      .map(params => new productActions.SelectAction(params.id))
+      .subscribe(store);
+  }
 
-   ngOnDestroy() {
-     this.actionsSubscription.unsubscribe();
-   }
+  ngOnDestroy() {
+    this.actionsSubscription.unsubscribe();
+  }
 
 }

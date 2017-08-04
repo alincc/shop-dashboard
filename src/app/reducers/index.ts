@@ -47,10 +47,13 @@ export const getShowSidenav = createSelector(
   fromLayout.getShowSidenav
 );
 
+export const getActiveMenu = createSelector(
+  getLayoutState,
+  fromLayout.getActiveMenu,
+);
 
 export const getOrdersState = createFeatureSelector<fromOrders.State>('orders');
 export const getThreadsState = createFeatureSelector<fromThreads.State>('threads');
-
 
 export const getSelectedThreadOrder = createSelector(
   fromOrders.getOrderEntities,

@@ -17,6 +17,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { OrdersModule } from './orders/orders.module';
 import { MessagesModule } from './messages/messages.module';
 import { CarriersModule } from './carriers/carriers.module';
+import { SettingsModule } from './settings/settings.module';
 import { IndexModule } from './index/index.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -56,6 +57,7 @@ import {
     CategoriesModule,
     MessagesModule,
     CarriersModule,
+    SettingsModule,
     SimpleNotificationsModule.forRoot(),
 
     StoreModule.forRoot(reducers, {

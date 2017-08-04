@@ -16,12 +16,14 @@ import * as authActions from '../auth/actions/auth';
 })
 export class IndexComponent implements OnInit {
   showSidenav$: Observable<boolean>;
+  activeMenu$: Observable<string | boolean>;
   loggedIn$: Observable<boolean>;
   user$: Observable<User>;
   userSubscription: Subscription;
 
   constructor(private store: Store<fromRoot.State>) {
     this.showSidenav$ = this.store.select(fromRoot.getShowSidenav);
+    this.activeMenu$ = this.store.select(fromRoot.getActiveMenu);
     this.loggedIn$ = this.store.select(fromAuth.getLoggedIn);
     this.user$ = this.store.select(fromAuth.getUser);
   }
@@ -36,6 +38,10 @@ export class IndexComponent implements OnInit {
     else {
       this.store.dispatch(new layout.CloseSidenavAction());
     }
+  }
+
+  onSelectMenu(menu: string): void {
+    this.store.dispatch(new layout.SelectActiveMenuAction(menu));
   }
 
   logout(): void {

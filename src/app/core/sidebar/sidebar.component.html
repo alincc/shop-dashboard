@@ -47,15 +47,27 @@
     <li>
       <a routerLink="/customer-service">
         <i class="fa fa-bullhorn text-green"></i>
-        <span>Customer Service</span>
+        <span>Support</span>
       </a>
     </li>
 
-    <li>
-      <a routerLink="/settings">
+    <li [class.active]="activeMenu === 'settings'">
+      <a (click)="setActive('settings')">
+        <span class="pull-right">
+          <i class="fa fa-fw fa-angle-right" *ngIf="active !== 'settings'"></i>
+          <i class="fa fa-fw fa-angle-down" *ngIf="active === 'settings'"></i>
+        </span>
         <i class="fa fa-cogs text-blue"></i>
         <span>Settings</span>
       </a>
+      <ul class="nav-sub">
+        <li>
+          <a [routerLink]="'/settings'">General</a>
+        </li>
+        <li>
+          <a [routerLink]="'/settings/products'">Products</a>
+        </li>
+      </ul>
     </li>
 
   </ul>

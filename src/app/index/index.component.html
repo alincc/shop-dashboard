@@ -2,7 +2,7 @@
 
   <div class="sidebar" *ngIf="showSidenav$ | async">
 
-    <app-sidebar></app-sidebar>
+    <app-sidebar (selectMenu)="onSelectMenu($event)" [activeMenu]="activeMenu$ | async"></app-sidebar>
 
   </div>
 

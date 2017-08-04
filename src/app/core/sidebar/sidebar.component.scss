@@ -54,6 +54,28 @@
   }
 }
 
+.nav-sub {
+  background: #101920;
+  display: none;
+
+  li {
+    a {
+      padding-left: 40px !important;
+      line-height: 20px !important;
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .sidebar {
   background: $sidebarBgColor;
 
@@ -76,9 +98,12 @@
       a {
         display: block;
         padding: 10px 40px;
+        padding-right: 10px;
         color: #869fb1;
         font-weight: 400;
-        font-size: 1em;
+        font-size: 0.9em;
+        line-height: 40px;
+        cursor: pointer;
         transition: background-color .2s ease-in-out 0s;
 
         &:hover {
@@ -86,7 +111,7 @@
         }
 
         i {
-          line-height: 40px;
+          // line-height: 40px;
           width: 40px;
 
           &.text-purple {
@@ -105,6 +130,15 @@
 
       &.padding {
         padding: 0 20px;
+      }
+
+      &.active {
+        background: #121C23;
+
+        .nav-sub {
+          display: block !important;
+          animation: fade 0.5s;
+        }
       }
     }
   }
