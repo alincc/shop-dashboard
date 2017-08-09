@@ -20,11 +20,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.store.select(fromAuth.getLoggedIn).take(1).map(authed => {
         if (!authed) {
-          if (localStorage.getItem('token')) {
-            this.store.dispatch(new authActions.GetUser({ user: true, redirect: false }));
-            return true;
-          }
-
           this.store.dispatch(new authActions.LoginRedirect());
           return false;
         }

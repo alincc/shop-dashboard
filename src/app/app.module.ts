@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 
 import { AppComponent } from './app.component';
@@ -21,9 +24,6 @@ import { SettingsModule } from './settings/settings.module';
 import { IndexModule } from './index/index.module';
 import { AuthModule } from './auth/auth.module';
 
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, developmentReducerFactory } from './reducers';
 
 import { RouterLinkStubDirective, RouterOutletStubComponent } from '../testing/router-stubs';
