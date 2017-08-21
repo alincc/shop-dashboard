@@ -65,6 +65,16 @@ export class AuthEffects {
       this.router.navigate(['/login']);
     });
 
+  @Effect()
+  check$ = this.actions$
+    .ofType(Auth.CHECK)
+    .map(() => {
+      if (localStorage.getItem('token')) {
+        return new Auth.GetUser({ user: true, redirect: false });
+      }
+      return new Auth.GuestLoginAction();
+    });
+
   constructor(
     private actions$: Actions,
     private authService: AuthService,

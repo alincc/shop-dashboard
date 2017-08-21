@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { LoaderService } from './core/loader/loader.service';
 import { LoaderState } from './core/loader/loader';
+import * as authActions from './auth/actions/auth';
+import * as fromAuth from './auth/reducers';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +24,12 @@ export class AppComponent implements OnInit {
       animate: 'fromRight',
   }
 
-  constructor(private loaderService: LoaderService) { }
+  constructor(
+    private loaderService: LoaderService,
+    private store: Store<fromAuth.State>,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.dispatch(new authActions.CheckAuthAction());
+  }
 }

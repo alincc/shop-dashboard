@@ -18,13 +18,27 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      return this.store.select(fromAuth.getLoggedIn).take(1).map(authed => {
-        if (!authed) {
-          this.store.dispatch(new authActions.LoginRedirect());
-          return false;
-        }
-
-        return true;
-      });
+      return true;
+      // const checked$ = this.store.select(fromAuth.getChecked);
+      // const loggedIn$ = this.store.select(fromAuth.getLoggedIn);
+      // return Observable.combineLatest(checked$, loggedIn$, (checked, loggedIn) => {
+      //   if (!checked) return false;
+      //
+      //   if (!loggedIn) {
+      //     return false;
+      //   }
+      //   return true;
+      //
+      // })
+      // return true;
+      // return this.store.select(fromAuth.selectAuthStatusState).take(1).map(authed => {
+      //   console.log('atu', authed)
+      //   // if (!authed.status.loggedIn && authed.status.checked) {
+      //   //   this.store.dispatch(new authActions.LoginRedirect());
+      //   //   return false;
+      //   // }
+      //
+      //   return true;
+      // });
   }
 }

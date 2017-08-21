@@ -1,3 +1,7 @@
+<div class="message negative" *ngIf="!(loggedIn$ | async) && (authChecked | async)">
+  Not signed in
+</div>
+
 <div class="app" [ngClass]="{'no-sidebar': !(showSidenav$ | async)}" *ngIf="loggedIn$ | async">
 
   <div class="sidebar" *ngIf="showSidenav$ | async">

@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
 import { Product, ErrorResponse, Message, ResolveEmit } from '../../../model/interface';
-import { ProductRemove } from '../../models/product';
+import { OptionType, ProductRemove } from '../../models/product';
 import { ProductService } from '../../product.service';
 import { ToastService, ConfirmationService } from '../../../services';
 
@@ -15,6 +15,7 @@ import { ToastService, ConfirmationService } from '../../../services';
 })
 export class ProductDetailComponent implements OnInit {
   @Input() product: Product;
+  @Input() optionTypes: OptionType[];
   @Output() update: EventEmitter<Product> = new EventEmitter();
   @Output() remove: EventEmitter<ProductRemove> = new EventEmitter();
   @Output() restore: EventEmitter<Product> = new EventEmitter();

@@ -8,7 +8,9 @@
 </app-title-pane>
 
 <div class="product-detail main">
-  <app-product-form [product]="product"
+  <app-product-form
+    [product]="product"
+    [optionTypes]="optionTypes"
     *ngIf="product"
     (removeEmitter)="onRemove($event)"
     (submitEmitter)="onSubmit($event)"

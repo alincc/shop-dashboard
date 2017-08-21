@@ -18,6 +18,7 @@ export class IndexComponent implements OnInit {
   showSidenav$: Observable<boolean>;
   activeMenu$: Observable<string | boolean>;
   loggedIn$: Observable<boolean>;
+  authChecked$: Observable<boolean>;
   user$: Observable<User>;
   userSubscription: Subscription;
 
@@ -25,6 +26,7 @@ export class IndexComponent implements OnInit {
     this.showSidenav$ = this.store.select(fromRoot.getShowSidenav);
     this.activeMenu$ = this.store.select(fromRoot.getActiveMenu);
     this.loggedIn$ = this.store.select(fromAuth.getLoggedIn);
+    this.authChecked$ = this.store.select(fromAuth.getChecked);
     this.user$ = this.store.select(fromAuth.getUser);
   }
 

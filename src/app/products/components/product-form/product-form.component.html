@@ -14,13 +14,13 @@
 
         <span class="tab" [ngClass]="{'active': activeTab == 'category'}" (click)="setTab('category')">Category</span>
 
-        <span class="tab" [ngClass]="{'active': activeTab == 'attributes'}" (click)="setTab('attributes')">Attributes</span>
-
         <span class="tab" [ngClass]="{'active': activeTab == 'quantities'}" (click)="setTab('quantities')">Quantities</span>
 
         <span class="tab" [ngClass]="{'active': activeTab == 'pricing'}" (click)="setTab('pricing')">Pricing</span>
 
         <span class="tab" [ngClass]="{'active': activeTab == 'image'}" (click)="setTab('image')">Images</span>
+
+        <span class="tab" [ngClass]="{'active': activeTab == 'variants'}" (click)="setTab('variants')">Variants</span>
 
       </div>
 
@@ -65,24 +65,10 @@
               [options]="categoryOptions()"
               formControlName="category"
               label="Select a category"
-              *ngIf="categories"
-            >
+              *ngIf="categories">
             </app-select>
 
             <div *ngIf="formErrors.category" class="errors">{{ formErrors.category }}</div>
-          </div>
-        </div>
-
-        <div class="tab-pane" *ngIf="activeTab == 'attributes'">
-          <div class="field">
-            <label for="attributes">Attributes</label>
-
-            <app-attribute-editor
-              [product]="product"
-              [combinationForm]="form.controls.combinationsGroup"
-              [attributes]="attributes">
-            </app-attribute-editor>
-
           </div>
         </div>
 
@@ -127,16 +113,13 @@
 
         <div class="tab-pane" *ngIf="activeTab == 'quantities'">
 
-          <div *ngIf="hasCombinations()" class="message info">
-            This product has combinations, specify the quantity under the "Attribute" tab.
-          </div>
-
-          <div class="field" [ngClass]="{'error': formErrors.quantity}" *ngIf="!hasCombinations()">
+          <div class="field" [ngClass]="{'error': formErrors.quantity}">
             <label for="quantity">Quantity</label>
             <input formControlName="quantity" placeholder="Quantity">
 
             <div *ngIf="formErrors.quantity" class="errors">{{ formErrors.quantity }}</div>
           </div>
+
         </div>
 
         <div class="tab-pane" *ngIf="activeTab == 'image'">
@@ -164,6 +147,15 @@
           </div>
 
           <app-image-upload (uploadComplete)="onImageAdd($event)"></app-image-upload>
+
+        </div>
+
+        <div class="tab-pane" *ngIf="activeTab == 'variants'">
+
+          <app-variant-form
+            [form]="form"
+            [optionTypes]="optionTypes">
+          </app-variant-form>
 
         </div>
 

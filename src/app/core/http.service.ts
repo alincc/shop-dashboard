@@ -31,7 +31,7 @@ export class HttpService extends Http {
     this.showLoader();
 
     return super.get(this.getFullUrl(url), this.requestOptions(options))
-      .delay(Math.floor(Math.random() * 900) + 300) // TODO: remove line
+      // .delay(Math.floor(Math.random() * 900) + 300) // TODO: remove line
       .catch(this.onCatch)
       .do((res: Response) => {
         this.onSuccess(res);
@@ -47,7 +47,7 @@ export class HttpService extends Http {
     this.showLoader();
 
     return super.post(this.getFullUrl(url), body, options)
-      .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
+      // .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
       .catch(this.onCatch)
       .do((res: Response) => {
         this.onSuccess(res);
@@ -63,7 +63,7 @@ export class HttpService extends Http {
     this.showLoader();
 
     return super.put(this.getFullUrl(url), body, options)
-      .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
+      // .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
       .catch(this.onCatch)
       .do((res: Response) => {
         this.onSuccess(res);
@@ -79,7 +79,7 @@ export class HttpService extends Http {
     this.showLoader();
 
     return super.delete(this.getFullUrl(url), options)
-      .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
+      // .delay(Math.floor(Math.random() * 1500) + 500) // TODO: remove line
       .catch(this.onCatch)
       .do((res: Response) => {
         this.onSuccess(res);

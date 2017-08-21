@@ -8,6 +8,8 @@ export const LOGIN_SUCCESS = '[Auth] Login Success';
 export const LOGIN_FAILURE = '[Auth] Login Failure';
 export const LOGIN_REDIRECT = '[Auth] Login Redirect';
 export const LOGIN_GET_USER = '[Auth] Get User';
+export const CHECK = '[Auth] Check';
+export const GUEST_LOGIN = '[Auth] Guest Login';
 
 export class Login implements Action {
   readonly type = LOGIN;
@@ -41,10 +43,20 @@ export class Logout implements Action {
   readonly type = LOGOUT;
 }
 
+export class CheckAuthAction implements Action {
+  readonly type = CHECK;
+}
+
+export class GuestLoginAction implements Action {
+  readonly type = GUEST_LOGIN;
+}
+
 export type Actions =
   | Login
   | LoginSuccess
   | LoginFailure
   | LoginRedirect
   | Logout
-  | GetUser;
+  | GetUser
+  | CheckAuthAction
+  | GuestLoginAction;

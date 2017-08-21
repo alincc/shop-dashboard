@@ -17,19 +17,15 @@
 
       <tr *ngFor="let item of items; let i = index">
         <td>
-          <a class="thumb-md" [routerLink]="['/product', item.product._id]">
-            <img [src]="item.product.image" alt="Image" />
+          <a class="thumb-md" [routerLink]="['/product', item.variant.product]">
+            <img [src]="item.variant.image" alt="Image" />
           </a>
         </td>
         <td>
-          <strong>{{ item.product.name }}</strong>
+          <strong>{{ item.variant.name }}</strong>
 
-          <div *ngIf="item.combination.length">
-            <ul class="product-attributes">
-              <li *ngFor="let attribute of item.combination">
-                <span *ngIf="attribute.value && attribute.attribute">{{ attribute.attribute.name }}: {{ attribute.value.label }}</span>
-              </li>
-            </ul>
+          <div *ngIf="item.variant?.optionsText">
+            <small>{{ item.variant.optionsText }}</small>
           </div>
 
         </td>
@@ -41,7 +37,7 @@
           <input type="number" [(ngModel)]="item.quantity" *ngIf="toggle[i]">
           <span *ngIf="!toggle[i]">{{ item.quantity }}</span>
         </td>
-        <td>{{ item.product.getQuantity(item.selectedCombination) }}</td>
+        <td>{{ item.variant.stock }}</td>
         <td>{{ item.getTotalPrice() | currency:'USD':true }}</td>
         <td>
           <div *ngIf="toggle[i]">

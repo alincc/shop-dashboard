@@ -1,10 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 
-import { AttributeService } from '../../../services';
+import { AttributeService, ConfirmationService } from '../../../services';
 import { CategoryService } from '../../../categories/category.service';
-import { Product, Category, Attribute, Combination, IOption } from '../../../model/interface';
-import { ProductImage } from '../../models/product';
+import { Product, Category, Attribute, Combination, IOption, ResolveEmit } from '../../../model/interface';
+import { OptionType, OptionValue, Variant, ProductImage } from '../../models/product';
+
+// TODO: should not be allowed to create duplicate variants
+// TODO: adding image on new prouduct not working?
+// TODO: discounts on variants?
+// TODO: should not loop the add variant form
 
 @Component({
   selector: 'app-product-form',
@@ -13,13 +18,12 @@ import { ProductImage } from '../../models/product';
 })
 export class ProductFormComponent implements OnInit {
   @Input() product: Product;
+  @Input() optionTypes: OptionType[];
   @Output() submitEmitter: EventEmitter<any> = new EventEmitter();
   @Output() removeEmitter: EventEmitter<any> = new EventEmitter();
   @Output() restoreEmitter: EventEmitter<any> = new EventEmitter();
 
   categories: Category[];
-  attributes: Attribute[];
-  selectedCombinations: Combination[] = [];
 
   activeTab: string = 'basic';
 
@@ -54,11 +58,10 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private categoryService: CategoryService,
-    private attributeService: AttributeService,
+    private confirmationService: ConfirmationService,
   ) { }
 
   ngOnInit() {
-    this.loadAttributes();
     this.categoryService.getCategories()
       .subscribe(
         categories => this.categories = categories,
@@ -77,6 +80,8 @@ export class ProductFormComponent implements OnInit {
         active: true,
         onSale: false,
         combinations: [],
+        variants: [],
+        optionTypes: [],
         deleted: false,
       });
     }
@@ -111,11 +116,25 @@ export class ProductFormComponent implements OnInit {
         startDate: product.discount ? [this.fullDate(new Date(product.discount.startDate))] : null,
         endDate: product.discount ? product.discount && [this.fullDate(new Date(product.discount.endDate))] : null,
       }),
-      combinationsGroup: this.fb.group({
-        combinations: this.fb.array(
-          this.initCombinations(),
-        ),
-      }),
+      variants: this.fb.array(product.variants.map(variant => this.fb.group({
+        _id: variant._id,
+        name: variant.name,
+        description: variant.description,
+        saved: true,
+        sku: variant.sku,
+        price: variant.price,
+        stock: variant.stock,
+        options: this.fb.array(variant.options.map(option => this.fb.group({
+          ...option,
+          values: this.initVariantOptionValues(option.optionTypeId, option)
+        }))),
+      }))),
+      optionTypes: this.fb.array(product.optionTypes.map(option => this.fb.group({
+        _id: option._id,
+        name: option.name,
+        label: option.label,
+        values: this.fb.array(option.values.map(value => this.fb.group(value))),
+      }))),
     });
 
     this.form.valueChanges
@@ -132,18 +151,12 @@ export class ProductFormComponent implements OnInit {
     this.formArrayImages.removeAt(index);
   }
 
-  initCombinations() {
-    return this.product.combinations.map(combination =>
-      this.fb.group({
-        quantity: combination.quantity,
-        attributes: this.fb.array(combination.attributes.map(attribute => (
-          this.fb.group({
-            attribute: attribute.attribute,
-            value: attribute.value,
-          })
-        ))),
-      })
-    );
+  initVariantOptionValues(optionTypeId: string, option: OptionValue) {
+    const optionType = this.optionTypes.find(type => type._id === option.optionTypeId);
+
+    if (!optionType || !optionType.values) return this.fb.array([]);
+
+    return this.fb.array(optionType.values.map(value => this.fb.group(value)));
   }
 
   fullDate(dateIn) {
@@ -173,25 +186,19 @@ export class ProductFormComponent implements OnInit {
       this.form.value.discount = null;
     }
 
-    this.form.value.combinations = this.form.value.combinationsGroup.combinations.filter(combination => {
-      return combination.attributes.length > 0;
-    });
-
     const data = {
       ...this.form.value,
       images: this.form.value.images.filter(image => image.url.length),
     }
 
-    this.submitEmitter.emit(data);
-    this.buildForm(data);
-  }
+    if (data.variants.length === 0) {
+      data.variants.push(this.appendMasterVariant());
+    }
 
-  /**
-   * Whether the form has combinations active
-   * @return {boolean} True if form has combinations
-   */
-  hasCombinations(): boolean {
-    return this.form.value.combinationsGroup.combinations.length > 0;
+    console.log(data); // TODO: remove line
+
+    this.submitEmitter.emit(data);
+    // this.buildForm(data);
   }
 
   onRemove(soft: boolean = true): void {
@@ -220,14 +227,6 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  loadAttributes(): void {
-    this.attributeService.getAll()
-      .subscribe(
-        attributes => this.attributes = attributes,
-        err => console.log(err),
-      );
-  }
-
   setTab(tab: string) {
     this.activeTab = tab;
   }
@@ -244,6 +243,26 @@ export class ProductFormComponent implements OnInit {
       ...image,
       saved: false,
     }));
+  }
+
+  /**
+   * Get a master variant, used in case no variants are added
+   * @return {Variant} [description]
+   */
+  appendMasterVariant(): Variant {
+    return {
+      product: this.product._id,
+      name: this.form.value.name,
+      price: this.form.value.price,
+      description: this.form.value.description,
+      images: this.form.value.images,
+      master: true,
+      options: [],
+      optionsText: '',
+      stock: this.form.value.quantity,
+      image: '',
+      sku: '',
+    }
   }
 
 }

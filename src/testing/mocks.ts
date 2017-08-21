@@ -57,6 +57,8 @@ export const FAKE_PRODUCT1: Product = new Product({
   active: true,
   onSale: false,
   combinations: [],
+  variants: [],
+  optionTypes: [],
 });
 
 export const FAKE_PRODUCT2: Product = new Product({
@@ -68,24 +70,26 @@ export const FAKE_PRODUCT2: Product = new Product({
   active: true,
   onSale: false,
   combinations: [],
+  variants: [],
+  optionTypes: [],
 });
 
 export const FAKE_PRODUCTS: Product[] = [FAKE_PRODUCT1, FAKE_PRODUCT2];
 
 export const PRODUCT_NOT_IN_CART: OrderLine = new OrderLine({
-  product: FAKE_PRODUCT1,
+  variant: null,
   quantity: 0,
   price: FAKE_PRODUCT1.price,
 });
 
 const FAKE_ORDERLINE1 = new OrderLine({
-  product: FAKE_PRODUCT1,
+  variant: null,
   quantity: 1,
   price: FAKE_PRODUCT1.price,
 });
 
 const FAKE_ORDERLINE2 = new OrderLine({
-  product: FAKE_PRODUCT2,
+  variant: null,
   quantity: 1,
   price: FAKE_PRODUCT2.price,
 });

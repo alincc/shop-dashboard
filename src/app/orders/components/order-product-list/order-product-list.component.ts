@@ -32,15 +32,15 @@ export class OrderProductListComponent implements OnInit {
   }
 
   priceDiffers(line: OrderLine): boolean {
-    return line.price !== line.product.price;
+    return line.price !== line.variant.price;
   }
 
   priceIncreased(line: OrderLine): boolean {
-    return line.price > line.product.price
+    return line.price > line.variant.price
   }
 
   priceDecreased(line: OrderLine): boolean {
-    return line.price < line.product.price
+    return line.price < line.variant.price
   }
 
 }

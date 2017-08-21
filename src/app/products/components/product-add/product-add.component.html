@@ -9,6 +9,6 @@
 
 <div class="product-add main">
 
-  <app-product-form (submitEmitter)="onSubmit($event)"></app-product-form>
+  <app-product-form (submitEmitter)="onSubmit($event)" [optionTypes]="optionTypes$ | async"></app-product-form>
 
 </div>

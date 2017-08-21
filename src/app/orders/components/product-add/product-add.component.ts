@@ -83,11 +83,11 @@ export class ProductAddComponent implements OnInit {
     }
 
     const line: OrderLine = new OrderLine({
-      product: this.selected.item,
+      variant: null, // TODO: fix
       quantity: this.selected.quantity,
       price: this.selected.price,
-      combination: this.selected.combination ? this.selected.combination.attributes : null,
-      selectedCombination: this.selected.combination,
+      // combination: this.selected.combination ? this.selected.combination.attributes : null,
+      // selectedCombination: this.selected.combination,
     });
 
     this.addEmitter.emit(line);

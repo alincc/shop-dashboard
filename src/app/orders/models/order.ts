@@ -1,6 +1,7 @@
 import { ShippingStatus, ShippingStatusEntry, ShippingAddress, Payment, ShippingLine, Product, Attribute, Combination } from '../../model/interface';
 import { Customer } from '../../customers/models/customer';
 import { Message as CustomerMessage, Thread } from '../../messages/message';
+import { Variant } from '../../products/models/product';
 
 export interface IOrder {
   _id: string;
@@ -68,38 +69,20 @@ export class Order implements IOrder {
 }
 
 export class IOrderLine {
-  product: Product;
   quantity: number;
   price: number;
-  combination?: {
-    attribute: Attribute;
-    value: {
-      label: string;
-      value: string;
-    }
-  }[];
-  selectedCombination?: Combination;
+  variant: Variant;
 }
 
 export class OrderLine implements IOrderLine {
-  product: Product;
   quantity: number;
   price: number;
-  combination?: {
-    attribute: Attribute;
-    value: {
-      label: string;
-      value: string;
-    }
-  }[];
-  selectedCombination?: Combination;
+  variant: Variant;
 
   constructor(orderLine: IOrderLine) {
-    this.product = new Product(orderLine.product);
     this.quantity = orderLine.quantity;
     this.price = orderLine.price;
-    this.combination = orderLine.combination ? orderLine.combination : [];
-    this.selectedCombination = orderLine.selectedCombination ? orderLine.selectedCombination : null;
+    this.variant = orderLine.variant ? new Variant(orderLine.variant) : null;
   }
 
   public getTotalPrice(): number {
