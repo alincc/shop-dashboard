@@ -33,7 +33,6 @@
           <tr>
             <th></th>
             <th>In Stock</th>
-            <th *ngIf="selected.item.combinations.length">Combination</th>
             <th>Price</th>
             <th>Quantity</th>
             <th></th>
@@ -42,17 +41,7 @@
         <tbody>
           <tr>
             <td><span class="text-bold">{{ selected.item.name }}</span></td>
-            <td>{{ selected.item.getQuantity(selected.combination) }}</td>
-            <td *ngIf="selected.item.combinations.length">
-
-              <app-select
-                [options]="combinationOptions()"
-                [(ngModel)]="selected.combination"
-                label="Combinations"
-              >
-              </app-select>
-
-            </td>
+            <td>{{ selected.item.getQuantity() }}</td>
             <td>
               <input type="number" [(ngModel)]="selected.price" placeholder="Price">
             </td>

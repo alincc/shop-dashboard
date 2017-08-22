@@ -197,61 +197,6 @@ export class ShippingAddress {
   }
 }
 
-export interface ICombination {
-  quantity: number;
-  attributes: [{
-    attribute: Attribute,
-    value: AttributeValue,
-  }];
-  _id?: string;
-}
-
-export class Combination implements ICombination {
-  quantity: number;
-  attributes: [{
-    attribute: Attribute,
-    value: AttributeValue,
-  }];
-  _id?: string;
-
-  constructor(combination: ICombination) {
-    this._id = combination._id;
-    this.quantity = combination.quantity;
-    this.attributes = combination.attributes;
-  }
-
-  public valuesToString(): string {
-    return this.attributes.map(attribute => attribute.value.label).join(', ');
-  }
-}
-
-export interface AttributeValue {
-  label: string;
-  value: string;
-}
-
-export class Attribute {
-  constructor(
-    public name: string,
-    public values: AttributeValue[],
-    public _id?: string,
-  ) {}
-}
-
-export interface AttributeLineValue {
-  value: string;
-  label: string;
-  quantity: number;
-}
-
-export class AttributeLine {
-  constructor(
-    public attribute: Attribute,
-    public values: AttributeLineValue[],
-  ) {}
-}
-
-
 export {
   Category,
   CartProduct,

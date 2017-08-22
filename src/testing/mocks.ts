@@ -56,7 +56,6 @@ export const FAKE_PRODUCT1: Product = new Product({
   price: 100,
   active: true,
   onSale: false,
-  combinations: [],
   variants: [],
   optionTypes: [],
 });
@@ -69,7 +68,6 @@ export const FAKE_PRODUCT2: Product = new Product({
   price: 100,
   active: true,
   onSale: false,
-  combinations: [],
   variants: [],
   optionTypes: [],
 });

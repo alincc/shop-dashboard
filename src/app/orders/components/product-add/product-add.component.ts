@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { Order, OrderLine } from '../../models/order';
-import { Product, Combination, IOption } from '../../../model/interface';
+import { Product, IOption } from '../../../model/interface';
 import { SearchService } from '../../../products/search.service';
 import { ToastService } from '../../../services';
 import { OrderService } from '../../order.service';
@@ -21,7 +21,6 @@ export class ProductAddComponent implements OnInit {
   items: Product[] = [];
   selected: {
     item: Product,
-    combination: Combination,
     quantity: number,
     price: number,
   };
@@ -56,18 +55,12 @@ export class ProductAddComponent implements OnInit {
       .subscribe(items => this.items = items);
   }
 
-  isInStock(product: Product, quantity: number, combination: Combination = null): boolean {
-    return product.getQuantity(combination) >= quantity;
+  isInStock(product: Product, quantity: number): boolean {
+    return product.getQuantity() >= quantity;
   }
 
   onSubmit(): void {
     if (!this.selected.item) {
-      return null;
-    }
-
-    // If the product has combination, a combination needs to be selected
-    if (this.selected.item.hasCombinations() && !this.selected.combination) {
-      this.toastService.warn('No combination selected', 'Please select a combination before adding the product');
       return null;
     }
 
@@ -77,7 +70,7 @@ export class ProductAddComponent implements OnInit {
       return null;
     }
 
-    if (!this.isInStock(this.selected.item, this.selected.quantity, this.selected.combination)) {
+    if (!this.isInStock(this.selected.item, this.selected.quantity)) {
       this.toastService.warn('Insufficient quantity in stock', 'The provided quantity is higher than the quantity in stock');
       return null;
     }
@@ -86,8 +79,6 @@ export class ProductAddComponent implements OnInit {
       variant: null, // TODO: fix
       quantity: this.selected.quantity,
       price: this.selected.price,
-      // combination: this.selected.combination ? this.selected.combination.attributes : null,
-      // selectedCombination: this.selected.combination,
     });
 
     this.addEmitter.emit(line);
@@ -109,18 +100,9 @@ export class ProductAddComponent implements OnInit {
   resetSelected(): void {
     this.selected = {
       item: null,
-      combination: null,
       quantity: 0,
       price: 0,
     };
-  }
-
-  combinationOptions(): IOption[] {
-    if (!this.selected.item || !this.selected.item.combinations.length) {
-      return null;
-    }
-
-    return this.selected.item.combinations.map(combination => ({ label: combination.valuesToString(), value: combination }));
   }
 
 }

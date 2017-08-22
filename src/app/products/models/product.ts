@@ -1,4 +1,4 @@
-import { Category, Combination } from '../../model/interface';
+import { Category } from '../../model/interface';
 
 interface Discount {
   value: number;
@@ -105,7 +105,6 @@ export interface IProduct {
   onSale: boolean;
   discount?: Discount;
   variants: Variant[];
-  combinations: Combination[];
   deleted?: boolean;
   optionTypes: OptionType[];
 }
@@ -122,7 +121,6 @@ export class Product implements IProduct {
   active: boolean;
   onSale: boolean;
   discount?: Discount;
-  combinations: Combination[];
   variants: Variant[];
   deleted?: boolean = false;
   optionTypes: OptionType[];
@@ -141,7 +139,6 @@ export class Product implements IProduct {
     this.discount = product.discount;
     this.variants = product.variants ? product.variants : [];
     this.optionTypes = product.optionTypes ? product.optionTypes : [];
-    this.combinations = product.combinations ? product.combinations.map(combination => new Combination(combination)) : [];
     this.deleted = product.deleted ? product.deleted : false;
   }
 
@@ -195,30 +192,11 @@ export class Product implements IProduct {
   }
 
   /**
-   * Whether or not the product has combinations
-   * @return {boolean} True if product has combinations, else false
-   */
-  public hasCombinations(): boolean {
-    return this.combinations.length > 0;
-  }
-
-  /**
-   * Get the quantity of the product, depending on
-   * whether the product has combinations
-   * @param  {Combination = null}        Get quantity for specific combination
+   * TODO: deprecate
+   * Get the quantity of the product
    * @return {number} Product quantity
    */
-  public getQuantity(combination: Combination = null): number {
-    if (!this.hasCombinations()) {
-      return this.quantity;
-    }
-
-    if (combination !== null) {
-      const found = this.combinations.find(c => combination._id == c._id);
-
-      return found && found.quantity;
-    }
-
-    return this.combinations.reduce((sum, combination) => (sum + combination.quantity), 0);
+  public getQuantity(): number {
+    return this.quantity;
   }
 }

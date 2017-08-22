@@ -11,10 +11,8 @@ import { AddedOptionTypesComponent } from './components/variants/added-option-ty
 import { AttachOptionTypeComponent } from './components/variants/attach-option-type.component';
 import { ProductListContainerComponent } from './components/product-list-container/product-list-container.component';
 import { SearchService } from './search.service';
-import { AttributeEditorComponent } from './components/attribute-editor/attribute-editor.component';
 import { ProductSelectedComponent } from './containers/product-selected.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { CombinationControlComponent } from './components/attribute-editor/combination-control.component';
 import { ProductService } from './product.service';
 import { CollectionEffects } from './effects/collection';
 import { ProductEffects } from './effects/product';
@@ -36,8 +34,6 @@ import { CollectionEffects as OptionTypeCollectionEffects } from './option-types
   declarations: [
     routedComponents,
     ProductFormComponent,
-    AttributeEditorComponent,
-    CombinationControlComponent,
     ProductSelectedComponent,
     AddedOptionTypesComponent,
     AttachOptionTypeComponent,

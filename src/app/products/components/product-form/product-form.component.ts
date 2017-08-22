@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormArray } from '@angular/forms';
 
-import { AttributeService, ConfirmationService } from '../../../services';
+import { ConfirmationService } from '../../../services';
 import { CategoryService } from '../../../categories/category.service';
-import { Product, Category, Attribute, Combination, IOption, ResolveEmit } from '../../../model/interface';
+import { Product, Category, IOption, ResolveEmit } from '../../../model/interface';
 import { OptionType, OptionValue, Variant, ProductImage } from '../../models/product';
 
 @Component({
@@ -74,7 +74,6 @@ export class ProductFormComponent implements OnInit {
         price: 0,
         active: true,
         onSale: false,
-        combinations: [],
         variants: [],
         optionTypes: [],
         deleted: false,

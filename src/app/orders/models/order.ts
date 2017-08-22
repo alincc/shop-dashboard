@@ -1,4 +1,4 @@
-import { ShippingStatus, ShippingStatusEntry, ShippingAddress, Payment, ShippingLine, Product, Attribute, Combination } from '../../model/interface';
+import { ShippingStatus, ShippingStatusEntry, ShippingAddress, Payment, ShippingLine, Product } from '../../model/interface';
 import { Customer } from '../../customers/models/customer';
 import { Message as CustomerMessage, Thread } from '../../messages/message';
 import { Variant } from '../../products/models/product';
@@ -12,7 +12,6 @@ export interface IOrder {
   statusLog: ShippingStatusEntry[];
   items: OrderLine[];
   customer?: Customer; // TODO: should not be optional
-  // shipping?: Shipping;
   shipping?: ShippingLine;
   shippingAddress?: ShippingAddress;
   payment?: Payment;
