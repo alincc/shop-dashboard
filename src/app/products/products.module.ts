@@ -6,7 +6,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductsRoutingModule, routedComponents } from './products.routing';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { VariantFormComponent } from './components/variants/variant-form.component';
-import { VariantAddComponent } from './components/variants/variant-add.component';
+import { VariantEditComponent } from './components/variants/variant-edit.component';
 import { AddedOptionTypesComponent } from './components/variants/added-option-types.component';
 import { AttachOptionTypeComponent } from './components/variants/attach-option-type.component';
 import { ProductListContainerComponent } from './components/product-list-container/product-list-container.component';
@@ -44,7 +44,7 @@ import { CollectionEffects as OptionTypeCollectionEffects } from './option-types
     ProductListContainerComponent,
     ProductDetailComponent,
     VariantFormComponent,
-    VariantAddComponent,
+    VariantEditComponent,
   ],
   providers: [
     SearchService,

@@ -6,11 +6,6 @@ import { CategoryService } from '../../../categories/category.service';
 import { Product, Category, Attribute, Combination, IOption, ResolveEmit } from '../../../model/interface';
 import { OptionType, OptionValue, Variant, ProductImage } from '../../models/product';
 
-// TODO: should not be allowed to create duplicate variants
-// TODO: adding image on new prouduct not working?
-// TODO: discounts on variants?
-// TODO: should not loop the add variant form
-
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',

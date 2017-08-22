@@ -5,9 +5,11 @@ import * as _ from 'lodash';
 import { Variant, OptionType, OptionValue } from '../../models/product';
 
 @Component({
-  selector: 'app-variant-add',
+  selector: 'app-variant-edit',
   template: `
-    <div *ngIf="!variant.value.saved" [formGroup]="variant">
+    <div [formGroup]="variant">
+
+      <h3>{{ variant.value._id ? 'Edit Variant' : 'Create New Variant'}}</h3>
 
       <div class="field">
         <label for="variant-name">Variant name</label>
@@ -47,7 +49,14 @@ import { Variant, OptionType, OptionValue } from '../../models/product';
 
           <select (change)="onOptionChange(i, option.value, $event.target)">
             <option [value]="null" disabled>Select value</option>
-            <option *ngFor="let value of option.value.values" [value]="value._id">{{ value.name }}</option>
+
+            <option
+              *ngFor="let value of option.value.values"
+              [value]="value._id"
+              [selected]="variant.controls.options.controls[i].value._id === value._id">
+              {{ value.name }}
+            </option>
+
           </select>
         </div>
 
@@ -59,7 +68,7 @@ import { Variant, OptionType, OptionValue } from '../../models/product';
     </div>
   `
 })
-export class VariantAddComponent implements OnInit {
+export class VariantEditComponent implements OnInit {
   @Input() variant: FormGroup;
   @Input() productName: string;
   @Input() optionTypes: OptionType[];
@@ -71,9 +80,11 @@ export class VariantAddComponent implements OnInit {
   constructor() {  }
 
   ngOnInit() {
-    this.existingVariantsIds = this.existingVariants.map(variant => {
-      return variant.options.map(option => option._id);
-    });
+    this.existingVariantsIds = this.existingVariants
+      .filter(variant => variant._id !== this.variant.value._id)
+      .map(variant => {
+        return variant.options.map(option => option._id);
+      });
   }
 
   /**

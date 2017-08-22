@@ -14,34 +14,41 @@ import { ConfirmationService } from '../../../services';
 
         <div class="col-md-9 col-xs-12">
 
-          <div>
-            <h3>Existing variants</h3>
-
-            <div *ngFor="let variant of form.value.variants">
-              {{ variant.name }} <span *ngIf="!variant.saved" class="label bg-danger">Not saved</span>
-            </div>
-
-            <button type="button" class="btn btn-sm btn-info" (click)="onVariantAdd()" *ngIf="!addingVariant">
+          <div *ngIf="!addingVariant && !editingVariant">
+            <button type="button" class="btn btn-xs btn-info pull-right" (click)="onVariantAdd()" *ngIf="!addingVariant">
               Add new variant
             </button>
-          </div>
 
-          <div formArrayName="variants" *ngIf="addingVariant">
-            <h3>Create new variant of this product</h3>
+            <h3>Existing variants</h3>
 
-            <div *ngFor="let variant of formArrayVariants.controls; let i=index" [formGroupName]="i">
-
-              <app-variant-add
-                [variant]="formArrayVariants.controls[i]"
-                [existingVariants]="formArrayVariants.value"
-                [productName]="form.value.name"
-                [optionTypes]="optionTypes"
-                (cancel)="onCancelNewVariant($event)"
-                (save)="onSaveNewVariant($event)">
-              </app-variant-add>
-
+            <div *ngFor="let variant of formArrayVariants.controls; let i = index">
+              {{ variant.value.name }}
+              <span class="label bg-primary cursor" (click)="edit(variant)">Edit</span>
+              <span class="label bg-danger cursor" (click)="delete(i)">Remove</span>
             </div>
 
+          </div>
+
+          <div *ngIf="editingVariant">
+            <app-variant-edit
+              [variant]="editingVariant"
+              [existingVariants]="formArrayVariants.value"
+              [productName]="editingVariant.value.name"
+              [optionTypes]="optionTypes"
+              (cancel)="onCancelEditVariant($event)"
+              (save)="onSaveVariant($event)">
+            </app-variant-edit>
+          </div>
+
+          <div *ngIf="addingVariant">
+            <app-variant-edit
+              [variant]="addingVariant"
+              [existingVariants]="formArrayVariants.value"
+              [productName]="form.value.name"
+              [optionTypes]="optionTypes"
+              (cancel)="onCancelNewVariant($event)"
+              (save)="onSaveVariant($event)">
+            </app-variant-edit>
           </div>
 
         </div>
@@ -68,7 +75,8 @@ import { ConfirmationService } from '../../../services';
 export class VariantFormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() optionTypes: OptionType[];
-  addingVariant: boolean = false;
+  addingVariant: FormGroup = null;
+  editingVariant: FormGroup = null;
 
   constructor(
     private fb: FormBuilder,
@@ -93,7 +101,7 @@ export class VariantFormComponent implements OnInit {
     // Only allow adding one variant at a time
     if (this.addingVariant) return;
 
-    const variant = {
+    const variant = this.fb.group({
       _id: null,
       name: this.form.value.name,
       sku: '',
@@ -110,10 +118,10 @@ export class VariantFormComponent implements OnInit {
         optionTypeLabel: option.label,
         values: this.fb.array(option.values.map(value => this.fb.group(value))),
       }))),
-    };
+    });
 
-    this.addingVariant = true;
-    this.formArrayVariants.push(this.fb.group(variant));
+    this.formArrayVariants.push(variant);
+    this.addingVariant = variant;
   }
 
   /**
@@ -123,14 +131,22 @@ export class VariantFormComponent implements OnInit {
     const index = this.formArrayVariants.controls.findIndex(variant => variant.value.saved === false);
 
     this.formArrayVariants.removeAt(index);
-    this.addingVariant = false;
+    this.addingVariant = null;
+  }
+
+  /**
+   * Cancel editing variant
+   */
+  onCancelEditVariant(): void {
+    this.editingVariant = null;
   }
 
   /**
    * Save new variant
    */
-  onSaveNewVariant(): void {
-    this.addingVariant = false;
+  onSaveVariant(): void {
+    this.addingVariant = null;
+    this.editingVariant = null;
   }
 
   /**
@@ -207,5 +223,19 @@ export class VariantFormComponent implements OnInit {
     const addedOptionTypeIds = this.form.value.optionTypes.map(type => type._id);
 
     return this.optionTypes.filter(type => addedOptionTypeIds.indexOf(type._id) < 0);
+  }
+
+  edit(variant: FormGroup): void {
+    this.editingVariant = variant;
+  }
+
+  delete(index: number): void {
+    this.confirmationService
+      .create('Are you sure?', 'You are not able to restore the variant after removal')
+      .subscribe((ans: ResolveEmit) => {
+        if (ans.resolved) {
+          this.formArrayVariants.removeAt(index);
+        }
+      });
   }
 }
