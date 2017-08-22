@@ -148,6 +148,10 @@ export class Product implements IProduct {
    * @return {Discount}   Active discount
    */
   public getActiveDiscount(): Discount {
+    if (!this.discount) {
+      return null;
+    }
+    
     if (this.discount.value <= 0 ||
       this.discount.startDate === null ||
       this.discount.endDate === null

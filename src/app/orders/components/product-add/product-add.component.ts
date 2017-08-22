@@ -2,7 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { Order, OrderLine } from '../../models/order';
-import { Product, IOption } from '../../../model/interface';
+import { IOption } from '../../../model/interface';
+import { Product, Variant } from '../../../products/models/product';
 import { SearchService } from '../../../products/search.service';
 import { ToastService } from '../../../services';
 import { OrderService } from '../../order.service';
@@ -20,9 +21,10 @@ export class ProductAddComponent implements OnInit {
   term = new FormControl();
   items: Product[] = [];
   selected: {
-    item: Product,
-    quantity: number,
-    price: number,
+    item: Product;
+    variant: Variant;
+    quantity: number;
+    price: number;
   };
 
   constructor(
@@ -76,7 +78,7 @@ export class ProductAddComponent implements OnInit {
     }
 
     const line: OrderLine = new OrderLine({
-      variant: null, // TODO: fix
+      variant: this.selected.variant,
       quantity: this.selected.quantity,
       price: this.selected.price,
     });
@@ -100,6 +102,7 @@ export class ProductAddComponent implements OnInit {
   resetSelected(): void {
     this.selected = {
       item: null,
+      variant: null,
       quantity: 0,
       price: 0,
     };
