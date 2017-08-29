@@ -50,11 +50,11 @@ export class CollectionEffects {
     .ofType(collection.REMOVE_OPTIONTYPE)
     .map((action: collection.RemoveOptionTypeAction) => action.payload)
     .switchMap(remove => {
-      return this.service.remove(remove.optionType._id, remove.soft)
+      return this.service.remove(remove._id, true)
         .map((response) => {
-          return new collection.RemoveOptionTypeSuccessAction({ optionType: response.data, soft: remove.soft })
+          return new collection.RemoveOptionTypeSuccessAction({ optionType: response.data, soft: false })
         })
-        .catch(() => of(new collection.RemoveOptionTypeFailAction(remove.optionType)));
+        .catch(() => of(new collection.RemoveOptionTypeFailAction(remove)));
     });
 
   @Effect({ dispatch: false })

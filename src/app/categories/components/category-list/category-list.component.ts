@@ -20,7 +20,7 @@ export class CategoryListComponent implements OnInit {
   selected = [];
   actionOptions = [
     { value: 'delete', label: 'Delete' },
-  ]
+  ];
 
   constructor(private confirmationService: ConfirmationService) { }
 

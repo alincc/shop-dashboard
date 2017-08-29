@@ -8,6 +8,10 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { VariantFormComponent } from './components/variants/variant-form.component';
 import { VariantEditComponent } from './components/variants/variant-edit.component';
 import { AddedOptionTypesComponent } from './components/variants/added-option-types.component';
+import { OptionTypeListComponent } from './option-types/components/option-type-list.component';
+import { OptionTypeSelectedComponent } from './option-types/containers/option-type-selected.component';
+import { OptionTypeFormComponent } from './option-types/components/option-type-form.component';
+import { OptionTypeDetailComponent } from './option-types/components/option-type-detail.component';
 import { AttachOptionTypeComponent } from './components/variants/attach-option-type.component';
 import { ProductListContainerComponent } from './components/product-list-container/product-list-container.component';
 import { SearchService } from './search.service';
@@ -37,6 +41,10 @@ import { CollectionEffects as OptionTypeCollectionEffects } from './option-types
     ProductSelectedComponent,
     AddedOptionTypesComponent,
     AttachOptionTypeComponent,
+    OptionTypeListComponent,
+    OptionTypeFormComponent,
+    OptionTypeSelectedComponent,
+    OptionTypeDetailComponent,
     ProductListContainerComponent,
     ProductDetailComponent,
     VariantFormComponent,

@@ -48,7 +48,6 @@ export function reducer(
 
     case collection.REMOVE_OPTIONTYPE_SUCCESS: {
       const remove = action.payload;
-
       if (remove.soft === false) {
         return Object.assign({}, state, {
           ids: state.ids.filter(id => id !== remove.optionType._id),
