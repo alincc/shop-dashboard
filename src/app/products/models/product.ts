@@ -7,7 +7,7 @@ interface Discount {
   active: boolean;
 }
 
-export interface OptionType {
+export class OptionType {
   _id: string;
   name: string;
   label: string;
@@ -151,7 +151,7 @@ export class Product implements IProduct {
     if (!this.discount) {
       return null;
     }
-    
+
     if (this.discount.value <= 0 ||
       this.discount.startDate === null ||
       this.discount.endDate === null

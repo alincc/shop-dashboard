@@ -18,9 +18,9 @@
 
   <ul class="choices" *ngIf="isOpen">
     <li class="choice" *ngFor="let item of options">
-      <a href="javascript:void(0)" (click)="onSelect(item)" [ngClass]="{'active': selected?.value == item.value}">
+      <span (click)="onSelect(item)" [ngClass]="{'active': selected?.value == item.value}">
         {{ item.label }}
-      </a>
+      </span>
     </li>
   </ul>
 </div>
