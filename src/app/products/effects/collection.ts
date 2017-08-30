@@ -5,6 +5,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/toArray';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
@@ -86,6 +87,7 @@ export class CollectionEffects {
     .ofType(collection.ADD_PRODUCT_SUCCESS)
     .do(() => {
       this.toastService.success('Success!', 'The product was created');
+      this.router.navigate(['/products']);
     });
 
   @Effect()
@@ -101,6 +103,7 @@ export class CollectionEffects {
   constructor(
     private actions$: Actions,
     private service: ProductService,
+    private router: Router,
     private toastService: ToastService,
   ) {}
 }

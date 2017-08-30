@@ -18,6 +18,8 @@ export class ProductFormComponent implements OnInit {
   @Output() removeEmitter: EventEmitter<any> = new EventEmitter();
   @Output() restoreEmitter: EventEmitter<any> = new EventEmitter();
 
+  categoryOptions: IOption[] = [];
+
   categories: Category[];
 
   activeTab: string = 'basic';
@@ -59,7 +61,10 @@ export class ProductFormComponent implements OnInit {
   ngOnInit() {
     this.categoryService.getCategories()
       .subscribe(
-        categories => this.categories = categories,
+        categories => {
+          this.categories = categories;
+          this.categoryOptions = this.categories.map(category => ({ label: category.name, value: category }));
+        },
         err => console.log(err),
       );
 
@@ -81,10 +86,6 @@ export class ProductFormComponent implements OnInit {
     }
 
     this.buildForm();
-  }
-
-  categoryOptions(): IOption[] {
-    return this.categories.map(category => ({ label: category.name, value: category }));
   }
 
   buildForm(product: Product = this.product): void {

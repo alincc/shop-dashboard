@@ -12,14 +12,14 @@ export class TopMenuComponent implements OnInit {
   @Input() user: User;
   @Output() toggleSideNav: EventEmitter<any> = new EventEmitter();
 
+  profileDropdownValues: DropdownValue[] = [];
+
   constructor() { }
 
   ngOnInit() {
     this.user = new User(this.user);
-  }
 
-  profileDropdownValues(): DropdownValue[] {
-    return [
+    this.profileDropdownValues = [
       new DropdownValue("/logout", "Logout"),
     ];
   }
