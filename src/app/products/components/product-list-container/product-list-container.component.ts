@@ -12,9 +12,11 @@ import { ToastService, ConfirmationService } from '../../../services';
 })
 export class ProductListContainerComponent implements OnInit {
   @Input() products: Product[];
+  @Input() displayRemoved: boolean = false;
   @Output() create: EventEmitter<Product> = new EventEmitter();
   @Output() remove: EventEmitter<Product> = new EventEmitter();
   @Output() restore: EventEmitter<Product> = new EventEmitter();
+  @Output() toggleDisplayRemoved: EventEmitter<any> = new EventEmitter();
   @Output() removeSelected: EventEmitter<Product[]> = new EventEmitter();
   currentPage: number = 1;
   reverse: boolean = false;
@@ -26,7 +28,6 @@ export class ProductListContainerComponent implements OnInit {
     { value: 'delete', label: 'Delete' },
   ];
   filter: any = {};
-  displayRemoved: boolean = false;
 
   constructor(
     private productService: ProductService,
