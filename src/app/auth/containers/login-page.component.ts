@@ -30,7 +30,5 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit($event: Authenticate) {
     this.store.dispatch(new Auth.Login($event));
-    // TODO: should only display on login success
-    this.toastService.success('Signed in', 'You have been succesfully signed in');
   }
 }
