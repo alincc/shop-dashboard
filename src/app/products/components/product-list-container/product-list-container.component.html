@@ -19,7 +19,7 @@
 
       <div class="pull-right">
 
-        <input type="checkbox" [(ngModel)]="displayRemoved" id="display-removed">
+        <input type="checkbox" [ngModel]="displayRemoved" (ngModelChange)="toggleDisplayRemoved.emit()" id="display-removed">
         <label for="display-removed" class="cursor">Display removed products</label>
 
       </div>
