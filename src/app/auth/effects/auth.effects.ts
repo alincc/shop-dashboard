@@ -10,6 +10,7 @@ import { of } from 'rxjs/observable/of';
 
 import { AuthService } from '../auth.service';
 import * as Auth from '../actions/auth';
+import { ToastService } from '../../services';
 
 @Injectable()
 export class AuthEffects {
@@ -53,9 +54,17 @@ export class AuthEffects {
   loginSuccess$ = this.actions$
     .ofType(Auth.LOGIN_SUCCESS)
     .do((action: Auth.LoginSuccess) => {
+      this.toastService.success('Signed in', 'You have been succesfully signed in');
       if (action.payload.redirect === true) {
         this.router.navigate(['/'])
       }
+    });
+
+  @Effect({ dispatch: false })
+  loginFailure$ = this.actions$
+    .ofType(Auth.LOGIN_FAILURE)
+    .do((action: Auth.LoginFailure) => {
+      this.toastService.error('Invalid credentials', 'The credentials you provided did not match');
     });
 
   @Effect({ dispatch: false })
@@ -78,6 +87,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private toastService: ToastService,
     private router: Router
   ) {}
 }
