@@ -54,8 +54,8 @@ export class AuthEffects {
   loginSuccess$ = this.actions$
     .ofType(Auth.LOGIN_SUCCESS)
     .do((action: Auth.LoginSuccess) => {
-      this.toastService.success('Signed in', 'You have been succesfully signed in');
       if (action.payload.redirect === true) {
+        this.toastService.success('Signed in', 'You have been succesfully signed in');
         this.router.navigate(['/'])
       }
     });

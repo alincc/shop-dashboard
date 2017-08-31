@@ -15,7 +15,6 @@ export interface IOrder {
   shipping?: ShippingLine;
   shippingAddress?: ShippingAddress;
   payment?: Payment;
-  messages: CustomerMessage[]; // TODO: deprecate
   thread?: Thread;
 }
 
@@ -31,7 +30,6 @@ export class Order implements IOrder {
   shipping?: ShippingLine;
   shippingAddress?: ShippingAddress;
   payment?: Payment;
-  messages: CustomerMessage[];
   thread?: Thread;
 
   constructor(order: IOrder) {
@@ -46,7 +44,6 @@ export class Order implements IOrder {
     this.shipping = order.shipping ? order.shipping : null;
     this.payment = order.payment ? order.payment : null;
     this.shippingAddress = order.shippingAddress ? new ShippingAddress(order.shippingAddress) : null;
-    this.messages = order.messages.map(message => new CustomerMessage(message));
     this.thread = order.thread ? new Thread(order.thread) : null;
   }
 
