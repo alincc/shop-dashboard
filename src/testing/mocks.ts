@@ -161,7 +161,6 @@ export const MOCK_ORDER1 = new Order({
     items: MOCK_ITEMS,
     customer: MOCK_CUSTOMER1,
     shipping: FAKE_SHIPPING_LINE1,
-    messages: [],
     thread: MOCK_THREAD,
 });
 

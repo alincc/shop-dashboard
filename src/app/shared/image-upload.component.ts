@@ -123,7 +123,11 @@ export class ImageUploadComponent {
           image: response,
         });
         this.files.push(output.file);
+
+        this.startUpload();
+        this.files = [];
       });
+
     } else if (output.type === 'uploading') {
       // update current data in files array for uploading file
       const index = this.files.findIndex(file => file.id === output.file.id);

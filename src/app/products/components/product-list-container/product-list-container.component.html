@@ -15,7 +15,11 @@
 
     <div class="heading">Products</div>
 
-    <div class="body">
+    <div class="body" *ngIf="!products.length">
+      <div class="message info">There are no products added to the store yet</div>
+    </div>
+
+    <div class="body" *ngIf="products.length">
 
       <div class="pull-right">
 
@@ -30,7 +34,7 @@
         (submitEmitter)="doAction($event)">
       </app-multi-select>
 
-      <table class="table table-responsive" *ngIf="products">
+      <table class="table table-responsive">
         <thead>
           <tr>
             <th></th>

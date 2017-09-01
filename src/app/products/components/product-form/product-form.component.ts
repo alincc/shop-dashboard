@@ -190,8 +190,6 @@ export class ProductFormComponent implements OnInit {
       data.variants.push(this.appendMasterVariant());
     }
 
-    console.log(data); // TODO: remove line
-
     this.submitEmitter.emit(data);
     // this.buildForm(data);
   }

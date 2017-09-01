@@ -29,7 +29,11 @@ import { ResolveEmit } from '../../../model/interface';
 
         <div class="heading">Option types</div>
 
-        <div class="body">
+        <div class="body" *ngIf="!optionTypes.length">
+          <div class="message info">There are no option types added to the store yet</div>
+        </div>
+
+        <div class="body" *ngIf="optionTypes.length">
 
           <app-multi-select
             [buttonDisable]="!selected.length"
@@ -37,7 +41,7 @@ import { ResolveEmit } from '../../../model/interface';
             (submitEmitter)="doAction($event)">
           </app-multi-select>
 
-          <table class="table table-responsive" *ngIf="optionTypes">
+          <table class="table table-responsive">
             <thead>
               <tr>
                 <th></th>
